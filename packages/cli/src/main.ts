@@ -89,7 +89,9 @@ async function devtoolPath(flag?: string): Promise<string> {
 }
 
 function run(devtool: string, argv: string[]) {
-  const r = spawnSync(devtool, argv, { stdio: ['ignore', 'inherit', 'inherit'] });
+  // zcash-devtool logs every request at INFO; keep the terminal readable unless RUST_LOG is set
+  const env = { ...process.env, RUST_LOG: process.env.RUST_LOG ?? 'warn' };
+  const r = spawnSync(devtool, argv, { stdio: ['ignore', 'inherit', 'inherit'], env });
   if (r.status !== 0) throw new Error(`zcash-devtool ${argv.slice(2, 3).join(' ')} failed (exit ${r.status})`);
 }
 
@@ -145,10 +147,12 @@ async function main() {
       const dir = (flags.wallet as string) ?? join(tmpdir(), `tells-${Buffer.from(ufvk).subarray(-12).toString('hex')}`);
       if (!existsSync(join(dir, 'data.sqlite'))) {
         mkdirSync(dir, { recursive: true });
+        console.log(dim(`Importing the viewing key into a view-only ${ufvkNetwork(ufvk)}net wallet (${dir})`));
         run(devtool, ['wallet', '-w', dir, 'init-fvk', '--name', 'tells', '--fvk', ufvk, '--birthday', birthday, '-s', server]);
       }
-      console.log(dim(`Syncing a view-only ${ufvkNetwork(ufvk)}net wallet in ${dir} ...`));
+      console.log(dim(`Syncing from block ${birthday} through ${server} ...`));
       run(devtool, ['wallet', '-w', dir, 'sync', '-s', server]);
+      console.log(dim('Fetching the full transactions ...'));
       run(devtool, ['wallet', '-w', dir, 'enhance', '-s', server]);
       const h = readHistory(dir);
       if (out) writeFileSync(out, JSON.stringify(h, null, 2));
