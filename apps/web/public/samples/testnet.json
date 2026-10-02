@@ -1,0 +1,233 @@
+{
+  "network": "test",
+  "label": "Careless testnet wallet",
+  "txs": [
+    {
+      "txid": "1b8ccaee540eed4680ce6c46585f66d9aa615d50a224c6fd68a7a40a479f0648",
+      "height": 4432302,
+      "time": 1790931196,
+      "fee": 15000,
+      "spent": [],
+      "received": [
+        {
+          "pool": "transparent",
+          "value": 12500000,
+          "address": "tmDezBwDiuqokEZgn2QCwHCVxSZEM18AhTc"
+        }
+      ],
+      "sent": []
+    },
+    {
+      "txid": "def1346e02520c2a16386018a1d113b254848a47c2d3e8be0d2051c250ef9b49",
+      "height": 4432609,
+      "time": 1790932461,
+      "fee": 15000,
+      "spent": [
+        {
+          "pool": "transparent",
+          "value": 12500000,
+          "address": "tmDezBwDiuqokEZgn2QCwHCVxSZEM18AhTc"
+        }
+      ],
+      "received": [
+        {
+          "pool": "ironwood",
+          "value": 12485000,
+          "change": true
+        }
+      ],
+      "sent": []
+    },
+    {
+      "txid": "afad7bac4329d9ed171c1984c47ce33797e6cab1c926f3f2d3519fe3d5b91c19",
+      "height": 4432656,
+      "time": 1790932877,
+      "fee": 10000,
+      "spent": [
+        {
+          "pool": "ironwood",
+          "value": 12485000
+        }
+      ],
+      "received": [
+        {
+          "pool": "ironwood",
+          "value": 9475000,
+          "change": true
+        }
+      ],
+      "sent": [
+        {
+          "pool": "ironwood",
+          "value": 3000000
+        }
+      ]
+    },
+    {
+      "txid": "4794de14684ed08707d40761539605be6d193aec5f5757b4fb0e3641f2bbde97",
+      "height": 4432676,
+      "time": 1790933229,
+      "fee": 15000,
+      "spent": [
+        {
+          "pool": "ironwood",
+          "value": 9475000
+        }
+      ],
+      "received": [
+        {
+          "pool": "ironwood",
+          "value": 5090000,
+          "change": true
+        }
+      ],
+      "sent": [
+        {
+          "pool": "transparent",
+          "value": 4370000,
+          "address": "tmTNQhe7WFUe1kttiNDTZSsbrawwDqtkRkv"
+        }
+      ]
+    },
+    {
+      "txid": "cdc1fdfbc1bd72929ee08bc2f397ef8968784eacdbd537a1560feea93df7b2a5",
+      "height": 4432742,
+      "time": 1790935677,
+      "fee": 15000,
+      "spent": [],
+      "received": [
+        {
+          "pool": "transparent",
+          "value": 4330000,
+          "address": "tmDezBwDiuqokEZgn2QCwHCVxSZEM18AhTc"
+        }
+      ],
+      "sent": []
+    },
+    {
+      "txid": "b4d3600ef58dfc8e14f27f5d783ea36fa99adc9bb3c7d770e5b46ed812ea08fe",
+      "height": 4432756,
+      "time": 1790936550,
+      "fee": 15000,
+      "spent": [
+        {
+          "pool": "transparent",
+          "value": 4330000,
+          "address": "tmDezBwDiuqokEZgn2QCwHCVxSZEM18AhTc"
+        }
+      ],
+      "received": [
+        {
+          "pool": "ironwood",
+          "value": 4315000,
+          "change": true
+        }
+      ],
+      "sent": []
+    },
+    {
+      "txid": "c9fe2d7ebaaf96d36f07b0fe2f60ea58c542ddc28c2a0f60922002bf49ea496a",
+      "height": 4432759,
+      "time": 1790936837,
+      "fee": 15000,
+      "spent": [
+        {
+          "pool": "ironwood",
+          "value": 5090000
+        }
+      ],
+      "received": [
+        {
+          "pool": "ironwood",
+          "value": 765000,
+          "change": true
+        }
+      ],
+      "sent": [
+        {
+          "pool": "transparent",
+          "value": 4310000,
+          "address": "tmWyBjLMKBYpkka1QJw2aBGvBLFf8w5TaAJ"
+        }
+      ]
+    },
+    {
+      "txid": "a832bf57bc5e6169ba2913e9b0f7c15f737aded7ed29e7242d1eb851a3841c84",
+      "height": 4432763,
+      "time": 1790937147,
+      "fee": 15000,
+      "spent": [
+        {
+          "pool": "ironwood",
+          "value": 4315000
+        }
+      ],
+      "received": [
+        {
+          "pool": "ironwood",
+          "value": 3100000,
+          "change": true
+        }
+      ],
+      "sent": [
+        {
+          "pool": "transparent",
+          "value": 1200000,
+          "address": "tmTNQhe7WFUe1kttiNDTZSsbrawwDqtkRkv"
+        }
+      ]
+    }
+  ],
+  "chain": {
+    "ranges": [
+      [
+        4432609,
+        4432676
+      ],
+      [
+        4432756,
+        4432763
+      ]
+    ],
+    "exits": [
+      {
+        "height": 4432676,
+        "txid": "4794de14684ed08707d40761539605be6d193aec5f5757b4fb0e3641f2bbde97",
+        "values": [
+          4370000
+        ]
+      },
+      {
+        "height": 4432676,
+        "txid": "657eb329d99902f603aee14d5bfebfde83ccdfa2de1740d7925a5407e6cb8019",
+        "values": [
+          100000
+        ]
+      },
+      {
+        "height": 4432759,
+        "txid": "c9fe2d7ebaaf96d36f07b0fe2f60ea58c542ddc28c2a0f60922002bf49ea496a",
+        "values": [
+          4310000
+        ]
+      },
+      {
+        "height": 4432763,
+        "txid": "a832bf57bc5e6169ba2913e9b0f7c15f737aded7ed29e7242d1eb851a3841c84",
+        "values": [
+          1200000
+        ]
+      }
+    ],
+    "entries": [
+      {
+        "height": 4432609,
+        "txid": "def1346e02520c2a16386018a1d113b254848a47c2d3e8be0d2051c250ef9b49"
+      },
+      {
+        "height": 4432756,
+        "txid": "b4d3600ef58dfc8e14f27f5d783ea36fa99adc9bb3c7d770e5b46ed812ea08fe"
+      }
+    ]
+  }
+}

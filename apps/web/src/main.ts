@@ -36,7 +36,8 @@ function renderGrade(r: Report) {
     </dl>`;
 }
 
-const EXPLORER: Record<string, string> = { main: 'https://mainnet.zcashexplorer.app/transactions/', test: 'https://testnet.zcashexplorer.app/transactions/' };
+// testnet.zcashexplorer.app stopped indexing in September 2026; ZecBlock follows the current testnet
+const EXPLORER: Record<string, string> = { main: 'https://mainnet.zcashexplorer.app/transactions/', test: 'https://testnet.zecblock.com/tx/' };
 /** Real txids link to a block explorer so anyone can check the finding on chain. */
 function txLink(t: string) {
   if (t.startsWith('planned')) return 'planned withdrawal';

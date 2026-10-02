@@ -1,25 +1,49 @@
 [
  {
   "type": "cmd",
-  "text": "npx github:luoy16002-svg/tells report history.json",
+  "text": "npx github:luoy16002-svg/tells scan --ufvk uviewtest1rj76c3…c0erj4 --birthday 4432039 --out testnet.json",
   "typing": 18,
   "delay": 500
  },
  {
   "type": "out",
+  "text": "Importing the viewing key into a view-only testnet wallet (%TEMP%\\tells-707470367167633065726a34)",
+  "cls": "",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "Syncing from block 4432039 through zecrocks ...",
+  "cls": "dim",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "Fetching the full transactions ...",
+  "cls": "",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "Reading 76 compact blocks around your links to size the crowd ...",
+  "cls": "",
+  "delay": 60
+ },
+ {
+  "type": "out",
   "text": "",
   "cls": "",
   "delay": 60
  },
  {
   "type": "out",
-  "text": "Tells \u00b7 Exchange regular (illustrative) (mainnet)",
+  "text": "Tells · tells (testnet)",
   "cls": "b",
   "delay": 350
  },
  {
   "type": "out",
-  "text": "Grade F  score 34/100  \u00b7 16 transactions, 5 into the pool, 3 out",
+  "text": "Grade F  score 20/100  · 8 transactions, 2 into the pool, 3 out",
   "cls": "b",
   "delay": 350
  },
@@ -31,25 +55,25 @@
  },
  {
   "type": "out",
-  "text": "CRITICAL  Round trip: 0.123306 ZEC in, 0.123156 ZEC out 25 min later",
+  "text": "CRITICAL  Round trip: 0.04315 ZEC in, 0.0431 ZEC out 5 min later",
   "cls": "crit",
   "delay": 250
  },
  {
   "type": "out",
-  "text": "          Anyone can pair these two public crossings by amount and time, which links the address that funded the shielded pool to the address that received the exit. 0.123156 ZEC has enough decimals to be close to unique on the chain.",
+  "text": "          Anyone can pair these two public crossings by amount and time, which links the address that funded the shielded pool to the address that received the exit. 0.0431 ZEC has enough decimals to be close to unique on the chain. No other exit of about this amount happened in that window, so the pairing is unambiguous.",
   "cls": "",
   "delay": 60
  },
  {
   "type": "out",
-  "text": "          tx l2shield00, m3exit0000",
+  "text": "          tx b4d3600ef5, c9fe2d7eba",
   "cls": "dim",
   "delay": 60
  },
  {
   "type": "out",
-  "text": "          Fix: Leave a different amount: a round sum such as 0.12 ZEC, and keep the rest shielded.",
+  "text": "          Fix: Leave a different amount: a round sum such as 0.04 ZEC, and keep the rest shielded.",
   "cls": "ok",
   "delay": 60
  },
@@ -61,25 +85,25 @@
  },
  {
   "type": "out",
-  "text": "MEDIUM    Exit of 1.24953 ZEC equals 2 earlier entries combined",
-  "cls": "med",
+  "text": "HIGH      Left the pool 13 min after entering",
+  "cls": "high",
   "delay": 250
  },
  {
   "type": "out",
-  "text": "          0.74985 + 0.49985 ZEC went in and the same total came out 4.6 h after the last of them. Splitting the entry does not hide a matching exit.",
+  "text": "          Few people enter and leave the shielded pool within the same hour, so the timing alone narrows down who this exit belongs to, even though the amounts differ. On chain, 1 other exit happened between your entry and your exit, which barely blurs the timing.",
   "cls": "",
   "delay": 60
  },
  {
   "type": "out",
-  "text": "          tx g7shield00, h8shield00, i9exit0000",
+  "text": "          tx def1346e02, 4794de1468",
   "cls": "dim",
   "delay": 60
  },
  {
   "type": "out",
-  "text": "          Fix: Take out an amount that does not add up to recent entries.",
+  "text": "          Fix: Let shielded funds sit for days before moving them out.",
   "cls": "ok",
   "delay": 60
  },
@@ -91,19 +115,19 @@
  },
  {
   "type": "out",
-  "text": "MEDIUM    Left the pool 1.4 h after entering",
-  "cls": "med",
+  "text": "HIGH      Left the pool 10 min after entering",
+  "cls": "high",
   "delay": 250
  },
  {
   "type": "out",
-  "text": "          Few people enter and leave the shielded pool within the same day, so the timing alone narrows down who this exit belongs to, even though the amounts differ.",
+  "text": "          Few people enter and leave the shielded pool within the same hour, so the timing alone narrows down who this exit belongs to, even though the amounts differ. On chain, 1 other exit happened between your entry and your exit, which barely blurs the timing.",
   "cls": "",
   "delay": 60
  },
  {
   "type": "out",
-  "text": "          tx c3shield00, e5exit0000",
+  "text": "          tx b4d3600ef5, a832bf57bc",
   "cls": "dim",
   "delay": 60
  },
@@ -127,13 +151,13 @@
  },
  {
   "type": "out",
-  "text": "          t1KxDeposi\u2026ngeLp9 received coins on 2 public transactions, so they are linked to each other regardless of what happens inside the pool.",
+  "text": "          tmTNQhe7WF…qtkRkv received coins on 2 public transactions, so they are linked to each other regardless of what happens inside the pool.",
   "cls": "",
   "delay": 60
  },
  {
   "type": "out",
-  "text": "          tx e5exit0000, i9exit0000",
+  "text": "          tx 4794de1468, a832bf57bc",
   "cls": "dim",
   "delay": 60
  },
@@ -157,7 +181,55 @@
  },
  {
   "type": "out",
-  "text": "          2.48296 ZEC, 0.54306 ZEC. An amount with four or more decimals is easy to search for on the public side, and any later exit near it will stand out.",
+  "text": "          0.12485 ZEC, 0.0437 ZEC. An amount with four or more decimals is easy to search for on the public side, and any later exit near it will stand out.",
+  "cls": "",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "          tx def1346e02, 4794de1468",
+  "cls": "dim",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "          Fix: Shield and deshield round amounts (0.5, 1, 2.5 ZEC) and leave the odd remainder shielded.",
+  "cls": "ok",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "",
+  "cls": "",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "LOW       Transparent address reused 2 times",
+  "cls": "dim",
+  "delay": 200
+ },
+ {
+  "type": "out",
+  "text": "          tmDezBwDiu…18AhTc received coins on 2 public transactions, so they are linked to each other regardless of what happens inside the pool.",
+  "cls": "",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "          tx 1b8ccaee54, cdc1fdfbc1",
+  "cls": "dim",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "          Fix: Use a fresh transparent address each time (most wallets rotate them automatically).",
+  "cls": "ok",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "",
   "cls": "",
   "delay": 60
  }
