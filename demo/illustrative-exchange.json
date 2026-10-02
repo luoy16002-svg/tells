@@ -1,0 +1,338 @@
+{
+  "network": "main",
+  "label": "Exchange regular (illustrative)",
+  "txs": [
+    {
+      "txid": "a1sapling0000000000000000000000000000000000000000000000000000000",
+      "height": 3092037,
+      "time": 1789374000,
+      "fee": 15000,
+      "spent": [],
+      "received": [
+        {
+          "pool": "sapling",
+          "value": 310000000
+        }
+      ],
+      "sent": []
+    },
+    {
+      "txid": "b2receive0000000000000000000000000000000000000000000000000000000",
+      "height": 3092074,
+      "time": 1789981920,
+      "fee": 15000,
+      "spent": [],
+      "received": [
+        {
+          "pool": "transparent",
+          "value": 248311000,
+          "address": "t1My3wallet8qTransparent2aB"
+        }
+      ],
+      "sent": []
+    },
+    {
+      "txid": "c3shield00000000000000000000000000000000000000000000000000000000",
+      "height": 3092111,
+      "time": 1789983600,
+      "fee": 15000,
+      "spent": [
+        {
+          "pool": "transparent",
+          "value": 248311000,
+          "address": "t1My3wallet8qTransparent2aB"
+        }
+      ],
+      "received": [
+        {
+          "pool": "orchard",
+          "value": 248296000,
+          "change": false
+        }
+      ],
+      "sent": []
+    },
+    {
+      "txid": "d4pay00000000000000000000000000000000000000000000000000000000000",
+      "height": 3092148,
+      "time": 1789986300,
+      "fee": 15000,
+      "spent": [
+        {
+          "pool": "orchard",
+          "value": 248296000,
+          "change": false
+        }
+      ],
+      "received": [
+        {
+          "pool": "orchard",
+          "value": 213281000,
+          "change": true
+        }
+      ],
+      "sent": [
+        {
+          "pool": "orchard",
+          "value": 35000000,
+          "change": false
+        }
+      ]
+    },
+    {
+      "txid": "e5exit0000000000000000000000000000000000000000000000000000000000",
+      "height": 3092185,
+      "time": 1789988520,
+      "fee": 15000,
+      "spent": [
+        {
+          "pool": "orchard",
+          "value": 213281000,
+          "change": false
+        }
+      ],
+      "received": [
+        {
+          "pool": "orchard",
+          "value": 93266000,
+          "change": true
+        }
+      ],
+      "sent": [
+        {
+          "pool": "transparent",
+          "value": 120000000,
+          "address": "t1KxDeposit5f8bQ3exchangeLp9"
+        }
+      ]
+    },
+    {
+      "txid": "f6receive0000000000000000000000000000000000000000000000000000000",
+      "height": 3092222,
+      "time": 1790259000,
+      "fee": 15000,
+      "spent": [],
+      "received": [
+        {
+          "pool": "transparent",
+          "value": 75000000,
+          "address": "t1My3wallet8qTransparent2aB"
+        },
+        {
+          "pool": "transparent",
+          "value": 50000000,
+          "address": "t1My3wallet8qTransparent2aB"
+        }
+      ],
+      "sent": []
+    },
+    {
+      "txid": "g7shield00000000000000000000000000000000000000000000000000000000",
+      "height": 3092259,
+      "time": 1790260200,
+      "fee": 15000,
+      "spent": [
+        {
+          "pool": "transparent",
+          "value": 75000000,
+          "address": "t1My3wallet8qTransparent2aB"
+        }
+      ],
+      "received": [
+        {
+          "pool": "orchard",
+          "value": 74985000,
+          "change": false
+        }
+      ],
+      "sent": []
+    },
+    {
+      "txid": "h8shield00000000000000000000000000000000000000000000000000000000",
+      "height": 3092296,
+      "time": 1790262300,
+      "fee": 15000,
+      "spent": [
+        {
+          "pool": "transparent",
+          "value": 50000000,
+          "address": "t1My3wallet8qTransparent2aB"
+        }
+      ],
+      "received": [
+        {
+          "pool": "orchard",
+          "value": 49985000,
+          "change": false
+        }
+      ],
+      "sent": []
+    },
+    {
+      "txid": "i9exit0000000000000000000000000000000000000000000000000000000000",
+      "height": 3092333,
+      "time": 1790278800,
+      "fee": 15000,
+      "spent": [
+        {
+          "pool": "orchard",
+          "value": 74985000,
+          "change": false
+        },
+        {
+          "pool": "orchard",
+          "value": 49985000,
+          "change": false
+        }
+      ],
+      "received": [
+        {
+          "pool": "orchard",
+          "value": 2000,
+          "change": true
+        }
+      ],
+      "sent": [
+        {
+          "pool": "transparent",
+          "value": 124953000,
+          "address": "t1KxDeposit5f8bQ3exchangeLp9"
+        }
+      ]
+    },
+    {
+      "txid": "j0migrate0000000000000000000000000000000000000000000000000000000",
+      "height": 3092370,
+      "time": 1790666100,
+      "fee": 15000,
+      "spent": [
+        {
+          "pool": "sapling",
+          "value": 310000000
+        }
+      ],
+      "received": [
+        {
+          "pool": "orchard",
+          "value": 309985000,
+          "change": false
+        }
+      ],
+      "sent": []
+    },
+    {
+      "txid": "k1receive0000000000000000000000000000000000000000000000000000000",
+      "height": 3092407,
+      "time": 1790870400,
+      "fee": 15000,
+      "spent": [],
+      "received": [
+        {
+          "pool": "transparent",
+          "value": 12345600,
+          "address": "t1Fresh6deposit4Wz9"
+        }
+      ],
+      "sent": []
+    },
+    {
+      "txid": "l2shield00000000000000000000000000000000000000000000000000000000",
+      "height": 3092444,
+      "time": 1790871600,
+      "fee": 15000,
+      "spent": [
+        {
+          "pool": "transparent",
+          "value": 12345600,
+          "address": "t1Fresh6deposit4Wz9"
+        }
+      ],
+      "received": [
+        {
+          "pool": "orchard",
+          "value": 12330600,
+          "change": false
+        }
+      ],
+      "sent": []
+    },
+    {
+      "txid": "m3exit0000000000000000000000000000000000000000000000000000000000",
+      "height": 3092481,
+      "time": 1790873100,
+      "fee": 15000,
+      "spent": [
+        {
+          "pool": "orchard",
+          "value": 12330600,
+          "change": false
+        }
+      ],
+      "received": [],
+      "sent": [
+        {
+          "pool": "transparent",
+          "value": 12315600,
+          "address": "t1Cafe8merchant2Lk5"
+        }
+      ]
+    },
+    {
+      "txid": "n4plain000000000000000000000000000000000000000000000000000000000",
+      "height": 3092518,
+      "time": 1790942400,
+      "fee": 15000,
+      "spent": [
+        {
+          "pool": "transparent",
+          "value": 20000000,
+          "address": "t1Old9transparentBuy3"
+        }
+      ],
+      "received": [],
+      "sent": [
+        {
+          "pool": "transparent",
+          "value": 19985000,
+          "address": "t1Friend2payment7Hs"
+        }
+      ]
+    },
+    {
+      "txid": "o5receive0000000000000000000000000000000000000000000000000000000",
+      "height": 3092555,
+      "time": 1790962800,
+      "fee": 15000,
+      "spent": [],
+      "received": [
+        {
+          "pool": "transparent",
+          "value": 54321000,
+          "address": "t1Ex3newWithdrawal5Ty"
+        }
+      ],
+      "sent": []
+    },
+    {
+      "txid": "p6shield00000000000000000000000000000000000000000000000000000000",
+      "height": 3092592,
+      "time": 1790964300,
+      "fee": 15000,
+      "spent": [
+        {
+          "pool": "transparent",
+          "value": 54321000,
+          "address": "t1Ex3newWithdrawal5Ty"
+        }
+      ],
+      "received": [
+        {
+          "pool": "orchard",
+          "value": 54306000,
+          "change": false
+        }
+      ],
+      "sent": []
+    }
+  ]
+}

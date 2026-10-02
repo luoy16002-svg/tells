@@ -1,0 +1,164 @@
+[
+ {
+  "type": "cmd",
+  "text": "npx github:luoy16002-svg/tells report history.json",
+  "typing": 18,
+  "delay": 500
+ },
+ {
+  "type": "out",
+  "text": "",
+  "cls": "",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "Tells \u00b7 Exchange regular (illustrative) (mainnet)",
+  "cls": "b",
+  "delay": 350
+ },
+ {
+  "type": "out",
+  "text": "Grade F  score 34/100  \u00b7 16 transactions, 5 into the pool, 3 out",
+  "cls": "b",
+  "delay": 350
+ },
+ {
+  "type": "out",
+  "text": "",
+  "cls": "",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "CRITICAL  Round trip: 0.123306 ZEC in, 0.123156 ZEC out 25 min later",
+  "cls": "crit",
+  "delay": 250
+ },
+ {
+  "type": "out",
+  "text": "          Anyone can pair these two public crossings by amount and time, which links the address that funded the shielded pool to the address that received the exit. 0.123156 ZEC has enough decimals to be close to unique on the chain.",
+  "cls": "",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "          tx l2shield00, m3exit0000",
+  "cls": "dim",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "          Fix: Leave a different amount: a round sum such as 0.12 ZEC, and keep the rest shielded.",
+  "cls": "ok",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "",
+  "cls": "",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "MEDIUM    Exit of 1.24953 ZEC equals 2 earlier entries combined",
+  "cls": "med",
+  "delay": 250
+ },
+ {
+  "type": "out",
+  "text": "          0.74985 + 0.49985 ZEC went in and the same total came out 4.6 h after the last of them. Splitting the entry does not hide a matching exit.",
+  "cls": "",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "          tx g7shield00, h8shield00, i9exit0000",
+  "cls": "dim",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "          Fix: Take out an amount that does not add up to recent entries.",
+  "cls": "ok",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "",
+  "cls": "",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "MEDIUM    Left the pool 1.4 h after entering",
+  "cls": "med",
+  "delay": 250
+ },
+ {
+  "type": "out",
+  "text": "          Few people enter and leave the shielded pool within the same day, so the timing alone narrows down who this exit belongs to, even though the amounts differ.",
+  "cls": "",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "          tx c3shield00, e5exit0000",
+  "cls": "dim",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "          Fix: Let shielded funds sit for days before moving them out.",
+  "cls": "ok",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "",
+  "cls": "",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "MEDIUM    Transparent address reused 2 times",
+  "cls": "med",
+  "delay": 250
+ },
+ {
+  "type": "out",
+  "text": "          t1KxDeposi\u2026ngeLp9 received coins on 2 public transactions, so they are linked to each other regardless of what happens inside the pool.",
+  "cls": "",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "          tx e5exit0000, i9exit0000",
+  "cls": "dim",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "          Fix: Use a fresh transparent address each time (most wallets rotate them automatically).",
+  "cls": "ok",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "",
+  "cls": "",
+  "delay": 60
+ },
+ {
+  "type": "out",
+  "text": "LOW       2 crossings with fingerprint amounts",
+  "cls": "dim",
+  "delay": 200
+ },
+ {
+  "type": "out",
+  "text": "          2.48296 ZEC, 0.54306 ZEC. An amount with four or more decimals is easy to search for on the public side, and any later exit near it will stand out.",
+  "cls": "",
+  "delay": 60
+ }
+]

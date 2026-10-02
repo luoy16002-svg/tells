@@ -21,9 +21,12 @@ function layout(events: Crossing[], available: number) {
     const gap = e.time - events[i - 1].time;
     return gap <= 0 ? MIN_STEP : Math.min(170, MIN_STEP + 26 * Math.log2(1 + gap / 900));
   });
-  const rawTotal = raw.reduce((a, b) => a + b, 0);
   const room = available - START - END_PAD;
-  const k = rawTotal > room && rawTotal > 0 ? Math.max(room / rawTotal, 0) : 1;
+  const totalAt = (k: number) => raw.reduce((sum, r, i) => sum + (i ? Math.max(MIN_STEP, r * k) : 0), 0);
+  // the largest scale (up to 1) whose total still fits; with the minimum step a dense history may simply scroll
+  let lo = 0, hi = 1;
+  if (totalAt(1) > room) { for (let i = 0; i < 30; i++) { const mid = (lo + hi) / 2; if (totalAt(mid) <= room) lo = mid; else hi = mid; } }
+  const k = totalAt(1) > room ? lo : 1;
   const xs: number[] = [];
   const breaks: { x: number; label: string }[] = [];
   let x = START;

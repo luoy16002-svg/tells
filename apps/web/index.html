@@ -51,7 +51,7 @@
         <div class="head">
           <div>
             <h2 id="checkup-title">Checkup</h2>
-            <p>Each arrow is a public crossing: gold enters the shielded pool, black leaves it. Arcs are links an observer can draw between them.</p>
+            <p>Each arrow is a public crossing: gold arrows enter the shielded pool, the others leave it. Arcs are links an observer can draw between them.</p>
           </div>
           <div class="tabs" role="tablist" aria-label="Sample wallets" id="samples"></div>
         </div>
@@ -113,10 +113,11 @@
           <div class="card step">
             <span class="n">02</span>
             <h3>Scan locally</h3>
-            <p>With <a href="https://github.com/zcash/zcash-devtool">zcash-devtool</a> built, run:</p>
+            <p>With Node 22 or newer, run:</p>
             <pre class="cmd" id="cmd">npx github:luoy16002-svg/tells scan \
   --ufvk uview1... --birthday 2726400 \
-  --devtool ./zcash-devtool --out history.json</pre>
+  --out history.json</pre>
+            <p style="font-size:13.5px;color:var(--muted)">It syncs a view-only wallet with <a href="https://github.com/zcash/zcash-devtool">zcash-devtool</a>: yours if it is installed, otherwise a checksummed build made by this project's public workflow.</p>
             <button class="btn ghost" type="button" id="copy">Copy command</button>
           </div>
           <div class="card step">

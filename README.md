@@ -39,14 +39,15 @@ Open the [live page](https://luoy16002-svg.github.io/tells/), look at the sample
 
 ### On your own wallet
 
-You need a **unified full viewing key** (`uview1...`), which can see your history but cannot spend, and the wallet's birthday height. Build [zcash-devtool](https://github.com/zcash/zcash-devtool) (`cargo build --release --all-features`), then:
+You need a **unified full viewing key** (`uview1...`), which can see your history but cannot spend, and the wallet's birthday height. With Node 22 or newer:
 
 ```bash
-npx github:luoy16002-svg/tells scan --ufvk uview1... --birthday 2726400 \
-  --devtool ./zcash-devtool/target/release/zcash-devtool --out history.json
+npx github:luoy16002-svg/tells scan --ufvk uview1... --birthday 2726400 --out history.json
 ```
 
-This creates a view-only wallet in a temporary folder, syncs it from lightwalletd (`zec.rocks` by default), prints the checkup and writes `history.json` for the web page. Other commands:
+This creates a view-only wallet in a temporary folder, syncs it from lightwalletd (`zec.rocks` by default) with [zcash-devtool](https://github.com/zcash/zcash-devtool), prints the checkup and writes `history.json` for the web page. If `zcash-devtool` is not on your PATH and you pass no `--devtool`, Tells downloads a build of the pinned upstream commit made by this repository's public [scanner workflow](.github/workflows/scanner.yml), and checks it against the release's `SHA256SUMS`. Behind a proxy, set `HTTPS_PROXY` and `NODE_USE_ENV_PROXY=1`.
+
+Other commands:
 
 ```bash
 tells report  <wallet-dir | history.json>
@@ -87,6 +88,13 @@ The CLI reads `v_received_outputs`, `v_received_output_spends` and `sent_notes` 
 - Tells sees the wallet's own side. It does not yet measure how many *other* users made similar crossings at the same time (the real size of the crowd); severities are conservative estimates.
 - Amount matching assumes standard fees (ZIP 317). Unusual fees can hide or create matches.
 - It flags patterns that link transactions; it cannot prove that nobody linked them some other way (network-level metadata, exchange records).
+
+## Business
+
+- **Users** check for free: the page and the CLI stay open source.
+- **Wallets and exchanges** integrate the pre-flight check, where it prevents the leak instead of reporting it. Integration support and an SLA-backed SDK are the paid product; custodial exchanges get a version that warns their customers before a TEX or transparent withdrawal.
+- **Funds, OTC desks and journalists' organisations** that hold ZEC for privacy buy periodic audits of their treasury wallets, run on their own machines.
+- The open core is a natural fit for Zcash ecosystem grants, which fund the first wallet integrations.
 
 ## Roadmap
 

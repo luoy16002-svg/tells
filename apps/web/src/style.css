@@ -195,16 +195,16 @@ pre.cmd { margin: 0; background: var(--bg); border: 1px solid var(--line); borde
 footer { padding: 36px 0 48px; color: var(--muted); font-size: 14px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--line); margin-top: 24px; }
 
 @media (max-width: 900px) {
-  .hero, .checkup, .pre, .sdk { grid-template-columns: 1fr; }
+  .hero, .checkup, .pre, .sdk { grid-template-columns: minmax(0, 1fr); }
   .hero { padding-top: 28px; }
-  .steps, .rules { grid-template-columns: 1fr; }
+  .steps, .rules { grid-template-columns: minmax(0, 1fr); }
   .top nav { display: none; }
   .grade { flex-direction: row; flex-wrap: wrap; align-items: center; }
   .grade dl { width: 100%; }
 }
 @media (max-width: 520px) {
   .wrap { padding: 0 16px; }
-  .finding { grid-template-columns: 1fr; }
+  .finding { grid-template-columns: minmax(0, 1fr); }
   .finding p, .finding .fix, .finding .txs { grid-column: 1; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }

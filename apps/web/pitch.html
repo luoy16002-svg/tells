@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tells: pitch</title>
+<script type="module">import '@fontsource/ibm-plex-sans/400.css'; import '@fontsource/ibm-plex-sans/600.css'; import '@fontsource/ibm-plex-mono/500.css';</script>
+<style>
+  :root { --bg: #0d0f13; --ink: #eef0f3; --ink2: #c3c8d1; --muted: #8b93a1; --gold: #f4b728; --red: #ff5a52; --line: rgb(238 240 243 / 0.14); }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', sans-serif; overflow: hidden; }
+  .slide { position: absolute; inset: 0; padding: 90px 120px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .slide.on { opacity: 1; transform: none; }
+  .kicker { font: 500 22px 'IBM Plex Mono', monospace; color: var(--gold); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 26px; }
+  h1 { font: 600 88px/1.02 'IBM Plex Sans', sans-serif; letter-spacing: -0.035em; margin: 0 0 28px; max-width: 18ch; }
+  h2 { font: 600 64px/1.08 'IBM Plex Sans', sans-serif; letter-spacing: -0.03em; margin: 0 0 24px; max-width: 22ch; }
+  p { font-size: 30px; line-height: 1.4; color: var(--ink2); margin: 0; max-width: 46ch; }
+  .row { display: flex; gap: 28px; margin-top: 46px; }
+  .row figure { margin: 0; flex: 1; }
+  .row img { width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); display: block; }
+  .row figcaption { font: 500 20px 'IBM Plex Mono', monospace; color: var(--muted); margin-top: 12px; }
+  .stat { font: 600 200px/0.9 'IBM Plex Mono', monospace; letter-spacing: -0.06em; color: var(--gold); margin-bottom: 18px; }
+  .cite { font: 500 20px 'IBM Plex Mono', monospace; color: var(--muted); margin-top: 26px; }
+  .vs { display: grid; gap: 30px; margin-top: 20px; }
+  .vs div { font-size: 46px; line-height: 1.2; font-weight: 600; letter-spacing: -0.02em; padding-left: 26px; border-left: 6px solid var(--line); }
+  .vs .no { border-left-color: var(--red); }
+  .vs span { display: block; font: 500 20px 'IBM Plex Mono', monospace; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px; font-weight: 500; }
+  .shots { display: grid; grid-template-columns: 1.15fr 1fr; gap: 26px; margin-top: 34px; align-items: start; }
+  .shots img { width: 100%; max-height: 430px; object-fit: cover; object-position: top left; border-radius: 12px; border: 1px solid var(--line); display: block; }
+  ol { margin: 34px 0 0; padding: 0; list-style: none; display: grid; gap: 22px; counter-reset: n; }
+  ol li { font-size: 40px; font-weight: 600; letter-spacing: -0.02em; display: flex; gap: 22px; align-items: baseline; counter-increment: n; }
+  ol li::before { content: '0' counter(n); font: 500 24px 'IBM Plex Mono', monospace; color: var(--gold); }
+  .end { position: absolute; left: 120px; top: 120px; font: 500 24px 'IBM Plex Mono', monospace; color: var(--muted); }
+  .end b { color: var(--ink); font-weight: 500; }
+  .mark { width: 92px; height: 92px; margin-bottom: 34px; }
+</style>
+</head>
+<body>
+  <section class="slide" data-id="p1-who">
+    <div class="kicker">Tells · Crypto World's Fair · Zcash track</div>
+    <h1>Kai Chen</h1>
+    <p>Independent developer based in China. Software that has to be correct, and checkable.</p>
+    <div class="row">
+      <figure><img src="./pitch/tooth-contact-lab.webp" alt=""><figcaption>3D collision checks on tooth meshes</figcaption></figure>
+      <figure><img src="./pitch/zatca-pos.webp" alt=""><figcaption>Offline POS printing ZATCA invoices</figcaption></figure>
+      <figure><img src="./pitch/pw-harvest.webp" alt=""><figcaption>Data pipelines</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="slide" data-id="p2-problem">
+    <div class="kicker">The problem</div>
+    <div class="stat">31.5%</div>
+    <h2>of the coins going into Zcash's shielded pool were paired with coins coming out, by amount and time alone.</h2>
+    <div class="cite">Quesnelle, "On the linkability of Zcash transactions", 2017 · 96% of those left within two hours</div>
+  </section>
+
+  <section class="slide" data-id="p3-gap">
+    <div class="kicker">The gap</div>
+    <div class="vs">
+      <div><span>Wallets warn you</span>"This is a transparent address."</div>
+      <div class="no"><span>Nobody warns you</span>"This withdrawal mirrors the deposit you made an hour ago."</div>
+    </div>
+  </section>
+
+  <section class="slide" data-id="p4-product">
+    <div class="kicker">Tells</div>
+    <h2>A privacy checkup that runs on your machine, and a check before you send.</h2>
+    <div class="shots"><img src="./pitch/checkup.png" alt=""><img src="./pitch/preflight.png" alt=""></div>
+  </section>
+
+  <section class="slide" data-id="p5-why">
+    <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#eef0f3"/><path d="M6 11h20M6 21h20" stroke="#6b7280" stroke-width="2"/><path d="M11 11v10" stroke="#e8a608" stroke-width="3"/><path d="M21 21V11" stroke="#0d0f13" stroke-width="3"/><path d="M11 9c2-5 8-5 10 0" fill="none" stroke="#ff5a52" stroke-width="2.5"/></svg>
+    <div class="kicker">Why me</div>
+    <h2>Research turned into a warning at the moment it matters. Tests so anyone can check it.</h2>
+  </section>
+
+  <section class="slide" data-id="p6-next">
+    <div class="kicker">Next</div>
+    <ol>
+      <li>Scan entirely in the browser with WebZjs</li>
+      <li>Grade every link against the real crowd size</li>
+      <li>Pre-flight inside Zashi and Zingo</li>
+    </ol>
+    <div class="end"><b>luoy16002-svg.github.io/tells</b> · github.com/luoy16002-svg/tells</div>
+  </section>
+
+<script>
+  const slides = [...document.querySelectorAll('.slide')];
+  window.go = id => slides.forEach(s => s.classList.toggle('on', s.dataset.id === id));
+  go(new URLSearchParams(location.search).get('s') || 'p1-who');
+</script>
+</body>
+</html>

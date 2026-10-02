@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 // tells: a privacy checkup for Zcash wallets. Everything runs on this machine; the viewing key never leaves it.
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { homedir, tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { analyze, preflight, zec, ZAT, type Finding, type History, type Report } from '@tells/core';
 import { readHistory } from './wallet';
@@ -49,6 +50,44 @@ function ufvkNetwork(ufvk: string) {
   return 'main';
 }
 
+const RELEASE = 'https://github.com/luoy16002-svg/tells/releases/download/scanner-v1';
+const ASSETS: Record<string, string> = {
+  'win32-x64': 'zcash-devtool-x86_64-pc-windows-msvc.exe',
+  'darwin-arm64': 'zcash-devtool-aarch64-apple-darwin',
+  'linux-x64': 'zcash-devtool-x86_64-unknown-linux-gnu',
+};
+
+function onPath(cmd: string) {
+  return spawnSync(cmd, ['--help'], { stdio: 'ignore' }).status === 0;
+}
+
+/**
+ * Finds zcash-devtool: --devtool, $ZCASH_DEVTOOL, PATH, or a binary built from the pinned upstream commit by this
+ * repository's public workflow (downloaded once and checked against the release's SHA256SUMS).
+ */
+async function devtoolPath(flag?: string): Promise<string> {
+  if (flag) return flag;
+  if (process.env.ZCASH_DEVTOOL) return process.env.ZCASH_DEVTOOL;
+  if (onPath('zcash-devtool')) return 'zcash-devtool';
+  const asset = ASSETS[`${process.platform}-${process.arch}`];
+  if (!asset) throw new Error(`No prebuilt zcash-devtool for ${process.platform}-${process.arch}. Build it from github.com/zcash/zcash-devtool and pass --devtool.`);
+  const dir = join(homedir(), '.cache', 'tells');
+  const file = join(dir, asset);
+  if (existsSync(file)) return file;
+  mkdirSync(dir, { recursive: true });
+  console.log(dim(`Downloading ${asset} (built from zcash/zcash-devtool by this project's public workflow) ...`));
+  const sums = await (await fetch(`${RELEASE}/SHA256SUMS`)).text();
+  const expected = sums.split('\n').map(l => l.trim().split(/\s+/)).find(([, name]) => name?.replace(/^\*/, '') === asset)?.[0];
+  if (!expected) throw new Error('Could not read the release checksums');
+  const res = await fetch(`${RELEASE}/${asset}`);
+  if (!res.ok) throw new Error(`Download failed (${res.status})`);
+  const bytes = Buffer.from(await res.arrayBuffer());
+  const got = createHash('sha256').update(bytes).digest('hex');
+  if (got !== expected) throw new Error(`Checksum mismatch for ${asset}: expected ${expected}, got ${got}`);
+  writeFileSync(file, bytes, { mode: 0o755 });
+  return file;
+}
+
 function run(devtool: string, argv: string[]) {
   const r = spawnSync(devtool, argv, { stdio: ['ignore', 'inherit', 'inherit'] });
   if (r.status !== 0) throw new Error(`zcash-devtool ${argv.slice(2, 3).join(' ')} failed (exit ${r.status})`);
@@ -58,12 +97,13 @@ const HELP = `tells: find what gives your Zcash history away
 
   tells scan --ufvk <UFVK> --birthday <height> [--devtool <path>] [--wallet <dir>] [--out history.json]
       Import a viewing key into a local view-only wallet, sync it, and print the checkup.
+      Without --devtool it uses zcash-devtool from PATH, or downloads a checksummed build once.
   tells report <wallet-dir | history.json> [--json]
   tells preflight <wallet-dir | history.json> --amount <ZEC> [--at <ISO date>] [--to <t-address>]
       Check a withdrawal before you make it, and get safer ways to make it.
   tells export <wallet-dir> [--account <uuid>] [--out history.json]
 
-Viewing keys and wallet data stay on this machine. Needs zcash-devtool for scan (github.com/zcash/zcash-devtool).`;
+Viewing keys and wallet data stay on this machine.`;
 
 async function main() {
   const [cmd, ...rest] = process.argv.slice(2);
@@ -100,7 +140,7 @@ async function main() {
       const ufvk = flags.ufvk as string;
       const birthday = flags.birthday as string;
       if (!ufvk || !birthday) throw new Error('scan needs --ufvk and --birthday');
-      const devtool = (flags.devtool as string) ?? process.env.ZCASH_DEVTOOL ?? 'zcash-devtool';
+      const devtool = await devtoolPath(flags.devtool as string | undefined);
       const server = (flags.server as string) ?? 'zecrocks';
       const dir = (flags.wallet as string) ?? join(tmpdir(), `tells-${Buffer.from(ufvk).subarray(-12).toString('hex')}`);
       if (!existsSync(join(dir, 'data.sqlite'))) {
