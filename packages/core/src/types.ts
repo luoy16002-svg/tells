@@ -1,0 +1,91 @@
+// Data model. All values are in zatoshis (1 ZEC = 100,000,000 zats); times are unix seconds.
+
+export type Pool = 'transparent' | 'sapling' | 'orchard' | 'ironwood';
+export const SHIELDED_POOLS: Pool[] = ['sapling', 'orchard', 'ironwood'];
+export type Network = 'main' | 'test' | 'regtest';
+
+export const ZAT = 100_000_000;
+
+/** Value moving through one pool, as the wallet's viewing key sees it. */
+export interface Flow {
+  pool: Pool;
+  value: number;
+  /** Transparent address that held or received the coins. Shielded addresses are never needed. */
+  address?: string;
+  change?: boolean;
+}
+
+/** One transaction of the wallet. */
+export interface WalletTx {
+  txid: string;
+  height: number | null;
+  time: number | null;
+  fee: number | null;
+  /** Wallet coins consumed by the transaction. */
+  spent: Flow[];
+  /** Outputs paid back to this wallet, including change. */
+  received: Flow[];
+  /** Outputs paid to anyone else. */
+  sent: Flow[];
+}
+
+export interface History {
+  network: Network;
+  label?: string;
+  txs: WalletTx[];
+}
+
+/**
+ * A value crossing that anyone reading the chain can see:
+ * - shield: transparent coins entering a shielded pool
+ * - deshield: shielded coins leaving to a transparent address
+ * - migrate: value moving between shielded pools, e.g. Sapling to Orchard (the amount is public)
+ * - transparent: a transaction that never touched a shielded pool
+ */
+export type CrossingKind = 'shield' | 'deshield' | 'migrate' | 'transparent';
+
+export interface Crossing {
+  txid: string;
+  time: number;
+  height: number;
+  kind: CrossingKind;
+  amount: number;
+  from: Pool;
+  to: Pool;
+  /** Transparent addresses on the public side of the crossing. */
+  addresses: string[];
+  /** A transparent payment into the wallet (it spent nothing). Public, but it is how coins arrive, not a spend. */
+  incoming?: boolean;
+}
+
+export type Severity = 'critical' | 'high' | 'medium' | 'low';
+
+export type RuleId =
+  | 'round-trip'
+  | 'sum-match'
+  | 'quick-exit'
+  | 'distinctive-amount'
+  | 'address-reuse'
+  | 'transparent-only'
+  | 'migration-reveal';
+
+export interface Finding {
+  rule: RuleId;
+  severity: Severity;
+  title: string;
+  detail: string;
+  txids: string[];
+  /** Crossing pairs or groups that the finding links together, for drawing. */
+  links: { from: string; to: string }[];
+  fixes: string[];
+}
+
+export interface Report {
+  network: Network;
+  label?: string;
+  crossings: Crossing[];
+  findings: Finding[];
+  score: number;
+  grade: 'A' | 'B' | 'C' | 'D' | 'F';
+  stats: { txs: number; shields: number; deshields: number; migrations: number; transparentOnly: number };
+}

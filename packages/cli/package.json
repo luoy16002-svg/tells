@@ -1,0 +1,11 @@
+{
+  "name": "@tells/cli",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": { "tells": "dist/tells.mjs" },
+  "scripts": {
+    "build": "esbuild src/main.ts --bundle --platform=node --format=esm --target=node22 --outfile=dist/tells.mjs --banner:js=\"import { createRequire } from 'module'; const require = createRequire(import.meta.url);\""
+  },
+  "dependencies": { "@tells/core": "0.1.0" },
+  "license": "MIT"
+}

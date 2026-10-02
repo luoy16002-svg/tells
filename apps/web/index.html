@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tells: a privacy checkup for Zcash wallets</title>
+  <meta name="description" content="Shielded transactions hide amounts and parties, but how you enter and leave the pool can link them anyway. Tells reads a wallet's history through its viewing key, on your machine, and shows what an observer can connect, before and after you transact." />
+  <meta property="og:title" content="Tells: a privacy checkup for Zcash wallets" />
+  <meta property="og:description" content="Find the round trips, quick exits and fingerprint amounts that link your shielded Zcash activity, and check a withdrawal before you make it." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#f3f4f6" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0d0f13" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f1115'/%3E%3Cpath d='M6 11h20M6 21h20' stroke='%236b7280' stroke-width='2'/%3E%3Cpath d='M11 11v10' stroke='%23e8a608' stroke-width='3'/%3E%3Cpath d='M21 21V11' stroke='%23fff' stroke-width='3'/%3E%3Cpath d='M11 9c2-5 8-5 10 0' fill='none' stroke='%23ff5a52' stroke-width='2.5'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="#" aria-label="Tells home">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M6 11h20M6 21h20" stroke="#6b7280" stroke-width="2"/><path d="M11 11v10" stroke="#e8a608" stroke-width="3"/><path d="M21 21V11" stroke="var(--bg)" stroke-width="3"/><path d="M11 9c2-5 8-5 10 0" fill="none" stroke="#ff5a52" stroke-width="2.5"/></svg>
+        tells
+      </a>
+      <nav aria-label="Sections">
+        <a href="#checkup">Checkup</a>
+        <a href="#preflight">Before you withdraw</a>
+        <a href="#wallet">Your wallet</a>
+        <a href="#how">How it works</a>
+        <a href="https://github.com/luoy16002-svg/tells">Source</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <div class="hero">
+        <div>
+          <h1>Your Zcash history has <em>tells</em>.</h1>
+          <p>Shielded transactions hide who paid whom and how much. How you enter and leave the shielded pool can still link your addresses together. Tells reads your wallet's history through its viewing key, on your own machine, and shows what an outside observer can connect. Run it before a withdrawal and it tells you a safer way to make it.</p>
+          <div class="actions">
+            <a class="btn primary" href="#checkup">See a checkup</a>
+            <a class="btn ghost" href="#wallet">Check your own wallet</a>
+          </div>
+        </div>
+        <ul class="facts">
+          <li><b>31.5%</b>of the coins sent into Zcash's shielded pool could be paired with a later exit by amount alone, in the first study of the chain (Quesnelle, 2017).</li>
+          <li><b>96%</b>of those round trips left the pool within two hours of entering it.</li>
+          <li><b>0 bytes</b>of your viewing key leave your machine. The checkup runs locally, in the browser or the command line.</li>
+        </ul>
+      </div>
+
+      <section id="checkup" aria-labelledby="checkup-title">
+        <div class="head">
+          <div>
+            <h2 id="checkup-title">Checkup</h2>
+            <p>Each arrow is a public crossing: gold enters the shielded pool, black leaves it. Arcs are links an observer can draw between them.</p>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Sample wallets" id="samples"></div>
+        </div>
+        <div class="checkup">
+          <div class="card grade" id="grade"></div>
+          <div class="card">
+            <div class="timeline" id="timeline"></div>
+            <div class="legend">
+              <span><i style="background:var(--critical)"></i>Critical link</span>
+              <span><i style="background:var(--high)"></i>High</span>
+              <span><i style="background:var(--medium)"></i>Medium</span>
+              <span><i style="background:var(--low)"></i>Weak hint</span>
+            </div>
+          </div>
+        </div>
+        <div class="findings" id="findings"></div>
+      </section>
+
+      <section id="preflight" aria-labelledby="preflight-title">
+        <div class="head">
+          <div>
+            <h2 id="preflight-title">Before you withdraw</h2>
+            <p>Enter the withdrawal you are about to make from the wallet above. Tells checks it against the history and proposes safer ways to make it, each one re-checked.</p>
+          </div>
+        </div>
+        <div class="pre">
+          <form class="card" id="preform">
+            <label class="field">Amount to send to a transparent address (ZEC)
+              <input id="pamount" name="amount" inputmode="decimal" autocomplete="off" required />
+            </label>
+            <label class="field">When
+              <input id="pwhen" name="when" type="datetime-local" required />
+              <small>Defaults to just after the wallet's latest transaction.</small>
+            </label>
+            <label class="field">Destination (optional)
+              <input id="pto" name="to" autocomplete="off" placeholder="t1..." />
+            </label>
+            <button class="btn primary" type="submit">Check this withdrawal</button>
+          </form>
+          <div class="card verdict" id="verdict" aria-live="polite">
+            <p class="hint">Try the amount that just went into the pool on the sample wallet, and the same amount a week later.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="wallet" aria-labelledby="wallet-title">
+        <div class="head">
+          <div>
+            <h2 id="wallet-title">Check your own wallet</h2>
+            <p>A unified full viewing key can see your history but cannot spend. Tells never asks for a seed phrase, and nothing is uploaded.</p>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="card step">
+            <span class="n">01</span>
+            <h3>Export the viewing key</h3>
+            <p>In your wallet, find the unified full viewing key (starts with <code>uview1</code>) and the wallet's birthday height. Keep the key private: it reveals your history.</p>
+          </div>
+          <div class="card step">
+            <span class="n">02</span>
+            <h3>Scan locally</h3>
+            <p>With <a href="https://github.com/zcash/zcash-devtool">zcash-devtool</a> built, run:</p>
+            <pre class="cmd" id="cmd">npx github:luoy16002-svg/tells scan \
+  --ufvk uview1... --birthday 2726400 \
+  --devtool ./zcash-devtool --out history.json</pre>
+            <button class="btn ghost" type="button" id="copy">Copy command</button>
+          </div>
+          <div class="card step">
+            <span class="n">03</span>
+            <h3>Open the result here</h3>
+            <p>The terminal prints the checkup. Drop <code>history.json</code> below to see the timeline and plan withdrawals. It is read by this page and never leaves your browser.</p>
+          </div>
+        </div>
+        <div class="drop" id="drop">
+          <p>Drop <code>history.json</code> here, or <label for="file">choose the file</label>.</p>
+          <input id="file" type="file" accept="application/json,.json" />
+          <p class="err" id="droperr" hidden></p>
+        </div>
+      </section>
+
+      <section id="how" aria-labelledby="how-title">
+        <div class="head">
+          <div>
+            <h2 id="how-title">How it works</h2>
+            <p>Only three things cross the pool boundary in public: an amount, a block time and a transparent address. Every rule below uses nothing else, so each finding is something anyone reading the chain could also find.</p>
+          </div>
+        </div>
+        <div class="rules">
+          <div class="card rule"><h3>Round trip</h3><p>An exit within a fee of an earlier entry pairs the two. Severity rises with speed (under two hours is critical) and with how unusual the amount is.</p></div>
+          <div class="card rule"><h3>Sum match</h3><p>Splitting the entry does not help when the exit equals two or three recent entries added together.</p></div>
+          <div class="card rule"><h3>Quick exit</h3><p>Leaving the pool within a day of entering narrows the crowd even when the amounts differ.</p></div>
+          <div class="card rule"><h3>Fingerprint amounts</h3><p>Amounts with four or more decimals are close to unique. Round amounts, and round amounts minus a fee, are shared by many users.</p></div>
+          <div class="card rule"><h3>Address reuse</h3><p>One transparent address on several crossings ties them together, whatever happened inside the pool.</p></div>
+          <div class="card rule"><h3>Pool migrations and transparent payments</h3><p>Moves between Sapling, Orchard and Ironwood publish their amount. Transparent-to-transparent payments publish everything.</p></div>
+        </div>
+        <p class="cite">Round-trip and timing rules follow J. Quesnelle, <a href="https://arxiv.org/abs/1712.01210">On the linkability of Zcash transactions</a> (2017) and G. Kappos, H. Yousaf, M. Maller, S. Meiklejohn, <a href="https://www.usenix.org/conference/usenixsecurity18/presentation/kappos">An Empirical Analysis of Anonymity in Zcash</a> (USENIX Security 2018).</p>
+      </section>
+
+      <section id="sdk" aria-labelledby="sdk-title">
+        <div class="sdk">
+          <div>
+            <h2 id="sdk-title" class="head" style="font:600 28px/1.15 var(--sans);letter-spacing:-0.02em;margin:0 0 12px">For wallet builders</h2>
+            <p>The rules are a dependency-free TypeScript package. A wallet can call it with the history it already holds, right before it builds a transaction, and warn the user while there is still time to change the amount or wait.</p>
+            <p>The same core powers this page and the command line, and runs in a browser, Node or a mobile JavaScript engine.</p>
+          </div>
+          <pre class="cmd card">import { preflight } from '@tells/core';
+
+const check = preflight(history, {
+  amount: 54_311_000,          // zats to a t-address
+  time: Date.now() / 1000,
+  address: recipient,
+});
+
+if (check.verdict === 'risky') {
+  showWarning(check.findings[0].title, check.alternatives);
+}</pre>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Tells is open source (MIT). Built by <a href="https://luoy16002-svg.github.io/kai-works/">Kai Chen</a> for the Colosseum Crypto World's Fair, Zcash track.</span>
+      <span><a href="https://github.com/luoy16002-svg/tells">github.com/luoy16002-svg/tells</a></span>
+    </footer>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

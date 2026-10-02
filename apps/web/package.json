@@ -1,0 +1,16 @@
+{
+  "name": "@tells/web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5210",
+    "build": "tsc --noEmit -p . && vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 5211"
+  },
+  "dependencies": {
+    "@tells/core": "0.1.0",
+    "@fontsource/ibm-plex-mono": "^5.2.6",
+    "@fontsource/ibm-plex-sans": "^5.2.6"
+  },
+  "devDependencies": { "vite": "^6.4.3" }
+}
