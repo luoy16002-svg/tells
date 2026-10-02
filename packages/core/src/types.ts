@@ -29,10 +29,24 @@ export interface WalletTx {
   sent: Flow[];
 }
 
+/**
+ * What everyone else did at the pool boundary, read from the compact blocks a light wallet downloads.
+ * Used to size the crowd a link hides in; optional.
+ */
+export interface ChainContext {
+  /** Block ranges (inclusive) that were read. A link is only graded against blocks inside these. */
+  ranges: [number, number][];
+  /** Transactions that sent shielded value to transparent outputs: height and output values (zats). */
+  exits: { height: number; txid: string; values: number[] }[];
+  /** Transactions that moved transparent inputs into a shielded pool (amounts are not in compact blocks). */
+  entries: { height: number; txid: string }[];
+}
+
 export interface History {
   network: Network;
   label?: string;
   txs: WalletTx[];
+  chain?: ChainContext;
 }
 
 /**
@@ -78,6 +92,8 @@ export interface Finding {
   /** Crossing pairs or groups that the finding links together, for drawing. */
   links: { from: string; to: string }[];
   fixes: string[];
+  /** Other people's crossings that look the same in the window of the link; absent when unknown. */
+  crowd?: { others: number; from: number; to: number };
 }
 
 export interface Report {

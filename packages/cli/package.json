@@ -2,10 +2,16 @@
   "name": "@tells/cli",
   "version": "0.1.0",
   "type": "module",
-  "bin": { "tells": "dist/tells.mjs" },
-  "scripts": {
-    "build": "esbuild src/main.ts --bundle --platform=node --format=esm --target=node22 --outfile=dist/tells.mjs --banner:js=\"import { createRequire } from 'module'; const require = createRequire(import.meta.url);\""
+  "bin": {
+    "tells": "dist/tells.mjs"
   },
-  "dependencies": { "@tells/core": "0.1.0" },
+  "scripts": {
+    "build": "node -e \"require('fs').cpSync('proto','dist/proto',{recursive:true})\" && esbuild src/main.ts --bundle --platform=node --format=esm --target=node22 --outfile=dist/tells.mjs --banner:js=\"import { createRequire } from 'module'; const require = createRequire(import.meta.url);\""
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.14.5",
+    "@grpc/proto-loader": "^0.8.1",
+    "@tells/core": "0.1.0"
+  },
   "license": "MIT"
 }

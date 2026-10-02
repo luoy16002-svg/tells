@@ -104,6 +104,38 @@ describe('rules', () => {
   });
 });
 
+describe('crowd', () => {
+  const trip = () => hist(
+    tx('in', T0, [t(0.12345678)], [o(0.12335678)]),
+    tx('out', T0 + 30 * MIN, [o(0.12335678)], [], [t(0.12325678, 'tmOut')]),
+  );
+  it('keeps a link critical when nobody else made a similar exit', () => {
+    const h = trip();
+    const [a, b] = [h.txs[0].height!, h.txs[1].height!];
+    h.chain = { ranges: [[a, b]], exits: [{ height: b, txid: 'someone', values: [z(3)] }], entries: [] };
+    const f = analyze(h).findings.find(x => x.rule === 'round-trip')!;
+    expect(f.severity).toBe('critical');
+    expect(f.crowd).toEqual({ others: 0, from: a, to: b });
+    expect(f.detail).toContain('unambiguous');
+  });
+
+  it('downgrades a link that hides among similar exits', () => {
+    const h = trip();
+    const [a, b] = [h.txs[0].height!, h.txs[1].height!];
+    const others = Array.from({ length: 6 }, (_, i) => ({ height: a + (i % 2), txid: `other${i}`, values: [z(0.1232)] }));
+    h.chain = { ranges: [[a, b]], exits: others, entries: [] };
+    const f = analyze(h).findings.find(x => x.rule === 'round-trip')!;
+    expect(f.severity).toBe('medium');
+    expect(f.crowd?.others).toBe(6);
+  });
+
+  it('says nothing about the crowd outside the blocks it read', () => {
+    const h = trip();
+    h.chain = { ranges: [[1, 2]], exits: [], entries: [] };
+    expect(analyze(h).findings.find(x => x.rule === 'round-trip')!.crowd).toBeUndefined();
+  });
+});
+
 describe('preflight', () => {
   const history = hist(tx('in', T0, [t(0.54321)], [o(0.54311)]));
 

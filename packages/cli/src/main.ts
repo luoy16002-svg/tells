@@ -5,8 +5,9 @@ import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { homedir, tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { analyze, preflight, zec, ZAT, type Finding, type History, type Report } from '@tells/core';
+import { analyze, crossings, findingsFor, preflight, zec, ZAT, type Finding, type History, type Report } from '@tells/core';
 import { readHistory } from './wallet';
+import { chainContext, windowsFor } from './chain';
 
 const c = (code: number) => (s: string) => (process.stdout.isTTY ? `\x1b[${code}m${s}\x1b[0m` : s);
 const red = c(31), yellow = c(33), green = c(32), dim = c(2), bold = c(1), cyan = c(36);
@@ -41,6 +42,21 @@ function printReport(r: Report) {
     console.log(`          ${f.detail}`);
     console.log(dim(`          tx ${f.txids.map(t => t.slice(0, 10)).join(', ')}`));
     console.log(`          ${cyan('Fix:')} ${f.fixes[0]}\n`);
+  }
+}
+
+/** Reads the crowd around each timing or amount link from lightwalletd and attaches it to the history. */
+async function addCrowd(h: History, server?: string): Promise<History> {
+  const cs = crossings(h.txs);
+  const windows = windowsFor(findingsFor(cs), cs);
+  if (!windows.length) return h;
+  const blocks = windows.reduce((n, [a, b]) => n + b - a + 1, 0);
+  console.log(dim(`Reading ${blocks} compact blocks around your links to size the crowd ...`));
+  try {
+    return { ...h, chain: await chainContext(h.network, windows, server) };
+  } catch (e) {
+    console.log(dim(`Could not read the crowd (${e instanceof Error ? e.message : e}); grading without it.`));
+    return h;
   }
 }
 
@@ -100,7 +116,9 @@ const HELP = `tells: find what gives your Zcash history away
   tells scan --ufvk <UFVK> --birthday <height> [--devtool <path>] [--wallet <dir>] [--out history.json]
       Import a viewing key into a local view-only wallet, sync it, and print the checkup.
       Without --devtool it uses zcash-devtool from PATH, or downloads a checksummed build once.
-  tells report <wallet-dir | history.json> [--json]
+      It then reads the compact blocks around each link to count look-alike exits (--no-crowd to skip,
+      --lightwalletd host:port to choose the server).
+  tells report <wallet-dir | history.json> [--json] [--crowd]
   tells preflight <wallet-dir | history.json> --amount <ZEC> [--at <ISO date>] [--to <t-address>]
       Check a withdrawal before you make it, and get safer ways to make it.
   tells export <wallet-dir> [--account <uuid>] [--out history.json]
@@ -120,7 +138,9 @@ async function main() {
       break;
     }
     case 'report': {
-      const r = analyze(load(pos[0], flags.account as string | undefined));
+      let h = load(pos[0], flags.account as string | undefined);
+      if (flags.crowd) h = await addCrowd(h, flags.lightwalletd as string | undefined);
+      const r = analyze(h);
       if (flags.json) console.log(JSON.stringify(r, null, 2)); else printReport(r);
       break;
     }
@@ -154,7 +174,8 @@ async function main() {
       run(devtool, ['wallet', '-w', dir, 'sync', '-s', server]);
       console.log(dim('Fetching the full transactions ...'));
       run(devtool, ['wallet', '-w', dir, 'enhance', '-s', server]);
-      const h = readHistory(dir);
+      let h = readHistory(dir);
+      if (!flags['no-crowd']) h = await addCrowd(h, flags.lightwalletd as string | undefined);
       if (out) writeFileSync(out, JSON.stringify(h, null, 2));
       printReport(analyze(h));
       break;

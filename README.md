@@ -28,6 +28,7 @@ Only three things cross the pool boundary in public: an amount, a block time and
 | Address reuse | One transparent address on several crossings | Low to medium |
 | Transparent payments | Transparent-to-transparent spends | Low to medium |
 | Pool migrations | Sapling, Orchard and Ironwood moves publish their amount | Low |
+| Crowd size | Look-alike exits by other people between your entry and your exit, read from compact blocks | Lowers a link by one or two levels |
 
 **Pre-flight** takes a planned withdrawal (amount, time, destination), runs the same rules as if it had happened, and if it is risky proposes alternatives: wait, send a round amount and keep the remainder shielded, split, or use a fresh address. Every alternative is re-checked before it is shown.
 
@@ -85,7 +86,7 @@ The CLI reads `v_received_outputs`, `v_received_output_spends` and `sent_notes` 
 
 ## Limits
 
-- Tells sees the wallet's own side. It does not yet measure how many *other* users made similar crossings at the same time (the real size of the crowd); severities are conservative estimates.
+- Crowd size counts look-alike *exits* (compact blocks carry transparent output values). Entry amounts are not in compact blocks, so the crowd of look-alike *entries* is not measured yet.
 - Amount matching assumes standard fees (ZIP 317). Unusual fees can hide or create matches.
 - It flags patterns that link transactions; it cannot prove that nobody linked them some other way (network-level metadata, exchange records).
 
@@ -98,7 +99,7 @@ The CLI reads `v_received_outputs`, `v_received_output_spends` and `sent_notes` 
 
 ## Roadmap
 
-- Crowd size from chain data: count comparable crossings in the same window to grade each finding against the real anonymity set.
+- Entry-side crowd size, by resolving transparent inputs, and a mainnet dashboard of how linkable crossings are overall.
 - WebAssembly scanning in the browser (WebZjs), so the whole checkup works without a terminal.
 - Wallet integrations: a pre-flight hook for Zashi, Zingo and YWallet before they build a transaction to a transparent or TEX address.
 

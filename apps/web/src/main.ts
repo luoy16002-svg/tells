@@ -36,13 +36,23 @@ function renderGrade(r: Report) {
     </dl>`;
 }
 
+const EXPLORER: Record<string, string> = { main: 'https://mainnet.zcashexplorer.app/transactions/', test: 'https://testnet.zcashexplorer.app/transactions/' };
+/** Real txids link to a block explorer so anyone can check the finding on chain. */
+function txLink(t: string) {
+  if (t.startsWith('planned')) return 'planned withdrawal';
+  const short = esc(t.slice(0, 16)) + '…';
+  const base = EXPLORER[current.network];
+  return /^[0-9a-f]{64}$/.test(t) && base ? `<a href="${base}${t}" target="_blank" rel="noopener">${short}</a>` : short;
+}
+
 function findingHtml(f: Finding, i: number) {
   return `<article class="card finding" data-s="${f.severity}" data-i="${i}" tabindex="0">
     <span class="chip" data-s="${f.severity}">${f.severity}</span>
     <h3>${esc(f.title)}</h3>
     <p>${esc(f.detail)}</p>
     <div class="fix"><b>Fix</b> · ${esc(f.fixes[0])}</div>
-    <div class="txs">${f.txids.map(t => (t.startsWith('planned') ? 'planned withdrawal' : t.slice(0, 16) + '…')).join('  ·  ')}</div>
+    ${f.crowd ? `<div class="txs">On chain: ${f.crowd.others} look-alike exit${f.crowd.others === 1 ? '' : 's'} in blocks ${f.crowd.from}–${f.crowd.to}</div>` : ''}
+    <div class="txs">${f.txids.map(txLink).join('  ·  ')}</div>
   </article>`;
 }
 
