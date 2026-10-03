@@ -193,14 +193,14 @@ var require_logging = __commonJS({
     var process_1 = __require("process");
     var clientVersion = require_package().version;
     var DEFAULT_LOGGER = {
-      error: (message, ...optionalParams) => {
-        console.error("E " + message, ...optionalParams);
+      error: (message2, ...optionalParams) => {
+        console.error("E " + message2, ...optionalParams);
       },
-      info: (message, ...optionalParams) => {
-        console.error("I " + message, ...optionalParams);
+      info: (message2, ...optionalParams) => {
+        console.error("I " + message2, ...optionalParams);
       },
-      debug: (message, ...optionalParams) => {
-        console.error("D " + message, ...optionalParams);
+      debug: (message2, ...optionalParams) => {
+        console.error("D " + message2, ...optionalParams);
       }
     };
     var _logger = DEFAULT_LOGGER;
@@ -539,8 +539,8 @@ var require_metadata = __commonJS({
               }
             }
           } catch (error) {
-            const message = `Failed to add metadata entry ${key}: ${values}. ${(0, error_1.getErrorMessage)(error)}. For more information see https://github.com/grpc/grpc-node/issues/1173`;
-            (0, logging_1.log)(constants_1.LogVerbosity.ERROR, message);
+            const message2 = `Failed to add metadata entry ${key}: ${values}. ${(0, error_1.getErrorMessage)(error)}. For more information see https://github.com/grpc/grpc-node/issues/1173`;
+            (0, logging_1.log)(constants_1.LogVerbosity.ERROR, message2);
           }
         }
         return result;
@@ -3366,12 +3366,12 @@ var require_call = __commonJS({
     var stream_1 = __require("stream");
     var constants_1 = require_constants();
     function callErrorFromStatus(status, callerStack) {
-      const message = `${status.code} ${constants_1.Status[status.code]}: ${status.details}`;
-      const error = new Error(message);
+      const message2 = `${status.code} ${constants_1.Status[status.code]}: ${status.details}`;
+      const error = new Error(message2);
       const stack = `${error.stack}
 for call at
 ${callerStack}`;
-      return Object.assign(new Error(message), status, { stack });
+      return Object.assign(new Error(message2), status, { stack });
     }
     var ClientUnaryCallImpl = class extends events_1.EventEmitter {
       constructor() {
@@ -3549,9 +3549,9 @@ var require_call_interface = __commonJS({
         });
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      onReceiveMessage(message) {
+      onReceiveMessage(message2) {
         this.processingMessage = true;
-        this.listener.onReceiveMessage(message, (msg) => {
+        this.listener.onReceiveMessage(message2, (msg) => {
           this.processingMessage = false;
           if (this.processingMetadata) {
             this.pendingMessage = msg;
@@ -3588,8 +3588,8 @@ var require_client_interceptors = __commonJS({
     var constants_1 = require_constants();
     var error_1 = require_error();
     var InterceptorConfigurationError = class _InterceptorConfigurationError extends Error {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "InterceptorConfigurationError";
         Error.captureStackTrace(this, _InterceptorConfigurationError);
       }
@@ -3659,8 +3659,8 @@ var require_client_interceptors = __commonJS({
       onReceiveMetadata: (metadata, next) => {
         next(metadata);
       },
-      onReceiveMessage: (message, next) => {
-        next(message);
+      onReceiveMessage: (message2, next) => {
+        next(message2);
       },
       onReceiveStatus: (status, next) => {
         next(status);
@@ -3670,8 +3670,8 @@ var require_client_interceptors = __commonJS({
       start: (metadata, listener, next) => {
         next(metadata, listener);
       },
-      sendMessage: (message, next) => {
-        next(message);
+      sendMessage: (message2, next) => {
+        next(message2);
       },
       halfClose: (next) => {
         next();
@@ -3724,7 +3724,7 @@ var require_client_interceptors = __commonJS({
         const fullInterceptingListener = {
           onReceiveMetadata: (_b = (_a = interceptingListener === null || interceptingListener === void 0 ? void 0 : interceptingListener.onReceiveMetadata) === null || _a === void 0 ? void 0 : _a.bind(interceptingListener)) !== null && _b !== void 0 ? _b : ((metadata2) => {
           }),
-          onReceiveMessage: (_d = (_c = interceptingListener === null || interceptingListener === void 0 ? void 0 : interceptingListener.onReceiveMessage) === null || _c === void 0 ? void 0 : _c.bind(interceptingListener)) !== null && _d !== void 0 ? _d : ((message) => {
+          onReceiveMessage: (_d = (_c = interceptingListener === null || interceptingListener === void 0 ? void 0 : interceptingListener.onReceiveMessage) === null || _c === void 0 ? void 0 : _c.bind(interceptingListener)) !== null && _d !== void 0 ? _d : ((message2) => {
           }),
           onReceiveStatus: (_f = (_e = interceptingListener === null || interceptingListener === void 0 ? void 0 : interceptingListener.onReceiveStatus) === null || _e === void 0 ? void 0 : _e.bind(interceptingListener)) !== null && _f !== void 0 ? _f : ((status) => {
           })
@@ -3750,13 +3750,13 @@ var require_client_interceptors = __commonJS({
         });
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      sendMessageWithContext(context, message) {
+      sendMessageWithContext(context, message2) {
         this.processingMessage = true;
-        this.requester.sendMessage(message, (finalMessage) => {
+        this.requester.sendMessage(message2, (finalMessage) => {
           this.processingMessage = false;
           if (this.processingMetadata) {
             this.pendingMessageContext = context;
-            this.pendingMessage = message;
+            this.pendingMessage = message2;
           } else {
             this.nextCall.sendMessageWithContext(context, finalMessage);
             this.processPendingHalfClose();
@@ -3764,8 +3764,8 @@ var require_client_interceptors = __commonJS({
         });
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      sendMessage(message) {
-        this.sendMessageWithContext({}, message);
+      sendMessage(message2) {
+        this.sendMessageWithContext({}, message2);
       }
       startRead() {
         this.nextCall.startRead();
@@ -3790,10 +3790,10 @@ var require_client_interceptors = __commonJS({
       const host = options.host;
       const parent = (_b = options.parent) !== null && _b !== void 0 ? _b : null;
       const propagateFlags = options.propagate_flags;
-      const credentials = options.credentials;
+      const credentials2 = options.credentials;
       const call = channel.createCall(path, deadline, host, parent, propagateFlags);
-      if (credentials) {
-        call.setCredentials(credentials);
+      if (credentials2) {
+        call.setCredentials(credentials2);
       }
       return call;
     }
@@ -3809,10 +3809,10 @@ var require_client_interceptors = __commonJS({
         return this.call.getPeer();
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      sendMessageWithContext(context, message) {
+      sendMessageWithContext(context, message2) {
         let serialized;
         try {
-          serialized = this.methodDefinition.requestSerialize(message);
+          serialized = this.methodDefinition.requestSerialize(message2);
         } catch (e) {
           this.call.cancelWithStatus(constants_1.Status.INTERNAL, `Request message serialization failure: ${(0, error_1.getErrorMessage)(e)}`);
           return;
@@ -3820,8 +3820,8 @@ var require_client_interceptors = __commonJS({
         this.call.sendMessageWithContext(context, serialized);
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      sendMessage(message) {
-        this.sendMessageWithContext({}, message);
+      sendMessage(message2) {
+        this.sendMessageWithContext({}, message2);
       }
       start(metadata, interceptingListener) {
         let readError = null;
@@ -3830,11 +3830,11 @@ var require_client_interceptors = __commonJS({
             var _a;
             (_a = interceptingListener === null || interceptingListener === void 0 ? void 0 : interceptingListener.onReceiveMetadata) === null || _a === void 0 ? void 0 : _a.call(interceptingListener, metadata2);
           },
-          onReceiveMessage: (message) => {
+          onReceiveMessage: (message2) => {
             var _a;
             let deserialized;
             try {
-              deserialized = this.methodDefinition.responseDeserialize(message);
+              deserialized = this.methodDefinition.responseDeserialize(message2);
             } catch (e) {
               readError = {
                 code: constants_1.Status.INTERNAL,
@@ -3878,10 +3878,10 @@ var require_client_interceptors = __commonJS({
           onReceiveMetadata: (_b = (_a = listener === null || listener === void 0 ? void 0 : listener.onReceiveMetadata) === null || _a === void 0 ? void 0 : _a.bind(listener)) !== null && _b !== void 0 ? _b : ((metadata2) => {
           }),
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          onReceiveMessage: (message) => {
+          onReceiveMessage: (message2) => {
             var _a2;
             receivedMessage = true;
-            (_a2 = listener === null || listener === void 0 ? void 0 : listener.onReceiveMessage) === null || _a2 === void 0 ? void 0 : _a2.call(listener, message);
+            (_a2 = listener === null || listener === void 0 ? void 0 : listener.onReceiveMessage) === null || _a2 === void 0 ? void 0 : _a2.call(listener, message2);
           },
           onReceiveStatus: (status) => {
             var _a2, _b2;
@@ -3953,7 +3953,7 @@ var require_client = __commonJS({
       return ((_a = error.stack) === null || _a === void 0 ? void 0 : _a.split("\n").slice(1).join("\n")) || "no stack trace available";
     }
     var Client = class {
-      constructor(address, credentials, options = {}) {
+      constructor(address, credentials2, options = {}) {
         var _a, _b;
         options = Object.assign({}, options);
         this[INTERCEPTOR_SYMBOL] = (_a = options.interceptors) !== null && _a !== void 0 ? _a : [];
@@ -3970,9 +3970,9 @@ var require_client = __commonJS({
         } else if (options.channelFactoryOverride) {
           const channelFactoryOverride = options.channelFactoryOverride;
           delete options.channelFactoryOverride;
-          this[CHANNEL_SYMBOL] = channelFactoryOverride(address, credentials, options);
+          this[CHANNEL_SYMBOL] = channelFactoryOverride(address, credentials2, options);
         } else {
-          this[CHANNEL_SYMBOL] = new channel_1.ChannelImplementation(address, credentials, options);
+          this[CHANNEL_SYMBOL] = new channel_1.ChannelImplementation(address, credentials2, options);
         }
       }
       close() {
@@ -4061,11 +4061,11 @@ var require_client = __commonJS({
             emitter.emit("metadata", metadata2);
           },
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          onReceiveMessage(message) {
+          onReceiveMessage(message2) {
             if (responseMessage !== null) {
               call.cancelWithStatus(constants_1.Status.UNIMPLEMENTED, "Too many responses received");
             }
-            responseMessage = message;
+            responseMessage = message2;
           },
           onReceiveStatus(status) {
             if (receivedStatus) {
@@ -4133,11 +4133,11 @@ var require_client = __commonJS({
             emitter.emit("metadata", metadata2);
           },
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          onReceiveMessage(message) {
+          onReceiveMessage(message2) {
             if (responseMessage !== null) {
               call.cancelWithStatus(constants_1.Status.UNIMPLEMENTED, "Too many responses received");
             }
-            responseMessage = message;
+            responseMessage = message2;
             call.startRead();
           },
           onReceiveStatus(status) {
@@ -4223,8 +4223,8 @@ var require_client = __commonJS({
             stream.emit("metadata", metadata2);
           },
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          onReceiveMessage(message) {
-            stream.push(message);
+          onReceiveMessage(message2) {
+            stream.push(message2);
           },
           onReceiveStatus(status) {
             if (receivedStatus) {
@@ -4279,8 +4279,8 @@ var require_client = __commonJS({
           onReceiveMetadata(metadata2) {
             stream.emit("metadata", metadata2);
           },
-          onReceiveMessage(message) {
-            stream.push(message);
+          onReceiveMessage(message2) {
+            stream.push(message2);
           },
           onReceiveStatus(status) {
             if (receivedStatus) {
@@ -4309,7 +4309,7 @@ var require_make_client = __commonJS({
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.makeClientConstructor = makeClientConstructor;
-    exports.loadPackageDefinition = loadPackageDefinition;
+    exports.loadPackageDefinition = loadPackageDefinition2;
     var client_1 = require_client();
     var requesterFuncs = {
       unary: client_1.Client.prototype.makeUnaryRequest,
@@ -4369,7 +4369,7 @@ var require_make_client = __commonJS({
     function isProtobufTypeDefinition(obj) {
       return "format" in obj;
     }
-    function loadPackageDefinition(packageDef) {
+    function loadPackageDefinition2(packageDef) {
       const result = {};
       for (const serviceFqn in packageDef) {
         if (Object.prototype.hasOwnProperty.call(packageDef, serviceFqn)) {
@@ -6457,11 +6457,11 @@ var require_minimal = __commonJS({
       return str.charAt(0).toLowerCase() + str.substring(1);
     };
     function newError(name) {
-      function CustomError(message, properties) {
+      function CustomError(message2, properties) {
         if (!(this instanceof CustomError))
-          return new CustomError(message, properties);
+          return new CustomError(message2, properties);
         Object.defineProperty(this, "message", { get: function() {
-          return message;
+          return message2;
         } });
         if (Error.captureStackTrace)
           Error.captureStackTrace(this, CustomError);
@@ -6789,7 +6789,7 @@ var require_writer_buffer = __commonJS({
 var require_reader = __commonJS({
   "../../node_modules/protobufjs/src/reader.js"(exports, module) {
     "use strict";
-    module.exports = Reader;
+    module.exports = Reader2;
     var util = require_minimal();
     var BufferReader;
     var LongBits = util.LongBits;
@@ -6797,29 +6797,29 @@ var require_reader = __commonJS({
     function indexOutOfRange(reader, writeLength) {
       return RangeError("index out of range: " + reader.pos + " + " + (writeLength || 1) + " > " + reader.len);
     }
-    function Reader(buffer) {
+    function Reader2(buffer) {
       this.buf = buffer;
       this.pos = 0;
       this.len = buffer.length;
     }
     var create_array = typeof Uint8Array !== "undefined" ? function create_typed_array(buffer) {
       if (buffer instanceof Uint8Array || Array.isArray(buffer))
-        return new Reader(buffer);
+        return new Reader2(buffer);
       throw Error("illegal buffer");
     } : function create_array2(buffer) {
       if (Array.isArray(buffer))
-        return new Reader(buffer);
+        return new Reader2(buffer);
       throw Error("illegal buffer");
     };
     var create = function create2() {
       return util.Buffer ? function create_buffer_setup(buffer) {
-        return (Reader.create = function create_buffer(buffer2) {
+        return (Reader2.create = function create_buffer(buffer2) {
           return util.Buffer.isBuffer(buffer2) ? new BufferReader(buffer2) : create_array(buffer2);
         })(buffer);
       } : create_array;
     };
-    Reader.create = create();
-    Reader.prototype._slice = util.Array.prototype.subarray || /* istanbul ignore next */
+    Reader2.create = create();
+    Reader2.prototype._slice = util.Array.prototype.subarray || /* istanbul ignore next */
     util.Array.prototype.slice;
     function readVarint32NearEnd(reader) {
       var value = 0;
@@ -6833,7 +6833,7 @@ var require_reader = __commonJS({
       }
       throw indexOutOfRange(reader);
     }
-    Reader.prototype.uint32 = /* @__PURE__ */ (function read_uint32_setup() {
+    Reader2.prototype.uint32 = /* @__PURE__ */ (function read_uint32_setup() {
       var value = 4294967295;
       return function read_uint32() {
         if (this.len - this.pos < 5) {
@@ -6859,10 +6859,10 @@ var require_reader = __commonJS({
         return value;
       };
     })();
-    Reader.prototype.int32 = function read_int32() {
+    Reader2.prototype.int32 = function read_int32() {
       return this.uint32() | 0;
     };
-    Reader.prototype.sint32 = function read_sint32() {
+    Reader2.prototype.sint32 = function read_sint32() {
       var value = this.uint32();
       return value >>> 1 ^ -(value & 1) | 0;
     };
@@ -6908,18 +6908,18 @@ var require_reader = __commonJS({
       }
       throw Error("invalid varint encoding");
     }
-    Reader.prototype.bool = function read_bool() {
+    Reader2.prototype.bool = function read_bool() {
       return this.uint32() !== 0;
     };
     function readFixed32_end(buf, end) {
       return (buf[end - 4] | buf[end - 3] << 8 | buf[end - 2] << 16 | buf[end - 1] << 24) >>> 0;
     }
-    Reader.prototype.fixed32 = function read_fixed32() {
+    Reader2.prototype.fixed32 = function read_fixed32() {
       if (this.pos + 4 > this.len)
         throw indexOutOfRange(this, 4);
       return readFixed32_end(this.buf, this.pos += 4);
     };
-    Reader.prototype.sfixed32 = function read_sfixed32() {
+    Reader2.prototype.sfixed32 = function read_sfixed32() {
       if (this.pos + 4 > this.len)
         throw indexOutOfRange(this, 4);
       return readFixed32_end(this.buf, this.pos += 4) | 0;
@@ -6929,21 +6929,21 @@ var require_reader = __commonJS({
         throw indexOutOfRange(this, 8);
       return new LongBits(readFixed32_end(this.buf, this.pos += 4), readFixed32_end(this.buf, this.pos += 4));
     }
-    Reader.prototype.float = function read_float() {
+    Reader2.prototype.float = function read_float() {
       if (this.pos + 4 > this.len)
         throw indexOutOfRange(this, 4);
       var value = util.float.readFloatLE(this.buf, this.pos);
       this.pos += 4;
       return value;
     };
-    Reader.prototype.double = function read_double() {
+    Reader2.prototype.double = function read_double() {
       if (this.pos + 8 > this.len)
         throw indexOutOfRange(this, 4);
       var value = util.float.readDoubleLE(this.buf, this.pos);
       this.pos += 8;
       return value;
     };
-    Reader.prototype.bytes = function read_bytes() {
+    Reader2.prototype.bytes = function read_bytes() {
       var length = this.uint32(), start = this.pos, end = this.pos + length;
       if (end > this.len)
         throw indexOutOfRange(this, length);
@@ -6956,11 +6956,11 @@ var require_reader = __commonJS({
       }
       return this._slice.call(this.buf, start, end);
     };
-    Reader.prototype.string = function read_string() {
+    Reader2.prototype.string = function read_string() {
       var bytes = this.bytes();
       return utf8.read(bytes, 0, bytes.length);
     };
-    Reader.prototype.skip = function skip(length) {
+    Reader2.prototype.skip = function skip(length) {
       if (typeof length === "number") {
         if (this.pos + length > this.len)
           throw indexOutOfRange(this, length);
@@ -6973,10 +6973,10 @@ var require_reader = __commonJS({
       }
       return this;
     };
-    Reader.recursionLimit = util.recursionLimit;
-    Reader.prototype.skipType = function(wireType, depth) {
+    Reader2.recursionLimit = util.recursionLimit;
+    Reader2.prototype.skipType = function(wireType, depth) {
       if (depth === void 0) depth = 0;
-      if (depth > Reader.recursionLimit)
+      if (depth > Reader2.recursionLimit)
         throw Error("maximum nesting depth exceeded");
       switch (wireType) {
         case 0:
@@ -7002,15 +7002,15 @@ var require_reader = __commonJS({
       }
       return this;
     };
-    Reader._configure = function(BufferReader_) {
+    Reader2._configure = function(BufferReader_) {
       BufferReader = BufferReader_;
-      Reader.create = create();
+      Reader2.create = create();
       BufferReader._configure();
       var fn = util.Long ? "toLong" : (
         /* istanbul ignore next */
         "toNumber"
       );
-      util.merge(Reader.prototype, {
+      util.merge(Reader2.prototype, {
         int64: function read_int64() {
           return readLongVarint.call(this)[fn](false);
         },
@@ -7036,11 +7036,11 @@ var require_reader_buffer = __commonJS({
   "../../node_modules/protobufjs/src/reader_buffer.js"(exports, module) {
     "use strict";
     module.exports = BufferReader;
-    var Reader = require_reader();
-    (BufferReader.prototype = Object.create(Reader.prototype)).constructor = BufferReader;
+    var Reader2 = require_reader();
+    (BufferReader.prototype = Object.create(Reader2.prototype)).constructor = BufferReader;
     var util = require_minimal();
     function BufferReader(buffer) {
-      Reader.call(this, buffer);
+      Reader2.call(this, buffer);
     }
     BufferReader._configure = function() {
       if (util.Buffer)
@@ -7927,11 +7927,11 @@ var require_message = __commonJS({
     Message.create = function create(properties) {
       return this.$type.create(properties);
     };
-    Message.encode = function encode(message, writer) {
-      return this.$type.encode(message, writer);
+    Message.encode = function encode(message2, writer) {
+      return this.$type.encode(message2, writer);
     };
-    Message.encodeDelimited = function encodeDelimited(message, writer) {
-      return this.$type.encodeDelimited(message, writer);
+    Message.encodeDelimited = function encodeDelimited(message2, writer) {
+      return this.$type.encodeDelimited(message2, writer);
     };
     Message.decode = function decode(reader) {
       return this.$type.decode(reader);
@@ -7939,14 +7939,14 @@ var require_message = __commonJS({
     Message.decodeDelimited = function decodeDelimited(reader) {
       return this.$type.decodeDelimited(reader);
     };
-    Message.verify = function verify(message) {
-      return this.$type.verify(message);
+    Message.verify = function verify(message2) {
+      return this.$type.verify(message2);
     };
     Message.fromObject = function fromObject(object) {
       return this.$type.fromObject(object);
     };
-    Message.toObject = function toObject(message, options) {
-      return this.$type.toObject(message, options);
+    Message.toObject = function toObject(message2, options) {
+      return this.$type.toObject(message2, options);
     };
     Message.prototype.toJSON = function toJSON() {
       return this.$type.toObject(this, util.toJSONOptions);
@@ -8350,7 +8350,7 @@ var require_wrappers = __commonJS({
         }
         return this.fromObject(object, depth);
       },
-      toObject: function(message, options, depth) {
+      toObject: function(message2, options, depth) {
         if (depth === void 0)
           depth = 0;
         if (depth > util.recursionLimit)
@@ -8358,16 +8358,16 @@ var require_wrappers = __commonJS({
         var googleApi = "type.googleapis.com/";
         var prefix = "";
         var name = "";
-        if (options && options.json && message.type_url && message.value) {
-          name = message.type_url.substring(message.type_url.lastIndexOf("/") + 1);
-          prefix = message.type_url.substring(0, message.type_url.lastIndexOf("/") + 1);
+        if (options && options.json && message2.type_url && message2.value) {
+          name = message2.type_url.substring(message2.type_url.lastIndexOf("/") + 1);
+          prefix = message2.type_url.substring(0, message2.type_url.lastIndexOf("/") + 1);
           var type = this.lookup(name);
           if (type)
-            message = type.decode(message.value, void 0, void 0, depth + 1);
+            message2 = type.decode(message2.value, void 0, void 0, depth + 1);
         }
-        if (!(message instanceof this.ctor) && message instanceof Message) {
-          var object = message.$type.toObject(message, options, depth + 1);
-          var messageName = message.$type.fullName[0] === "." ? message.$type.fullName.slice(1) : message.$type.fullName;
+        if (!(message2 instanceof this.ctor) && message2 instanceof Message) {
+          var object = message2.$type.toObject(message2, options, depth + 1);
+          var messageName = message2.$type.fullName[0] === "." ? message2.$type.fullName.slice(1) : message2.$type.fullName;
           if (prefix === "") {
             prefix = googleApi;
           }
@@ -8375,7 +8375,7 @@ var require_wrappers = __commonJS({
           object["@type"] = name;
           return object;
         }
-        return this.toObject(message, options, depth);
+        return this.toObject(message2, options, depth);
       }
     };
   }
@@ -8394,7 +8394,7 @@ var require_type = __commonJS({
     var MapField = require_mapfield();
     var Service = require_service2();
     var Message = require_message();
-    var Reader = require_reader();
+    var Reader2 = require_reader();
     var Writer = require_writer();
     var util = require_util();
     var encoder = require_encoder();
@@ -8677,7 +8677,7 @@ var require_type = __commonJS({
         util
       });
       this.decode = decoder(this)({
-        Reader,
+        Reader: Reader2,
         types,
         util
       });
@@ -8703,27 +8703,27 @@ var require_type = __commonJS({
       }
       return this;
     };
-    Type.prototype.encode = function encode_setup(message, writer) {
+    Type.prototype.encode = function encode_setup(message2, writer) {
       return this.setup().encode.apply(this, arguments);
     };
-    Type.prototype.encodeDelimited = function encodeDelimited(message, writer) {
-      return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+    Type.prototype.encodeDelimited = function encodeDelimited(message2, writer) {
+      return this.encode(message2, writer && writer.len ? writer.fork() : writer).ldelim();
     };
     Type.prototype.decode = function decode_setup(reader, length, end, depth) {
       return this.setup().decode(reader, length, end, depth);
     };
     Type.prototype.decodeDelimited = function decodeDelimited(reader) {
-      if (!(reader instanceof Reader))
-        reader = Reader.create(reader);
+      if (!(reader instanceof Reader2))
+        reader = Reader2.create(reader);
       return this.decode(reader, reader.uint32());
     };
-    Type.prototype.verify = function verify_setup(message, depth) {
-      return this.setup().verify(message, depth);
+    Type.prototype.verify = function verify_setup(message2, depth) {
+      return this.setup().verify(message2, depth);
     };
     Type.prototype.fromObject = function fromObject(object, depth) {
       return this.setup().fromObject(object, depth);
     };
-    Type.prototype.toObject = function toObject(message, options) {
+    Type.prototype.toObject = function toObject(message2, options) {
       return this.setup().toObject.apply(this, arguments);
     };
     Type.d = function decorateType(typeName) {
@@ -8894,7 +8894,7 @@ var require_root = __commonJS({
       }
       return self2;
     };
-    Root.prototype.loadSync = function loadSync(filename, options) {
+    Root.prototype.loadSync = function loadSync2(filename, options) {
       if (!util.isNode)
         throw Error("not supported");
       return this.load(filename, options, SYNC);
@@ -9975,12 +9975,12 @@ var require_index_light = __commonJS({
       return root.load(filename, callback);
     }
     protobuf.load = load2;
-    function loadSync(filename, root) {
+    function loadSync2(filename, root) {
       if (!root)
         root = new protobuf.Root();
       return root.loadSync(filename);
     }
-    protobuf.loadSync = loadSync;
+    protobuf.loadSync = loadSync2;
     protobuf.encoder = require_encoder();
     protobuf.decoder = require_decoder();
     protobuf.verifier = require_verifier();
@@ -13820,8 +13820,8 @@ var require_src2 = __commonJS({
         if (Array.isArray(arg)) {
           throw new Error(`Failed to serialize message: expected object with ${cls.name} structure, got array instead`);
         }
-        const message = cls.fromObject(arg);
-        return cls.encode(message).finish();
+        const message2 = cls.fromObject(arg);
+        return cls.encode(message2).finish();
       };
     }
     function mapMethodOptions(options) {
@@ -13867,14 +13867,14 @@ var require_src2 = __commonJS({
       }
       return def;
     }
-    function createMessageDefinition(message, options, fileDescriptors) {
-      const messageDescriptor = message.toDescriptor("proto3");
+    function createMessageDefinition(message2, options, fileDescriptors) {
+      const messageDescriptor = message2.toDescriptor("proto3");
       return {
         format: "Protocol Buffer 3 DescriptorProto",
         type: messageDescriptor.$type.toObject(messageDescriptor, descriptorOptions),
         fileDescriptorProtos: fileDescriptors,
-        serialize: createSerializer(message),
-        deserialize: createDeserializer(message, options)
+        serialize: createSerializer(message2),
+        deserialize: createDeserializer(message2, options)
       };
     }
     function createEnumDefinition(enumType, fileDescriptors) {
@@ -13918,11 +13918,11 @@ var require_src2 = __commonJS({
       });
     }
     exports.load = load2;
-    function loadSync(filename, options) {
+    function loadSync2(filename, options) {
       const loadedRoot = (0, util_1.loadProtosWithOptionsSync)(filename, options);
       return createPackageDefinition(loadedRoot, options);
     }
-    exports.loadSync = loadSync;
+    exports.loadSync = loadSync2;
     function fromJSON(json, options) {
       options = options || {};
       const loadedRoot = Protobuf.Root.fromJSON(json);
@@ -14569,11 +14569,11 @@ var require_filter = __commonJS({
       receiveMetadata(metadata) {
         return metadata;
       }
-      async sendMessage(message) {
-        return message;
+      async sendMessage(message2) {
+        return message2;
       }
-      async receiveMessage(message) {
-        return message;
+      async receiveMessage(message2) {
+        return message2;
       }
       receiveTrailers(status) {
         return status;
@@ -14603,8 +14603,8 @@ var require_compression_filter = __commonJS({
        * @param compress Indicates whether the message should be compressed
        * @return Framed message, compressed if applicable
        */
-      async writeMessage(message, compress) {
-        let messageBuffer = message;
+      async writeMessage(message2, compress) {
+        let messageBuffer = message2;
         if (compress) {
           messageBuffer = await this.compressMessage(messageBuffer);
         }
@@ -14628,17 +14628,17 @@ var require_compression_filter = __commonJS({
       }
     };
     var IdentityHandler = class extends CompressionHandler {
-      async compressMessage(message) {
-        return message;
+      async compressMessage(message2) {
+        return message2;
       }
-      async writeMessage(message, compress) {
-        const output = Buffer.allocUnsafe(message.length + 5);
+      async writeMessage(message2, compress) {
+        const output = Buffer.allocUnsafe(message2.length + 5);
         output.writeUInt8(0, 0);
-        output.writeUInt32BE(message.length, 1);
-        message.copy(output, 5);
+        output.writeUInt32BE(message2.length, 1);
+        message2.copy(output, 5);
         return output;
       }
-      decompressMessage(message) {
+      decompressMessage(message2) {
         return Promise.reject(new Error('Received compressed message but "grpc-encoding" header was identity'));
       }
     };
@@ -14647,9 +14647,9 @@ var require_compression_filter = __commonJS({
         super();
         this.maxRecvMessageLength = maxRecvMessageLength;
       }
-      compressMessage(message) {
+      compressMessage(message2) {
         return new Promise((resolve, reject) => {
-          zlib.deflate(message, (err, output) => {
+          zlib.deflate(message2, (err, output) => {
             if (err) {
               reject(err);
             } else {
@@ -14658,7 +14658,7 @@ var require_compression_filter = __commonJS({
           });
         });
       }
-      decompressMessage(message) {
+      decompressMessage(message2) {
         return new Promise((resolve, reject) => {
           let totalLength = 0;
           const messageParts = [];
@@ -14683,7 +14683,7 @@ var require_compression_filter = __commonJS({
           decompresser.on("end", () => {
             resolve(Buffer.concat(messageParts));
           });
-          decompresser.write(message);
+          decompresser.write(message2);
           decompresser.end();
         });
       }
@@ -14693,9 +14693,9 @@ var require_compression_filter = __commonJS({
         super();
         this.maxRecvMessageLength = maxRecvMessageLength;
       }
-      compressMessage(message) {
+      compressMessage(message2) {
         return new Promise((resolve, reject) => {
-          zlib.gzip(message, (err, output) => {
+          zlib.gzip(message2, (err, output) => {
             if (err) {
               reject(err);
             } else {
@@ -14704,7 +14704,7 @@ var require_compression_filter = __commonJS({
           });
         });
       }
-      decompressMessage(message) {
+      decompressMessage(message2) {
         return new Promise((resolve, reject) => {
           let totalLength = 0;
           const messageParts = [];
@@ -14729,7 +14729,7 @@ var require_compression_filter = __commonJS({
           decompresser.on("end", () => {
             resolve(Buffer.concat(messageParts));
           });
-          decompresser.write(message);
+          decompresser.write(message2);
           decompresser.end();
         });
       }
@@ -14739,10 +14739,10 @@ var require_compression_filter = __commonJS({
         super();
         this.compressionName = compressionName;
       }
-      compressMessage(message) {
+      compressMessage(message2) {
         return Promise.reject(new Error(`Received message compressed with unsupported compression method ${this.compressionName}`));
       }
-      decompressMessage(message) {
+      decompressMessage(message2) {
         return Promise.reject(new Error(`Compression method not supported: ${this.compressionName}`));
       }
     };
@@ -14814,9 +14814,9 @@ var require_compression_filter = __commonJS({
         metadata.remove("grpc-accept-encoding");
         return metadata;
       }
-      async sendMessage(message) {
+      async sendMessage(message2) {
         var _a;
-        const resolvedMessage = await message;
+        const resolvedMessage = await message2;
         if (this.maxSendMessageLength !== -1 && resolvedMessage.message.length > this.maxSendMessageLength) {
           throw {
             code: constants_1.Status.RESOURCE_EXHAUSTED,
@@ -14834,8 +14834,8 @@ var require_compression_filter = __commonJS({
           flags: resolvedMessage.flags
         };
       }
-      async receiveMessage(message) {
-        return this.receiveCompression.readMessage(await message);
+      async receiveMessage(message2) {
+        return this.receiveCompression.readMessage(await message2);
       }
     };
     exports.CompressionFilter = CompressionFilter;
@@ -14977,15 +14977,15 @@ var require_filter_stack = __commonJS({
         }
         return result;
       }
-      sendMessage(message) {
-        let result = message;
+      sendMessage(message2) {
+        let result = message2;
         for (let i = 0; i < this.filters.length; i++) {
           result = this.filters[i].sendMessage(result);
         }
         return result;
       }
-      receiveMessage(message) {
-        let result = message;
+      receiveMessage(message2) {
+        let result = message2;
         for (let i = this.filters.length - 1; i >= 0; i--) {
           result = this.filters[i].receiveMessage(result);
         }
@@ -15121,9 +15121,9 @@ var require_single_subchannel_channel = __commonJS({
           onReceiveMetadata: async (metadata2) => {
             listener.onReceiveMetadata(await this.filterStack.receiveMetadata(metadata2));
           },
-          onReceiveMessage: async (message) => {
+          onReceiveMessage: async (message2) => {
             this.readFilterPending = true;
-            const filteredMessage = await this.filterStack.receiveMessage(message);
+            const filteredMessage = await this.filterStack.receiveMessage(message2);
             this.readFilterPending = false;
             listener.onReceiveMessage(filteredMessage);
             if (this.pendingStatus) {
@@ -15150,9 +15150,9 @@ var require_single_subchannel_channel = __commonJS({
           this.childCall.halfClose();
         }
       }
-      async sendMessageWithContext(context, message) {
+      async sendMessageWithContext(context, message2) {
         this.writeFilterPending = true;
-        const filteredMessage = await this.filterStack.sendMessage(Promise.resolve({ message, flags: context.flags }));
+        const filteredMessage = await this.filterStack.sendMessage(Promise.resolve({ message: message2, flags: context.flags }));
         this.writeFilterPending = false;
         if (this.childCall) {
           this.childCall.sendMessageWithContext(context, filteredMessage.message);
@@ -15180,7 +15180,7 @@ var require_single_subchannel_channel = __commonJS({
       getCallNumber() {
         return this.callNumber;
       }
-      setCredentials(credentials) {
+      setCredentials(credentials2) {
         throw new Error("Method not implemented.");
       }
       getAuthContext() {
@@ -15271,7 +15271,7 @@ var require_subchannel = __commonJS({
        * @param credentials The channel credentials used to establish this
        *     connection
        */
-      constructor(channelTarget, subchannelAddress, options, credentials, connector) {
+      constructor(channelTarget, subchannelAddress, options, credentials2, connector) {
         var _a;
         this.channelTarget = channelTarget;
         this.subchannelAddress = subchannelAddress;
@@ -15312,7 +15312,7 @@ var require_subchannel = __commonJS({
         if (this.traceEnabled) {
           this.trace("Subchannel constructed with options " + JSON.stringify(options, void 0, 2));
         }
-        this.secureConnector = credentials._createSecureConnector(channelTarget, options);
+        this.secureConnector = credentials2._createSecureConnector(channelTarget, options);
       }
       getChannelzInfo() {
         return {
@@ -16163,9 +16163,9 @@ var require_stream_decoder = __commonJS({
                 if (this.readMessageRemaining > 0) {
                   this.readState = ReadState.READING_MESSAGE;
                 } else {
-                  const message = Buffer.concat([this.readCompressFlag, this.readPartialSize], 5);
+                  const message2 = Buffer.concat([this.readCompressFlag, this.readPartialSize], 5);
                   this.readState = ReadState.NO_DATA;
-                  result.push(message);
+                  result.push(message2);
                 }
               }
               break;
@@ -16317,12 +16317,12 @@ var require_subchannel_call = __commonJS({
             }
             return;
           }
-          for (const message of messages) {
+          for (const message2 of messages) {
             if (this.traceEnabled) {
-              this.trace("parsed message of length " + message.length);
+              this.trace("parsed message of length " + message2.length);
             }
             this.callEventTracker.addMessageReceived();
-            this.tryPush(message);
+            this.tryPush(message2);
           }
         });
         http2Stream.on("end", () => {
@@ -16464,9 +16464,9 @@ var require_subchannel_call = __commonJS({
           }
         }
       }
-      push(message) {
+      push(message2) {
         if (this.traceEnabled) {
-          this.trace("pushing to reader message of length " + (message instanceof Buffer ? message.length : null));
+          this.trace("pushing to reader message of length " + (message2 instanceof Buffer ? message2.length : null));
         }
         this.canPush = false;
         this.isPushPending = true;
@@ -16475,7 +16475,7 @@ var require_subchannel_call = __commonJS({
           if (this.statusOutput) {
             return;
           }
-          this.listener.onReceiveMessage(message);
+          this.listener.onReceiveMessage(message2);
           this.maybeOutputStatus();
         });
       }
@@ -16597,9 +16597,9 @@ var require_subchannel_call = __commonJS({
         }
         this.http2Stream.resume();
       }
-      sendMessageWithContext(context, message) {
+      sendMessageWithContext(context, message2) {
         if (this.traceEnabled) {
-          this.trace("write() called with message of length " + message.length);
+          this.trace("write() called with message of length " + message2.length);
         }
         const cb = (error) => {
           process.nextTick(() => {
@@ -16615,11 +16615,11 @@ var require_subchannel_call = __commonJS({
           });
         };
         if (this.traceEnabled) {
-          this.trace("sending data chunk of length " + message.length);
+          this.trace("sending data chunk of length " + message2.length);
         }
         this.callEventTracker.addMessageSent();
         try {
-          this.http2Stream.write(message, cb);
+          this.http2Stream.write(message2, cb);
         } catch (error) {
           this.endCall({
             code: constants_1.Status.UNAVAILABLE,
@@ -17334,13 +17334,13 @@ var require_load_balancing_call = __commonJS({
     var http2 = __require("http2");
     var TRACER_NAME = "load_balancing_call";
     var LoadBalancingCall = class {
-      constructor(channel, callConfig, methodName, host, credentials, deadline, callNumber) {
+      constructor(channel, callConfig, methodName, host, credentials2, deadline, callNumber) {
         var _a, _b;
         this.channel = channel;
         this.callConfig = callConfig;
         this.methodName = methodName;
         this.host = host;
-        this.credentials = credentials;
+        this.credentials = credentials2;
         this.deadline = deadline;
         this.callNumber = callNumber;
         this.child = null;
@@ -17452,9 +17452,9 @@ var require_load_balancing_call = __commonJS({
                     this.trace("Received metadata");
                     this.listener.onReceiveMetadata(metadata);
                   },
-                  onReceiveMessage: (message) => {
+                  onReceiveMessage: (message2) => {
                     this.trace("Received message");
-                    this.listener.onReceiveMessage(message);
+                    this.listener.onReceiveMessage(message2);
                   },
                   onReceiveStatus: (status) => {
                     this.trace("Received status");
@@ -17538,14 +17538,14 @@ var require_load_balancing_call = __commonJS({
         this.metadata = metadata;
         this.doPick();
       }
-      sendMessageWithContext(context, message) {
+      sendMessageWithContext(context, message2) {
         if (this.traceEnabled) {
-          this.trace("write() called with message of length " + message.length);
+          this.trace("write() called with message of length " + message2.length);
         }
         if (this.child) {
-          this.child.sendMessageWithContext(context, message);
+          this.child.sendMessageWithContext(context, message2);
         } else {
-          this.pendingMessage = { context, message };
+          this.pendingMessage = { context, message: message2 };
         }
       }
       startRead() {
@@ -17564,7 +17564,7 @@ var require_load_balancing_call = __commonJS({
           this.pendingHalfClose = true;
         }
       }
-      setCredentials(credentials) {
+      setCredentials(credentials2) {
         throw new Error("Method not implemented.");
       }
       getCallNumber() {
@@ -17708,13 +17708,13 @@ var require_resolving_call = __commonJS({
           });
         }
       }
-      sendMessageOnChild(context, message) {
+      sendMessageOnChild(context, message2) {
         if (!this.child) {
           throw new Error("sendMessageonChild called with child not populated");
         }
         const child = this.child;
         this.writeFilterPending = true;
-        this.filterStack.sendMessage(Promise.resolve({ message, flags: context.flags })).then((filteredMessage) => {
+        this.filterStack.sendMessage(Promise.resolve({ message: message2, flags: context.flags })).then((filteredMessage) => {
           this.writeFilterPending = false;
           child.sendMessageWithContext(context, filteredMessage.message);
           if (this.pendingHalfClose) {
@@ -17775,10 +17775,10 @@ var require_resolving_call = __commonJS({
               this.trace("Received metadata");
               this.listener.onReceiveMetadata(this.filterStack.receiveMetadata(metadata));
             },
-            onReceiveMessage: (message) => {
+            onReceiveMessage: (message2) => {
               this.trace("Received message");
               this.readFilterPending = true;
-              this.filterStack.receiveMessage(message).then((filteredMesssage) => {
+              this.filterStack.receiveMessage(message2).then((filteredMesssage) => {
                 this.trace("Finished filtering received message");
                 this.readFilterPending = false;
                 this.listener.onReceiveMessage(filteredMesssage);
@@ -17840,14 +17840,14 @@ var require_resolving_call = __commonJS({
         this.listener = listener;
         this.getConfig();
       }
-      sendMessageWithContext(context, message) {
+      sendMessageWithContext(context, message2) {
         if (this.traceEnabled) {
-          this.trace("write() called with message of length " + message.length);
+          this.trace("write() called with message of length " + message2.length);
         }
         if (this.child) {
-          this.sendMessageOnChild(context, message);
+          this.sendMessageOnChild(context, message2);
         } else {
-          this.pendingMessage = { context, message };
+          this.pendingMessage = { context, message: message2 };
         }
       }
       startRead() {
@@ -17866,8 +17866,8 @@ var require_resolving_call = __commonJS({
           this.pendingHalfClose = true;
         }
       }
-      setCredentials(credentials) {
-        this.credentials = credentials;
+      setCredentials(credentials2) {
+        this.credentials = credentials2;
       }
       addStatusWatcher(watcher) {
         this.statusWatchers.push(watcher);
@@ -17963,13 +17963,13 @@ var require_retrying_call = __commonJS({
     var PREVIONS_RPC_ATTEMPTS_METADATA_KEY = "grpc-previous-rpc-attempts";
     var DEFAULT_MAX_ATTEMPTS_LIMIT = 5;
     var RetryingCall = class {
-      constructor(channel, callConfig, methodName, host, credentials, deadline, callNumber, bufferTracker, retryThrottler) {
+      constructor(channel, callConfig, methodName, host, credentials2, deadline, callNumber, bufferTracker, retryThrottler) {
         var _a;
         this.channel = channel;
         this.callConfig = callConfig;
         this.methodName = methodName;
         this.host = host;
-        this.credentials = credentials;
+        this.credentials = credentials2;
         this.deadline = deadline;
         this.callNumber = callNumber;
         this.bufferTracker = bufferTracker;
@@ -18375,13 +18375,13 @@ var require_retrying_call = __commonJS({
               this.listener.onReceiveMetadata(metadata);
             }
           },
-          onReceiveMessage: (message) => {
+          onReceiveMessage: (message2) => {
             if (this.traceEnabled) {
               this.trace("Received message from child [" + child.getCallNumber() + "]");
             }
             this.commitCall(index);
             if (this.underlyingCalls[index].state === "ACTIVE") {
-              this.listener.onReceiveMessage(message);
+              this.listener.onReceiveMessage(message2);
             }
           },
           onReceiveStatus: (status) => {
@@ -18448,19 +18448,19 @@ var require_retrying_call = __commonJS({
           }
         }
       }
-      sendMessageWithContext(context, message) {
+      sendMessageWithContext(context, message2) {
         if (this.traceEnabled) {
-          this.trace("write() called with message of length " + message.length);
+          this.trace("write() called with message of length " + message2.length);
         }
         const writeObj = {
-          message,
+          message: message2,
           flags: context.flags
         };
         const messageIndex = this.getNextBufferIndex();
         const bufferEntry = {
           entryType: "MESSAGE",
           message: writeObj,
-          allocated: this.bufferTracker.allocate(message.length, this.callNumber)
+          allocated: this.bufferTracker.allocate(message2.length, this.callNumber)
         };
         this.writeBuffer.push(bufferEntry);
         if (bufferEntry.allocated) {
@@ -18474,7 +18474,7 @@ var require_retrying_call = __commonJS({
                 callback: (error) => {
                   this.handleChildWriteCompleted(callIndex, messageIndex);
                 }
-              }, message);
+              }, message2);
             }
           }
         } else {
@@ -18489,7 +18489,7 @@ var require_retrying_call = __commonJS({
               callback: (error) => {
                 this.handleChildWriteCompleted(this.committedCallIndex, messageIndex);
               }
-            }, message);
+            }, message2);
           }
         }
       }
@@ -18737,9 +18737,9 @@ var require_internal_channel = __commonJS({
       }
     };
     var InternalChannel = class {
-      constructor(target, credentials, options) {
+      constructor(target, credentials2, options) {
         var _a, _b, _c, _d, _e, _f;
-        this.credentials = credentials;
+        this.credentials = credentials2;
         this.options = options;
         this.connectivityState = connectivity_state_1.ConnectivityState.IDLE;
         this.currentPicker = new picker_1.UnavailablePicker();
@@ -18757,7 +18757,7 @@ var require_internal_channel = __commonJS({
         if (typeof target !== "string") {
           throw new TypeError("Channel target must be a string");
         }
-        if (!(credentials instanceof channel_credentials_1.ChannelCredentials)) {
+        if (!(credentials2 instanceof channel_credentials_1.ChannelCredentials)) {
           throw new TypeError("Channel credentials must be a ChannelCredentials object");
         }
         if (options) {
@@ -19056,19 +19056,19 @@ var require_internal_channel = __commonJS({
         this.lastActivityTimestamp = /* @__PURE__ */ new Date();
         this.maybeStartIdleTimer();
       }
-      createLoadBalancingCall(callConfig, method, host, credentials, deadline, callNumber) {
+      createLoadBalancingCall(callConfig, method, host, credentials2, deadline, callNumber) {
         const finalCallNumber = callNumber !== null && callNumber !== void 0 ? callNumber : (0, call_number_1.getNextCallNumber)();
         if (this.traceEnabled) {
           this.trace("createLoadBalancingCall [" + finalCallNumber + '] method="' + method + '"');
         }
-        return new load_balancing_call_1.LoadBalancingCall(this, callConfig, method, host, credentials, deadline, finalCallNumber);
+        return new load_balancing_call_1.LoadBalancingCall(this, callConfig, method, host, credentials2, deadline, finalCallNumber);
       }
-      createRetryingCall(callConfig, method, host, credentials, deadline, callNumber) {
+      createRetryingCall(callConfig, method, host, credentials2, deadline, callNumber) {
         const finalCallNumber = callNumber !== null && callNumber !== void 0 ? callNumber : (0, call_number_1.getNextCallNumber)();
         if (this.traceEnabled) {
           this.trace("createRetryingCall [" + finalCallNumber + '] method="' + method + '"');
         }
-        return new retrying_call_1.RetryingCall(this, callConfig, method, host, credentials, deadline, finalCallNumber, this.retryBufferTracker, RETRY_THROTTLER_MAP.get(this.getTarget()));
+        return new retrying_call_1.RetryingCall(this, callConfig, method, host, credentials2, deadline, finalCallNumber, this.retryBufferTracker, RETRY_THROTTLER_MAP.get(this.getTarget()));
       }
       createResolvingCall(method, deadline, host, parentCall, propagateFlags) {
         const callNumber = (0, call_number_1.getNextCallNumber)();
@@ -19187,11 +19187,11 @@ var require_channel = __commonJS({
     var channel_credentials_1 = require_channel_credentials();
     var internal_channel_1 = require_internal_channel();
     var ChannelImplementation = class {
-      constructor(target, credentials, options) {
+      constructor(target, credentials2, options) {
         if (typeof target !== "string") {
           throw new TypeError("Channel target must be a string");
         }
-        if (!(credentials instanceof channel_credentials_1.ChannelCredentials)) {
+        if (!(credentials2 instanceof channel_credentials_1.ChannelCredentials)) {
           throw new TypeError("Channel credentials must be a ChannelCredentials object");
         }
         if (options) {
@@ -19199,7 +19199,7 @@ var require_channel = __commonJS({
             throw new TypeError("Channel options must be an object");
           }
         }
-        this.internalChannel = new internal_channel_1.InternalChannel(target, credentials, options);
+        this.internalChannel = new internal_channel_1.InternalChannel(target, credentials2, options);
       }
       close() {
         this.internalChannel.close();
@@ -19728,8 +19728,8 @@ var require_server_credentials = __commonJS({
         return this.childCredentials._getSecureContextOptions();
       }
     };
-    function createServerCredentialsWithInterceptors(credentials, interceptors) {
-      return new InterceptorServerCredentials(credentials, interceptors);
+    function createServerCredentialsWithInterceptors(credentials2, interceptors) {
+      return new InterceptorServerCredentials(credentials2, interceptors);
     }
   }
 });
@@ -19746,10 +19746,10 @@ var require_duration = __commonJS({
     exports.isDurationMessage = isDurationMessage;
     exports.parseDuration = parseDuration;
     exports.durationToString = durationToString;
-    function durationMessageToDuration(message) {
+    function durationMessageToDuration(message2) {
       return {
-        seconds: Number.parseInt(message.seconds),
-        nanos: message.nanos
+        seconds: Number.parseInt(message2.seconds),
+        nanos: message2.nanos
       };
     }
     function msToDuration(millis) {
@@ -20186,12 +20186,12 @@ var require_server_interceptors = __commonJS({
           this.processPendingHalfClose();
         });
       }
-      onReceiveMessage(message) {
+      onReceiveMessage(message2) {
         if (this.cancelled) {
           return;
         }
         this.processingMessage = true;
-        this.listener.onReceiveMessage(message, (msg) => {
+        this.listener.onReceiveMessage(message2, (msg) => {
           this.processingMessage = false;
           if (this.cancelled) {
             return;
@@ -20263,8 +20263,8 @@ var require_server_interceptors = __commonJS({
       onReceiveMetadata: (metadata, next) => {
         next(metadata);
       },
-      onReceiveMessage: (message, next) => {
-        next(message);
+      onReceiveMessage: (message2, next) => {
+        next(message2);
       },
       onReceiveHalfClose: (next) => {
         next();
@@ -20279,8 +20279,8 @@ var require_server_interceptors = __commonJS({
       sendMetadata: (metadata, next) => {
         next(metadata);
       },
-      sendMessage: (message, next) => {
-        next(message);
+      sendMessage: (message2, next) => {
+        next(message2);
       },
       sendStatus: (status, next) => {
         next(status);
@@ -20339,12 +20339,12 @@ var require_server_interceptors = __commonJS({
           this.processPendingStatus();
         });
       }
-      sendMessage(message, callback) {
+      sendMessage(message2, callback) {
         this.processingMessage = true;
         if (!this.sentMetadata) {
           this.sendMetadata(new metadata_1.Metadata());
         }
-        this.responder.sendMessage(message, (interceptedMessage) => {
+        this.responder.sendMessage(message2, (interceptedMessage) => {
           this.processingMessage = false;
           if (this.processingMetadata) {
             this.pendingMessage = interceptedMessage;
@@ -20562,8 +20562,8 @@ var require_server_interceptors = __commonJS({
         messageBuffer.copy(output, 5);
         return output;
       }
-      decompressMessage(message, encoding) {
-        const messageContents = message.subarray(5);
+      decompressMessage(message2, encoding) {
+        const messageContents = message2.subarray(5);
         if (encoding === "identity") {
           return messageContents;
         } else if (encoding === "deflate" || encoding === "gzip") {
@@ -20696,13 +20696,13 @@ var require_server_interceptors = __commonJS({
         const headers = Object.assign(Object.assign(Object.assign({}, defaultResponseHeaders), defaultCompressionHeaders), custom);
         this.stream.respond(headers, defaultResponseOptions);
       }
-      sendMessage(message, callback) {
+      sendMessage(message2, callback) {
         if (this.checkCancelled()) {
           return;
         }
         let response;
         try {
-          response = this.serializeMessage(message);
+          response = this.serializeMessage(message2);
         } catch (e) {
           this.sendStatus({
             code: constants_1.Status.INTERNAL,
@@ -20913,9 +20913,9 @@ var require_server = __commonJS({
     }
     function noop() {
     }
-    function deprecate(message) {
+    function deprecate(message2) {
       return function(target, context) {
-        return util.deprecate(target, message);
+        return util.deprecate(target, message2);
       };
     }
     function getUnimplementedStatusResponse(methodName) {
@@ -21140,11 +21140,11 @@ var require_server = __commonJS({
         experimentalUnregisterListenerFromChannelz(channelzRef) {
           (0, channelz_1.unregisterChannelzRef)(channelzRef);
         }
-        createHttp2Server(credentials) {
+        createHttp2Server(credentials2) {
           let http2Server;
-          if (credentials._isSecure()) {
-            const constructorOptions = credentials._getConstructorOptions();
-            const contextOptions = credentials._getSecureContextOptions();
+          if (credentials2._isSecure()) {
+            const constructorOptions = credentials2._getConstructorOptions();
+            const contextOptions = credentials2._getSecureContextOptions();
             const secureServerOptions = Object.assign(Object.assign(Object.assign(Object.assign({}, this.commonServerOptions), constructorOptions), contextOptions), { enableTrace: this.options["grpc-node.tls_enable_trace"] === 1 });
             let areCredentialsValid = contextOptions !== null;
             this.trace("Initial credentials valid: " + areCredentialsValid);
@@ -21173,15 +21173,15 @@ var require_server = __commonJS({
               areCredentialsValid = options !== null;
               this.trace("Post-update credentials valid: " + areCredentialsValid);
             };
-            credentials._addWatcher(credsWatcher);
+            credentials2._addWatcher(credsWatcher);
             http2Server.on("close", () => {
-              credentials._removeWatcher(credsWatcher);
+              credentials2._removeWatcher(credsWatcher);
             });
           } else {
             http2Server = http2.createServer(this.commonServerOptions);
           }
           http2Server.setTimeout(0, noop);
-          this._setupHandlers(http2Server, credentials._getInterceptors());
+          this._setupHandlers(http2Server, credentials2._getInterceptors());
           return http2Server;
         }
         bindOneAddress(address, boundPortObject) {
@@ -21416,14 +21416,14 @@ var require_server = __commonJS({
          * @param channelzRef
          * @returns
          */
-        experimentalCreateConnectionInjectorWithChannelzRef(credentials, channelzRef, ownsChannelzRef = false) {
-          if (credentials === null || !(credentials instanceof server_credentials_1.ServerCredentials)) {
+        experimentalCreateConnectionInjectorWithChannelzRef(credentials2, channelzRef, ownsChannelzRef = false) {
+          if (credentials2 === null || !(credentials2 instanceof server_credentials_1.ServerCredentials)) {
             throw new TypeError("creds must be a ServerCredentials object");
           }
           if (this.channelzEnabled) {
             this.listenerChildrenTracker.refChild(channelzRef);
           }
-          const server = this.createHttp2Server(credentials);
+          const server = this.createHttp2Server(credentials2);
           const sessionsSet = /* @__PURE__ */ new Set();
           this.http2Servers.set(server, {
             channelzRef,
@@ -21453,12 +21453,12 @@ var require_server = __commonJS({
             }
           };
         }
-        createConnectionInjector(credentials) {
-          if (credentials === null || !(credentials instanceof server_credentials_1.ServerCredentials)) {
+        createConnectionInjector(credentials2) {
+          if (credentials2 === null || !(credentials2 instanceof server_credentials_1.ServerCredentials)) {
             throw new TypeError("creds must be a ServerCredentials object");
           }
           const channelzRef = this.registerInjectorToChannelz();
-          return this.experimentalCreateConnectionInjectorWithChannelzRef(credentials, channelzRef, true);
+          return this.experimentalCreateConnectionInjectorWithChannelzRef(credentials2, channelzRef, true);
         }
         closeServer(server, callback) {
           this.trace("Closing server with address " + JSON.stringify(server.address()));
@@ -22129,7 +22129,7 @@ var require_server = __commonJS({
           requestMetadata = metadata;
           call.startRead();
         },
-        onReceiveMessage(message) {
+        onReceiveMessage(message2) {
           if (requestMessage) {
             call.sendStatus({
               code: constants_1.Status.UNIMPLEMENTED,
@@ -22138,7 +22138,7 @@ var require_server = __commonJS({
             });
             return;
           }
-          requestMessage = message;
+          requestMessage = message2;
           call.startRead();
         },
         onReceiveHalfClose() {
@@ -22209,8 +22209,8 @@ var require_server = __commonJS({
             });
           }
         },
-        onReceiveMessage(message) {
-          stream.push(message);
+        onReceiveMessage(message2) {
+          stream.push(message2);
         },
         onReceiveHalfClose() {
           stream.push(null);
@@ -22233,7 +22233,7 @@ var require_server = __commonJS({
           requestMetadata = metadata;
           call.startRead();
         },
-        onReceiveMessage(message) {
+        onReceiveMessage(message2) {
           if (requestMessage) {
             call.sendStatus({
               code: constants_1.Status.UNIMPLEMENTED,
@@ -22242,7 +22242,7 @@ var require_server = __commonJS({
             });
             return;
           }
-          requestMessage = message;
+          requestMessage = message2;
           call.startRead();
         },
         onReceiveHalfClose() {
@@ -22301,8 +22301,8 @@ var require_server = __commonJS({
             });
           }
         },
-        onReceiveMessage(message) {
-          stream.push(message);
+        onReceiveMessage(message2) {
+          stream.push(message2);
         },
         onReceiveHalfClose() {
           stream.push(null);
@@ -24494,7 +24494,7 @@ import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync as existsSync3, mkdirSync, readFileSync as readFileSync2, writeFileSync } from "node:fs";
 import { homedir, tmpdir } from "node:os";
-import { join as join3 } from "node:path";
+import { join as join5 } from "node:path";
 
 // ../core/src/types.ts
 var SHIELDED_POOLS = ["sapling", "orchard", "ironwood"];
@@ -24595,11 +24595,78 @@ function dominant(flows, pools) {
   return best;
 }
 
+// ../core/src/entry-crowd.ts
+var DEFAULT_ENTRY_MAX_BLOCKS = 1152;
+var DEFAULT_ENTRY_MAX_TRANSACTIONS = 200;
+function boundedEntryWindow(request, maxBlocks = DEFAULT_ENTRY_MAX_BLOCKS) {
+  if (!Number.isSafeInteger(maxBlocks) || maxBlocks < 1) throw new Error("maxBlocks must be a positive integer");
+  if (!Number.isSafeInteger(request.from) || !Number.isSafeInteger(request.to) || request.from < 0 || request.to < request.from) {
+    throw new Error("Invalid entry crowd block window");
+  }
+  return [request.from, Math.min(request.to, request.from + maxBlocks - 1)];
+}
+function entryCrowdRequests(findings, cs) {
+  const shields = new Map(cs.filter((c2) => c2.kind === "shield").map((c2) => [c2.txid, c2]));
+  const exits = new Map(cs.filter((c2) => c2.kind === "deshield").map((c2) => [c2.txid, c2]));
+  const requests = /* @__PURE__ */ new Map();
+  for (const f of findings) {
+    if (!["round-trip", "sum-match", "quick-exit"].includes(f.rule)) continue;
+    const exit = exits.get(f.links[0]?.to);
+    const entries = f.links.map((l) => shields.get(l.from));
+    if (!exit || !entries.length || entries.some((e) => !e)) continue;
+    const from = Math.min(...entries.map((e) => e.height));
+    if (exit.height < from) continue;
+    for (const e of entries) {
+      const request = { txid: e.txid, amount: e.amount, from, to: exit.height };
+      requests.set(`${request.txid}:${from}:${request.to}`, request);
+    }
+  }
+  return [...requests.values()];
+}
+function countEntryCrowd(request, entries, coverage, excludeTxids = []) {
+  const excluded = /* @__PURE__ */ new Set([request.txid, ...excludeTxids]);
+  const seen = /* @__PURE__ */ new Set();
+  let others = 0, timingOthers = 0;
+  for (const e of entries) {
+    if (!coverage.range || e.height < Math.max(request.from, coverage.range[0]) || e.height > Math.min(request.to, coverage.range[1])) continue;
+    if (excluded.has(e.txid) || seen.has(e.txid) || !Number.isSafeInteger(e.amount) || e.amount <= 0) continue;
+    seen.add(e.txid);
+    timingOthers++;
+    if (sameCoins(request.amount, e.amount)) others++;
+  }
+  return { ...request, others, timingOthers, coverage };
+}
+function entryCrowdComplete(c2) {
+  const v = c2.coverage;
+  return v.limits.length === 0 && v.errors.length === 0 && v.range !== null && v.range[0] <= c2.from && v.range[1] >= c2.to && v.resolved === v.candidates;
+}
+
 // ../core/src/crowd.ts
 var order = ["low", "medium", "high", "critical"];
 var lower = (s, by) => order[Math.max(0, order.indexOf(s) - by)];
 var covered = (ctx, from, to) => ctx.ranges.some(([a, b]) => a <= from && b >= to);
 function withCrowd(findings, cs, ctx) {
+  const adjusted = withExitCrowd(findings, cs, ctx);
+  if (!ctx?.entryCrowds?.length) return adjusted;
+  return adjusted.map((f, i) => {
+    const requests = entryCrowdRequests([findings[i]], cs);
+    const evidence = requests.flatMap((r) => {
+      const c2 = ctx.entryCrowds.find((c3) => c3.txid === r.txid && c3.amount === r.amount && c3.from === r.from && c3.to === r.to);
+      return c2 ? [c2] : [];
+    });
+    if (!evidence.length) return f;
+    const complete = evidence.length === requests.length && evidence.every(entryCrowdComplete);
+    const others = complete ? Math.min(...evidence.map((c2) => f.rule === "quick-exit" ? c2.timingOthers : c2.others)) : 0;
+    const by = f.rule === "quick-exit" ? others >= 20 ? 2 : others >= 5 ? 1 : 0 : others >= 5 ? 2 : others >= 1 ? 1 : 0;
+    const entrySeverity = lower(findings[i].severity, by);
+    const severity = order[Math.min(order.indexOf(f.severity), order.indexOf(entrySeverity))];
+    let detail = f.detail;
+    if (!complete || evidence.some((c2) => c2.others > 0)) detail = detail.replace(", so the pairing is unambiguous.", ".");
+    if (!complete || evidence.some((c2) => c2.timingOthers > 0)) detail = detail.replace(", so the timing alone points at you.", ".");
+    return { ...f, severity, detail, entryCrowd: evidence };
+  });
+}
+function withExitCrowd(findings, cs, ctx) {
   if (!ctx) return findings;
   const byTx = new Map(cs.map((c2) => [c2.txid, c2]));
   return findings.map((f) => {
@@ -24985,19 +25052,98 @@ function fillTimes(db, txs) {
   }
 }
 
-// src/chain.ts
-var import_grpc_js = __toESM(require_src3(), 1);
-var import_proto_loader = __toESM(require_src2(), 1);
+// src/lightwalletd.ts
+var grpc = __toESM(require_src3(), 1);
+var loader = __toESM(require_src2(), 1);
 import { existsSync as existsSync2 } from "node:fs";
 import { dirname, join as join2 } from "node:path";
 import { fileURLToPath } from "node:url";
 var SERVERS = { main: "zec.rocks:443", test: "testnet.zec.rocks:443" };
-var MAX_BLOCKS = 2e4;
 function protoDir() {
   const here = dirname(fileURLToPath(import.meta.url));
   for (const p of [join2(here, "proto"), join2(here, "..", "proto")]) if (existsSync2(join2(p, "service.proto"))) return p;
   throw new Error("lightwalletd protocol files not found");
 }
+function normalizeProxyEnv(env) {
+  for (const name of ["grpc_proxy", "https_proxy", "http_proxy", "no_grpc_proxy", "no_proxy"]) {
+    if (env[name] === void 0 && env[name.toUpperCase()] !== void 0) env[name] = env[name.toUpperCase()];
+  }
+  const proxy = env.grpc_proxy || env.https_proxy || env.http_proxy;
+  if (proxy && new URL(proxy).protocol !== "http:") throw new Error("grpc-js requires an http:// CONNECT proxy; HTTPS_PROXY was not bypassed");
+}
+function validateLightdInfo(info, network) {
+  if (info.chainName !== network) throw new Error(`lightwalletd network ${info.chainName} does not match ${network}`);
+  const m = /^v?(\d+)\.(\d+)\.(\d+)/.exec(info.lightwalletProtocolVersion);
+  if (!m || +m[1] === 0 && +m[2] < 4) {
+    throw new Error(`lightwalletd ${info.lightwalletProtocolVersion || "(unknown protocol)"} cannot guarantee transparent compact data (requires >=0.4.0)`);
+  }
+}
+function openLightwalletd(network, server, timeoutMs = 3e4) {
+  normalizeProxyEnv(process.env);
+  if (!Number.isSafeInteger(timeoutMs) || timeoutMs <= 0) throw new Error("RPC timeout must be positive");
+  const address = server ?? SERVERS[network];
+  if (!address) throw new Error(`Specify a lightwalletd server for ${network}`);
+  const dir = protoDir();
+  const def = loader.loadSync(join2(dir, "service.proto"), { includeDirs: [dir], keepCase: true, longs: Number, enums: String, defaults: true });
+  const rpc = grpc.loadPackageDefinition(def).cash.z.wallet.sdk.rpc;
+  const client = new rpc.CompactTxStreamer(address, grpc.credentials.createSsl(), {
+    "grpc.enable_http_proxy": (process.env.no_grpc_proxy ?? process.env.no_proxy)?.split(",").some((s) => s.trim() === "*") ? 0 : 1
+  });
+  const unary = (method, request) => new Promise((resolve, reject) => {
+    client[method](request, { deadline: Date.now() + timeoutMs }, (error, response) => error ? reject(error) : resolve(response));
+  });
+  let info;
+  const readInfo = () => info ??= unary("GetLightdInfo", {}).then((value) => {
+    validateLightdInfo(value, network);
+    return value;
+  });
+  return {
+    info: readInfo,
+    async blocks(from, to) {
+      const info2 = await readInfo();
+      const version = info2.lightwalletProtocolVersion.replace(/^v/, "").split(".").map(Number);
+      const poolTypes = ["TRANSPARENT", "SAPLING", "ORCHARD"];
+      if (version[0] > 0 || version[1] >= 5) poolTypes.push("IRONWOOD");
+      return new Promise((resolve, reject) => {
+        const blocks = [];
+        const stream = client.GetBlockRange({ start: { height: from }, end: { height: to }, poolTypes }, { deadline: Date.now() + timeoutMs });
+        stream.on("data", (b) => {
+          try {
+            if (Number(b.height) !== from + blocks.length || Number(b.height) > to) throw new Error("Incomplete or unordered compact block range");
+            const txs = b.vtx.map((t) => {
+              if (t.txid.length !== 32) throw new Error("Invalid compact transaction ID");
+              const outputCount = t.outputs.length + t.actions.length + (t.ironwoodActions?.length ?? 0);
+              return {
+                txid: Buffer.from(t.txid).reverse().toString("hex"),
+                index: Number(t.index),
+                shielded: t.spends.length + outputCount > 0,
+                shieldedOutputs: outputCount > 0,
+                vin: t.vin.map((v) => ({ txid: Buffer.from(v.prevoutTxid).reverse().toString("hex"), index: Number(v.prevoutIndex) })),
+                vout: t.vout.map((o) => Number(o.value))
+              };
+            });
+            blocks.push({ height: Number(b.height), time: Number(b.time), txs });
+          } catch (error) {
+            reject(error);
+            stream.cancel();
+          }
+        });
+        stream.on("error", reject);
+        stream.on("end", () => blocks.length === to - from + 1 ? resolve(blocks) : reject(new Error(`Incomplete compact range: expected ${to - from + 1} blocks, received ${blocks.length}`)));
+      });
+    },
+    async transaction(txid) {
+      if (!/^[0-9a-f]{64}$/.test(txid)) throw new Error("Invalid transaction ID");
+      const raw = await unary("GetTransaction", { hash: Buffer.from(txid, "hex").reverse() });
+      if (!raw.data?.length) throw new Error(`GetTransaction returned no data for ${txid}`);
+      return Buffer.from(raw.data);
+    },
+    close: () => client.close()
+  };
+}
+
+// src/chain.ts
+var MAX_BLOCKS = 2e4;
 function windowsFor(findings, cs) {
   const byTx = new Map(cs.map((c2) => [c2.txid, c2]));
   const raw = [];
@@ -25017,37 +25163,296 @@ function windowsFor(findings, cs) {
   let budget = MAX_BLOCKS;
   return merged.filter(([a, b]) => (budget -= b - a + 1) >= 0);
 }
-async function chainContext(network, windows, server) {
+async function chainContext(network, windows, server, source) {
   const ctx = { ranges: [], exits: [], entries: [] };
   if (!windows.length) return ctx;
-  const dir = protoDir();
-  const def = import_proto_loader.default.loadSync(join2(dir, "service.proto"), { includeDirs: [dir], keepCase: true, longs: Number, enums: String, defaults: true });
-  const rpc = import_grpc_js.default.loadPackageDefinition(def).cash.z.wallet.sdk.rpc;
-  const client = new rpc.CompactTxStreamer(server ?? SERVERS[network] ?? SERVERS.main, import_grpc_js.default.credentials.createSsl());
+  const client = source ?? openLightwalletd(network, server);
   try {
     for (const [start, end] of windows) {
-      await new Promise((resolve, reject) => {
-        const stream = client.GetBlockRange({ start: { height: start }, end: { height: end }, poolTypes: ["TRANSPARENT", "SAPLING", "ORCHARD", "IRONWOOD"] });
-        stream.on("data", (b) => {
-          for (const t of b.vtx) {
-            if (Number(t.index) === 0) continue;
-            const txid = Buffer.from(t.txid).reverse().toString("hex");
-            const shielded = t.spends.length + t.outputs.length + t.actions.length + (t.ironwoodActions?.length ?? 0) > 0;
-            if (!shielded) continue;
-            if (t.vout.length && !t.vin.length) ctx.exits.push({ height: Number(b.height), txid, values: t.vout.map((o) => Number(o.value)) });
-            else if (t.vin.length && (t.outputs.length || t.actions.length || t.ironwoodActions?.length)) ctx.entries.push({ height: Number(b.height), txid });
-          }
-        });
-        stream.on("end", () => resolve());
-        stream.on("error", reject);
-      });
+      for (const b of await client.blocks(start, end)) for (const t of b.txs) {
+        if (t.index === 0 || !t.shielded) continue;
+        if (t.vout.length && !t.vin.length) ctx.exits.push({ height: b.height, txid: t.txid, values: t.vout });
+        else if (t.vin.length && t.shieldedOutputs) ctx.entries.push({ height: b.height, txid: t.txid });
+      }
       ctx.ranges.push([start, end]);
     }
   } finally {
-    client.close();
+    if (!source) client.close();
   }
   return ctx;
 }
+
+// src/entry-crowd.ts
+import { join as join4 } from "node:path";
+
+// src/transaction.ts
+var MAX_TRANSACTION_BYTES = 2e6;
+var MAX_MONEY = 21e6 * 1e8;
+var Reader = class {
+  constructor(bytes) {
+    this.bytes = bytes;
+  }
+  bytes;
+  offset = 0;
+  take(n) {
+    if (!Number.isSafeInteger(n) || n < 0 || n > this.bytes.length - this.offset) throw new Error("Truncated transaction");
+    const value = this.bytes.subarray(this.offset, this.offset + n);
+    this.offset += n;
+    return value;
+  }
+  skip(n) {
+    this.take(n);
+  }
+  u32() {
+    return this.take(4).readUInt32LE();
+  }
+  money(signed = false) {
+    const b = this.take(8);
+    const n = signed ? b.readBigInt64LE() : b.readBigUInt64LE();
+    if (n < BigInt(-MAX_MONEY) || n > BigInt(MAX_MONEY)) throw new Error("Transaction value out of range");
+    return Number(n);
+  }
+  size() {
+    const tag = this.take(1)[0];
+    const value = tag < 253 ? BigInt(tag) : tag === 253 ? BigInt(this.take(2).readUInt16LE()) : tag === 254 ? BigInt(this.u32()) : this.take(8).readBigUInt64LE();
+    if (tag === 253 && value < 253n || tag === 254 && value <= 65535n || tag === 255 && value <= 0xffffffffn) {
+      throw new Error("Non-canonical CompactSize");
+    }
+    if (value > BigInt(MAX_TRANSACTION_BYTES)) throw new Error("CompactSize exceeds transaction limit");
+    return Number(value);
+  }
+};
+function parseTransaction(bytes) {
+  if (bytes.length > MAX_TRANSACTION_BYTES) throw new Error("Transaction exceeds size limit");
+  const r = new Reader(bytes);
+  const header = r.u32();
+  const version = header & 2147483647;
+  const overwintered = header >>> 31 === 1;
+  const groups = { 3: 63210096, 4: 2301567109, 5: 648488714, 6: 3632576152 };
+  if (version < 1 || version > 6 || overwintered !== version >= 3) throw new Error(`Unsupported transaction header ${header.toString(16)}`);
+  if (overwintered && r.u32() !== groups[version]) throw new Error(`Unsupported v${version} version group`);
+  if (version >= 5) r.skip(12);
+  const vin = [];
+  for (let n = r.size(); n > 0; n--) {
+    const txid = Buffer.from(r.take(32)).reverse().toString("hex");
+    const index = r.u32();
+    r.skip(r.size());
+    r.skip(4);
+    vin.push({ txid, index });
+  }
+  const vout = [];
+  for (let n = r.size(); n > 0; n--) {
+    vout.push(r.money());
+    r.skip(r.size());
+  }
+  let shieldedBalance = 0;
+  if (version >= 5) {
+    const spends = r.size();
+    r.skip(spends * 96);
+    const outputs = r.size();
+    r.skip(outputs * 756);
+    if (spends + outputs > 0) shieldedBalance += r.money(true);
+    if (spends > 0) r.skip(32);
+    r.skip(spends * (192 + 64) + outputs * 192);
+    if (spends + outputs > 0) r.skip(64);
+    const orchard = () => {
+      const actions = r.size();
+      if (actions === 0) return 0;
+      r.skip(actions * 820);
+      r.skip(1);
+      const balance = r.money(true);
+      r.skip(32);
+      r.skip(r.size());
+      r.skip(actions * 64 + 64);
+      return balance;
+    };
+    shieldedBalance += orchard();
+    if (version === 6) shieldedBalance += orchard();
+  } else {
+    r.skip(4);
+    if (version >= 3) r.skip(4);
+    let sapling = false;
+    if (version === 4) {
+      shieldedBalance += r.money(true);
+      const spends = r.size();
+      r.skip(spends * 384);
+      const outputs = r.size();
+      r.skip(outputs * 948);
+      sapling = spends + outputs > 0;
+    }
+    if (version >= 2) {
+      const joins = r.size();
+      for (let n = joins; n > 0; n--) {
+        const old = r.money(), fresh = r.money();
+        shieldedBalance += fresh - old;
+        r.skip((version === 4 ? 1698 : 1802) - 16);
+      }
+      if (joins > 0) r.skip(32 + 64);
+    }
+    if (sapling) r.skip(64);
+  }
+  if (r.offset !== bytes.length) throw new Error("Trailing transaction data");
+  if (!Number.isSafeInteger(shieldedBalance) || Math.abs(shieldedBalance) > MAX_MONEY) throw new Error("Shielded balance out of range");
+  return { version, vin, vout, shieldedBalance };
+}
+async function resolveEntry(tx, previous) {
+  let input = 0;
+  const seen = /* @__PURE__ */ new Set();
+  for (const p of tx.vin) {
+    const key = `${p.txid}:${p.index}`;
+    if (p.txid === "0".repeat(64) || seen.has(key)) throw new Error("Coinbase or duplicate transparent input");
+    seen.add(key);
+    const prev = await previous(p.txid);
+    const value = prev.vout[p.index];
+    if (value === void 0) throw new Error(`Previous output ${p.txid}:${p.index} is missing`);
+    input += value;
+  }
+  const output = tx.vout.reduce((a, b) => a + b, 0);
+  const fee = input - output + tx.shieldedBalance;
+  if (![input, output, fee].every((n) => Number.isSafeInteger(n) && n >= 0 && n <= MAX_MONEY)) throw new Error("Invalid transparent balance or fee");
+  return { amount: Math.max(0, -tx.shieldedBalance), input, output, fee };
+}
+
+// src/transaction-cache.ts
+import { randomUUID } from "node:crypto";
+import { mkdir, readFile, rename, unlink, writeFile } from "node:fs/promises";
+import { join as join3 } from "node:path";
+var TransactionCache = class {
+  constructor(network, cacheDir, fetch2) {
+    this.fetch = fetch2;
+    this.directory = join3(cacheDir, "v1", network);
+  }
+  fetch;
+  stats = { fetched: 0, diskHits: 0, memoryHits: 0, bytesWritten: 0 };
+  memory = /* @__PURE__ */ new Map();
+  directory;
+  get(txid) {
+    if (!/^[0-9a-f]{64}$/.test(txid)) return Promise.reject(new Error("Invalid transaction ID"));
+    const hit = this.memory.get(txid);
+    if (hit) {
+      this.stats.memoryHits++;
+      return hit;
+    }
+    const pending = this.load(txid);
+    this.memory.set(txid, pending);
+    return pending;
+  }
+  async load(txid) {
+    const path = join3(this.directory, `${txid}.bin`);
+    let bytes;
+    try {
+      bytes = await readFile(path);
+    } catch (error) {
+      if (error.code !== "ENOENT") throw error;
+    }
+    if (bytes) {
+      try {
+        const parsed2 = parseTransaction(bytes);
+        this.stats.diskHits++;
+        return parsed2;
+      } catch {
+      }
+    }
+    this.stats.fetched++;
+    bytes = await this.fetch(txid);
+    const parsed = parseTransaction(bytes);
+    await mkdir(this.directory, { recursive: true });
+    const temp = `${path}.${randomUUID()}.tmp`;
+    try {
+      await writeFile(temp, bytes, { flag: "wx" });
+      await rename(temp, path);
+    } finally {
+      await unlink(temp).catch((error) => {
+        if (error.code !== "ENOENT") throw error;
+      });
+    }
+    this.stats.bytesWritten += bytes.length;
+    return parsed;
+  }
+};
+
+// src/entry-crowd.ts
+var TransactionCap = class extends Error {
+};
+async function resolveEntryCrowds(network, requests, options = {}) {
+  const maxBlocks = options.maxBlocks ?? DEFAULT_ENTRY_MAX_BLOCKS;
+  const maxTransactions = options.maxTransactions ?? DEFAULT_ENTRY_MAX_TRANSACTIONS;
+  if (!Number.isSafeInteger(maxTransactions) || maxTransactions < 1) throw new Error("maxTransactions must be a positive integer");
+  boundedEntryWindow({ txid: "", amount: 0, from: 0, to: 0 }, maxBlocks);
+  const result = { crowds: [], entries: [], cache: { fetched: 0, diskHits: 0, memoryHits: 0, bytesWritten: 0 } };
+  if (!requests.length) return result;
+  const source = options.source ?? openLightwalletd(network, options.server, options.timeoutMs);
+  const cache = new TransactionCache(network, options.cacheDir ?? join4(process.cwd(), ".tells-cache", "transactions"), (id) => source.transaction(id));
+  const context = { ranges: [...options.context?.ranges ?? []], entries: [...options.context?.entries ?? []], exits: [] };
+  const observed = /* @__PURE__ */ new Map();
+  try {
+    let infoError;
+    try {
+      validateLightdInfo(await source.info(), network);
+    } catch (error) {
+      infoError = message(error);
+    }
+    for (const request of requests) {
+      const [from, to] = boundedEntryWindow(request, maxBlocks);
+      const coverage = { range: null, candidates: 0, resolved: 0, transactions: 0, limits: [], errors: [] };
+      if (to < request.to) coverage.limits.push("window");
+      const entries = [];
+      const touched = /* @__PURE__ */ new Set();
+      const get = (txid) => {
+        if (!touched.has(txid)) {
+          if (touched.size >= maxTransactions) throw new TransactionCap();
+          touched.add(txid);
+        }
+        return cache.get(txid);
+      };
+      try {
+        if (infoError) throw new Error(infoError);
+        if (!context.ranges.some(([a, b]) => a <= from && b >= to)) {
+          const blocks = await source.blocks(from, to);
+          if (blocks.length !== to - from + 1 || blocks.some((b, i) => b.height !== from + i)) throw new Error("Incomplete compact block range");
+          for (const b of blocks) for (const t of b.txs) {
+            if (t.index !== 0 && t.vin.length && t.shieldedOutputs) context.entries.push({ txid: t.txid, height: b.height });
+          }
+          context.ranges.push([from, to]);
+        }
+        coverage.range = [from, to];
+        const candidates = [...new Map(context.entries.filter((e) => e.height >= from && e.height <= to).map((e) => [e.txid, e])).values()].sort((a, b) => a.height - b.height || a.txid.localeCompare(b.txid));
+        coverage.candidates = candidates.length;
+        for (const candidate of candidates) {
+          try {
+            const tx = await get(candidate.txid);
+            const value = await resolveEntry(tx, get);
+            coverage.resolved++;
+            if (tx.vin.length && value.amount > 0) {
+              const entry = { ...candidate, amount: value.amount };
+              entries.push(entry);
+              observed.set(entry.txid, entry);
+            }
+          } catch (error) {
+            if (error instanceof TransactionCap) {
+              coverage.limits.push("transactions");
+              break;
+            }
+            if (!coverage.limits.includes("unresolved")) coverage.limits.push("unresolved");
+            coverage.errors.push(`${candidate.txid}: ${message(error)}`);
+            if (coverage.errors.length >= 3) break;
+          }
+        }
+      } catch (error) {
+        coverage.limits.push("coverage");
+        coverage.errors.push(message(error));
+      }
+      coverage.transactions = touched.size;
+      result.crowds.push(countEntryCrowd(request, entries, coverage, options.excludeTxids));
+    }
+  } finally {
+    if (!options.source) source.close();
+  }
+  result.entries = [...observed.values()].sort((a, b) => a.height - b.height || a.txid.localeCompare(b.txid));
+  result.cache = { ...cache.stats };
+  return result;
+}
+var message = (error) => error instanceof Error ? error.message : String(error);
 
 // src/main.ts
 var c = (code) => (s) => process.stdout.isTTY ? `\x1B[${code}m${s}\x1B[0m` : s;
@@ -25074,7 +25479,7 @@ function args(argv) {
   return { pos, flags };
 }
 function load(source, account) {
-  if (existsSync3(join3(source, "data.sqlite"))) return readHistory(source, { account });
+  if (existsSync3(join5(source, "data.sqlite"))) return readHistory(source, { account });
   return JSON.parse(readFileSync2(source, "utf8"));
 }
 function printReport(r) {
@@ -25088,23 +25493,59 @@ ${bold("Tells")} ${dim("\xB7")} ${r.label ?? "wallet"} ${dim(`(${r.network}net)`
   for (const f of r.findings) {
     console.log(`${SEV[f.severity](f.severity.toUpperCase().padEnd(9))} ${bold(f.title)}`);
     console.log(`          ${f.detail}`);
+    for (const c2 of f.entryCrowd ?? []) {
+      console.log(dim(`          Entry ${c2.txid.slice(0, 10)}: ${entryCrowdComplete(c2) ? "" : "at least "}${c2.others} look-alike entries; ${c2.timingOthers} total entries (${c2.from}\u2013${c2.to})${entryCrowdComplete(c2) ? "" : `; incomplete: ${[...c2.coverage.limits, ...c2.coverage.errors].join("; ")}`}.`));
+    }
     console.log(dim(`          tx ${f.txids.map((t) => t.slice(0, 10)).join(", ")}`));
     console.log(`          ${cyan("Fix:")} ${f.fixes[0]}
 `);
   }
 }
-async function addCrowd(h, server) {
+async function addCrowd(h, options) {
   const cs = crossings(h.txs);
-  const windows = windowsFor(findingsFor(cs), cs);
-  if (!windows.length) return h;
+  const findings = findingsFor(cs);
+  const requests = entryCrowdRequests(findings, cs);
+  const windows = windowsFor(findings, cs);
+  if (!requests.length && !windows.length) return h;
   const blocks = windows.reduce((n, [a, b]) => n + b - a + 1, 0);
-  console.log(dim(`Reading ${blocks} compact blocks around your links to size the crowd ...`));
+  console.error(dim(`Reading ${blocks} compact blocks around your links to size the crowd ...`));
+  let source;
   try {
-    return { ...h, chain: await chainContext(h.network, windows, server) };
+    source = openLightwalletd(h.network, options.server, options.timeoutMs);
+    let chain = { ranges: [], exits: [], entries: [] };
+    try {
+      chain = await chainContext(h.network, windows, options.server, source);
+    } catch (error) {
+      console.error(dim(`Exit crowd unavailable: ${error instanceof Error ? error.message : error}`));
+    }
+    const entries = await resolveEntryCrowds(h.network, requests, { ...options, source, context: chain, excludeTxids: h.txs.map((t) => t.txid) });
+    chain.entryCrowds = entries.crowds;
+    for (const c2 of entries.crowds) if (!entryCrowdComplete(c2)) {
+      console.error(dim(`Entry crowd incomplete for ${c2.txid.slice(0, 10)} (${c2.from}\u2013${c2.to}): ${[...c2.coverage.limits, ...c2.coverage.errors].join("; ")}; ${c2.coverage.resolved}/${c2.coverage.candidates} candidates resolved. No entry severity reduction.`));
+    }
+    console.error(dim(`Entry crowd: ${entries.crowds.filter(entryCrowdComplete).length}/${entries.crowds.length} complete windows; ${entries.cache.fetched} full transactions fetched, ${entries.cache.diskHits} disk cache hits.`));
+    return { ...h, chain };
   } catch (e) {
-    console.log(dim(`Could not read the crowd (${e instanceof Error ? e.message : e}); grading without it.`));
+    console.error(dim(`Could not read the crowd (${e instanceof Error ? e.message : e}); keeping existing context.`));
     return h;
+  } finally {
+    source?.close();
   }
+}
+function crowdOptions(flags) {
+  const number = (name) => {
+    if (flags[name] === void 0) return void 0;
+    const value = typeof flags[name] === "string" ? Number(flags[name]) : NaN;
+    if (!Number.isSafeInteger(value) || value < 1) throw new Error(`--${name} needs a positive integer`);
+    return value;
+  };
+  return {
+    server: flags.lightwalletd,
+    cacheDir: flags["crowd-cache"],
+    maxBlocks: number("entry-crowd-max-blocks"),
+    maxTransactions: number("entry-crowd-max-transactions"),
+    timeoutMs: number("crowd-timeout-ms")
+  };
 }
 function ufvkNetwork(ufvk) {
   if (ufvk.startsWith("uviewtest")) return "test";
@@ -25126,8 +25567,8 @@ async function devtoolPath(flag) {
   if (onPath("zcash-devtool")) return "zcash-devtool";
   const asset = ASSETS[`${process.platform}-${process.arch}`];
   if (!asset) throw new Error(`No prebuilt zcash-devtool for ${process.platform}-${process.arch}. Build it from github.com/zcash/zcash-devtool and pass --devtool.`);
-  const dir = join3(homedir(), ".cache", "tells");
-  const file = join3(dir, asset);
+  const dir = join5(homedir(), ".cache", "tells");
+  const file = join5(dir, asset);
   if (existsSync3(file)) return file;
   mkdirSync(dir, { recursive: true });
   console.log(dim(`Downloading ${asset} (built from zcash/zcash-devtool by this project's public workflow) ...`));
@@ -25152,9 +25593,13 @@ var HELP = `tells: find what gives your Zcash history away
   tells scan --ufvk <UFVK> --birthday <height> [--devtool <path>] [--wallet <dir>] [--out history.json]
       Import a viewing key into a local view-only wallet, sync it, and print the checkup.
       Without --devtool it uses zcash-devtool from PATH, or downloads a checksummed build once.
-      It then reads the compact blocks around each link to count look-alike exits (--no-crowd to skip,
+      It then counts look-alike exits and resolves entry amounts (--no-crowd to skip,
       --lightwalletd host:port to choose the server).
   tells report <wallet-dir | history.json> [--json] [--crowd]
+      Crowd options: --entry-crowd-max-blocks 1152 --entry-crowd-max-transactions 200
+      --crowd-cache .tells-cache/transactions --crowd-timeout-ms 30000
+      Limits apply per entry window, including previous transactions and cache hits. Incomplete counts
+      are reported and cannot lower severity. Full transactions are cached by network and txid.
   tells preflight <wallet-dir | history.json> --amount <ZEC> [--at <ISO date>] [--to <t-address>]
       Check a withdrawal before you make it, and get safer ways to make it.
   tells export <wallet-dir> [--account <uuid>] [--out history.json]
@@ -25174,7 +25619,7 @@ async function main() {
     }
     case "report": {
       let h = load(pos[0], flags.account);
-      if (flags.crowd) h = await addCrowd(h, flags.lightwalletd);
+      if (flags.crowd) h = await addCrowd(h, crowdOptions(flags));
       const r = analyze(h);
       if (flags.json) console.log(JSON.stringify(r, null, 2));
       else printReport(r);
@@ -25205,8 +25650,8 @@ Withdrawing ${zec(amount)} ZEC: ${v}
       if (!ufvk || !birthday) throw new Error("scan needs --ufvk and --birthday");
       const devtool = await devtoolPath(flags.devtool);
       const server = flags.server ?? "zecrocks";
-      const dir = flags.wallet ?? join3(tmpdir(), `tells-${Buffer.from(ufvk).subarray(-12).toString("hex")}`);
-      if (!existsSync3(join3(dir, "data.sqlite"))) {
+      const dir = flags.wallet ?? join5(tmpdir(), `tells-${Buffer.from(ufvk).subarray(-12).toString("hex")}`);
+      if (!existsSync3(join5(dir, "data.sqlite"))) {
         mkdirSync(dir, { recursive: true });
         console.log(dim(`Importing the viewing key into a view-only ${ufvkNetwork(ufvk)}net wallet (${dir})`));
         run(devtool, ["wallet", "-w", dir, "init-fvk", "--name", "tells", "--fvk", ufvk, "--birthday", birthday, "-s", server]);
@@ -25216,7 +25661,7 @@ Withdrawing ${zec(amount)} ZEC: ${v}
       console.log(dim("Fetching the full transactions ..."));
       run(devtool, ["wallet", "-w", dir, "enhance", "-s", server]);
       let h = readHistory(dir);
-      if (!flags["no-crowd"]) h = await addCrowd(h, flags.lightwalletd);
+      if (!flags["no-crowd"]) h = await addCrowd(h, crowdOptions(flags));
       if (out) writeFileSync(out, JSON.stringify(h, null, 2));
       printReport(analyze(h));
       break;

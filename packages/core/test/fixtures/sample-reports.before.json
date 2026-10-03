@@ -1,0 +1,1009 @@
+{
+  "demo/illustrative-careful.json": {
+    "network": "main",
+    "label": "Careful saver (illustrative)",
+    "crossings": [
+      {
+        "txid": "p1receive0000000000000000000000000000000000000000000000000000000",
+        "time": 1788343200,
+        "height": 3092629,
+        "kind": "transparent",
+        "amount": 500000000,
+        "from": "transparent",
+        "to": "transparent",
+        "addresses": [
+          "t1Ex7withdrawalOnce4Ra"
+        ],
+        "incoming": true
+      },
+      {
+        "txid": "q2shield00000000000000000000000000000000000000000000000000000000",
+        "time": 1788345000,
+        "height": 3092666,
+        "kind": "shield",
+        "amount": 499985000,
+        "from": "transparent",
+        "to": "orchard",
+        "addresses": [
+          "t1Ex7withdrawalOnce4Ra"
+        ]
+      },
+      {
+        "txid": "t5exit0000000000000000000000000000000000000000000000000000000000",
+        "time": 1790500800,
+        "height": 3092777,
+        "kind": "deshield",
+        "amount": 150000000,
+        "from": "orchard",
+        "to": "transparent",
+        "addresses": [
+          "t1Ex9deposit2fresh8Kd"
+        ]
+      }
+    ],
+    "findings": [],
+    "score": 100,
+    "grade": "A",
+    "stats": {
+      "txs": 6,
+      "shields": 1,
+      "deshields": 1,
+      "migrations": 0,
+      "transparentOnly": 1
+    }
+  },
+  "demo/illustrative-exchange.json": {
+    "network": "main",
+    "label": "Exchange regular (illustrative)",
+    "crossings": [
+      {
+        "txid": "b2receive0000000000000000000000000000000000000000000000000000000",
+        "time": 1789981920,
+        "height": 3092074,
+        "kind": "transparent",
+        "amount": 248311000,
+        "from": "transparent",
+        "to": "transparent",
+        "addresses": [
+          "t1My3wallet8qTransparent2aB"
+        ],
+        "incoming": true
+      },
+      {
+        "txid": "c3shield00000000000000000000000000000000000000000000000000000000",
+        "time": 1789983600,
+        "height": 3092111,
+        "kind": "shield",
+        "amount": 248296000,
+        "from": "transparent",
+        "to": "orchard",
+        "addresses": [
+          "t1My3wallet8qTransparent2aB"
+        ]
+      },
+      {
+        "txid": "e5exit0000000000000000000000000000000000000000000000000000000000",
+        "time": 1789988520,
+        "height": 3092185,
+        "kind": "deshield",
+        "amount": 120000000,
+        "from": "orchard",
+        "to": "transparent",
+        "addresses": [
+          "t1KxDeposit5f8bQ3exchangeLp9"
+        ]
+      },
+      {
+        "txid": "f6receive0000000000000000000000000000000000000000000000000000000",
+        "time": 1790259000,
+        "height": 3092222,
+        "kind": "transparent",
+        "amount": 125000000,
+        "from": "transparent",
+        "to": "transparent",
+        "addresses": [
+          "t1My3wallet8qTransparent2aB"
+        ],
+        "incoming": true
+      },
+      {
+        "txid": "g7shield00000000000000000000000000000000000000000000000000000000",
+        "time": 1790260200,
+        "height": 3092259,
+        "kind": "shield",
+        "amount": 74985000,
+        "from": "transparent",
+        "to": "orchard",
+        "addresses": [
+          "t1My3wallet8qTransparent2aB"
+        ]
+      },
+      {
+        "txid": "h8shield00000000000000000000000000000000000000000000000000000000",
+        "time": 1790262300,
+        "height": 3092296,
+        "kind": "shield",
+        "amount": 49985000,
+        "from": "transparent",
+        "to": "orchard",
+        "addresses": [
+          "t1My3wallet8qTransparent2aB"
+        ]
+      },
+      {
+        "txid": "i9exit0000000000000000000000000000000000000000000000000000000000",
+        "time": 1790278800,
+        "height": 3092333,
+        "kind": "deshield",
+        "amount": 124953000,
+        "from": "orchard",
+        "to": "transparent",
+        "addresses": [
+          "t1KxDeposit5f8bQ3exchangeLp9"
+        ]
+      },
+      {
+        "txid": "j0migrate0000000000000000000000000000000000000000000000000000000",
+        "time": 1790666100,
+        "height": 3092370,
+        "kind": "migrate",
+        "amount": 309985000,
+        "from": "sapling",
+        "to": "orchard",
+        "addresses": []
+      },
+      {
+        "txid": "k1receive0000000000000000000000000000000000000000000000000000000",
+        "time": 1790870400,
+        "height": 3092407,
+        "kind": "transparent",
+        "amount": 12345600,
+        "from": "transparent",
+        "to": "transparent",
+        "addresses": [
+          "t1Fresh6deposit4Wz9"
+        ],
+        "incoming": true
+      },
+      {
+        "txid": "l2shield00000000000000000000000000000000000000000000000000000000",
+        "time": 1790871600,
+        "height": 3092444,
+        "kind": "shield",
+        "amount": 12330600,
+        "from": "transparent",
+        "to": "orchard",
+        "addresses": [
+          "t1Fresh6deposit4Wz9"
+        ]
+      },
+      {
+        "txid": "m3exit0000000000000000000000000000000000000000000000000000000000",
+        "time": 1790873100,
+        "height": 3092481,
+        "kind": "deshield",
+        "amount": 12315600,
+        "from": "orchard",
+        "to": "transparent",
+        "addresses": [
+          "t1Cafe8merchant2Lk5"
+        ]
+      },
+      {
+        "txid": "n4plain000000000000000000000000000000000000000000000000000000000",
+        "time": 1790942400,
+        "height": 3092518,
+        "kind": "transparent",
+        "amount": 19985000,
+        "from": "transparent",
+        "to": "transparent",
+        "addresses": [
+          "t1Old9transparentBuy3",
+          "t1Friend2payment7Hs"
+        ]
+      },
+      {
+        "txid": "o5receive0000000000000000000000000000000000000000000000000000000",
+        "time": 1790962800,
+        "height": 3092555,
+        "kind": "transparent",
+        "amount": 54321000,
+        "from": "transparent",
+        "to": "transparent",
+        "addresses": [
+          "t1Ex3newWithdrawal5Ty"
+        ],
+        "incoming": true
+      },
+      {
+        "txid": "p6shield00000000000000000000000000000000000000000000000000000000",
+        "time": 1790964300,
+        "height": 3092592,
+        "kind": "shield",
+        "amount": 54306000,
+        "from": "transparent",
+        "to": "orchard",
+        "addresses": [
+          "t1Ex3newWithdrawal5Ty"
+        ]
+      }
+    ],
+    "findings": [
+      {
+        "rule": "round-trip",
+        "severity": "critical",
+        "title": "Round trip: 0.123306 ZEC in, 0.123156 ZEC out 25 min later",
+        "detail": "Anyone can pair these two public crossings by amount and time, which links the address that funded the shielded pool to the address that received the exit. 0.123156 ZEC has enough decimals to be close to unique on the chain.",
+        "txids": [
+          "l2shield00000000000000000000000000000000000000000000000000000000",
+          "m3exit0000000000000000000000000000000000000000000000000000000000"
+        ],
+        "links": [
+          {
+            "from": "l2shield00000000000000000000000000000000000000000000000000000000",
+            "to": "m3exit0000000000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "fixes": [
+          "Leave a different amount: a round sum such as 0.12 ZEC, and keep the rest shielded.",
+          "Wait longer between entering and leaving the pool (days, not hours).",
+          "Pay shielded addresses directly where the recipient accepts them, so nothing leaves the pool."
+        ]
+      },
+      {
+        "rule": "sum-match",
+        "severity": "medium",
+        "title": "Exit of 1.24953 ZEC equals 2 earlier entries combined",
+        "detail": "0.74985 + 0.49985 ZEC went in and the same total came out 4.6 h after the last of them. Splitting the entry does not hide a matching exit.",
+        "txids": [
+          "g7shield00000000000000000000000000000000000000000000000000000000",
+          "h8shield00000000000000000000000000000000000000000000000000000000",
+          "i9exit0000000000000000000000000000000000000000000000000000000000"
+        ],
+        "links": [
+          {
+            "from": "g7shield00000000000000000000000000000000000000000000000000000000",
+            "to": "i9exit0000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "from": "h8shield00000000000000000000000000000000000000000000000000000000",
+            "to": "i9exit0000000000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "fixes": [
+          "Take out an amount that does not add up to recent entries.",
+          "Spread exits over time instead of emptying what you just put in."
+        ]
+      },
+      {
+        "rule": "quick-exit",
+        "severity": "medium",
+        "title": "Left the pool 1.4 h after entering",
+        "detail": "Few people enter and leave the shielded pool within the same day, so the timing alone narrows down who this exit belongs to, even though the amounts differ.",
+        "txids": [
+          "c3shield00000000000000000000000000000000000000000000000000000000",
+          "e5exit0000000000000000000000000000000000000000000000000000000000"
+        ],
+        "links": [
+          {
+            "from": "c3shield00000000000000000000000000000000000000000000000000000000",
+            "to": "e5exit0000000000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "fixes": [
+          "Let shielded funds sit for days before moving them out.",
+          "Avoid entering and leaving at the same time of day."
+        ]
+      },
+      {
+        "rule": "address-reuse",
+        "severity": "medium",
+        "title": "Transparent address reused 2 times",
+        "detail": "t1KxDeposi…ngeLp9 received coins on 2 public transactions, so they are linked to each other regardless of what happens inside the pool.",
+        "txids": [
+          "e5exit0000000000000000000000000000000000000000000000000000000000",
+          "i9exit0000000000000000000000000000000000000000000000000000000000"
+        ],
+        "links": [
+          {
+            "from": "e5exit0000000000000000000000000000000000000000000000000000000000",
+            "to": "i9exit0000000000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "fixes": [
+          "Use a fresh transparent address each time (most wallets rotate them automatically).",
+          "For exchanges, use the TEX address they give you rather than reusing an old one."
+        ]
+      },
+      {
+        "rule": "distinctive-amount",
+        "severity": "low",
+        "title": "2 crossings with fingerprint amounts",
+        "detail": "2.48296 ZEC, 0.54306 ZEC. An amount with four or more decimals is easy to search for on the public side, and any later exit near it will stand out.",
+        "txids": [
+          "c3shield00000000000000000000000000000000000000000000000000000000",
+          "p6shield00000000000000000000000000000000000000000000000000000000"
+        ],
+        "links": [],
+        "fixes": [
+          "Shield and deshield round amounts (0.5, 1, 2.5 ZEC) and leave the odd remainder shielded."
+        ]
+      },
+      {
+        "rule": "address-reuse",
+        "severity": "low",
+        "title": "Transparent address reused 2 times",
+        "detail": "t1My3walle…ent2aB received coins on 2 public transactions, so they are linked to each other regardless of what happens inside the pool.",
+        "txids": [
+          "b2receive0000000000000000000000000000000000000000000000000000000",
+          "f6receive0000000000000000000000000000000000000000000000000000000"
+        ],
+        "links": [
+          {
+            "from": "b2receive0000000000000000000000000000000000000000000000000000000",
+            "to": "f6receive0000000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "fixes": [
+          "Use a fresh transparent address each time (most wallets rotate them automatically).",
+          "For exchanges, use the TEX address they give you rather than reusing an old one."
+        ]
+      },
+      {
+        "rule": "transparent-only",
+        "severity": "low",
+        "title": "1 fully transparent payment",
+        "detail": "These never touched a shielded pool: amounts, senders and receivers are all public, just like Bitcoin.",
+        "txids": [
+          "n4plain000000000000000000000000000000000000000000000000000000000"
+        ],
+        "links": [],
+        "fixes": [
+          "Shield transparent funds once, then pay from the shielded balance."
+        ]
+      },
+      {
+        "rule": "migration-reveal",
+        "severity": "low",
+        "title": "1 pool migration with a public amount",
+        "detail": "Moves between shielded pools (sapling to orchard) show their amount: 3.09985 ZEC. It does not link you to a transparent address, but a one-shot migration of a whole balance tells observers how much the wallet held.",
+        "txids": [
+          "j0migrate0000000000000000000000000000000000000000000000000000000"
+        ],
+        "links": [],
+        "fixes": [
+          "Migrate in a few smaller steps, or let your wallet move funds as you spend."
+        ]
+      }
+    ],
+    "score": 34,
+    "grade": "F",
+    "stats": {
+      "txs": 16,
+      "shields": 5,
+      "deshields": 3,
+      "migrations": 1,
+      "transparentOnly": 5
+    }
+  },
+  "apps/web/public/samples/testnet.json": {
+    "network": "test",
+    "label": "Careless testnet wallet",
+    "crossings": [
+      {
+        "txid": "1b8ccaee540eed4680ce6c46585f66d9aa615d50a224c6fd68a7a40a479f0648",
+        "time": 1790931196,
+        "height": 4432302,
+        "kind": "transparent",
+        "amount": 12500000,
+        "from": "transparent",
+        "to": "transparent",
+        "addresses": [
+          "tmDezBwDiuqokEZgn2QCwHCVxSZEM18AhTc"
+        ],
+        "incoming": true
+      },
+      {
+        "txid": "def1346e02520c2a16386018a1d113b254848a47c2d3e8be0d2051c250ef9b49",
+        "time": 1790932461,
+        "height": 4432609,
+        "kind": "shield",
+        "amount": 12485000,
+        "from": "transparent",
+        "to": "ironwood",
+        "addresses": [
+          "tmDezBwDiuqokEZgn2QCwHCVxSZEM18AhTc"
+        ]
+      },
+      {
+        "txid": "4794de14684ed08707d40761539605be6d193aec5f5757b4fb0e3641f2bbde97",
+        "time": 1790933229,
+        "height": 4432676,
+        "kind": "deshield",
+        "amount": 4370000,
+        "from": "ironwood",
+        "to": "transparent",
+        "addresses": [
+          "tmTNQhe7WFUe1kttiNDTZSsbrawwDqtkRkv"
+        ]
+      },
+      {
+        "txid": "cdc1fdfbc1bd72929ee08bc2f397ef8968784eacdbd537a1560feea93df7b2a5",
+        "time": 1790935677,
+        "height": 4432742,
+        "kind": "transparent",
+        "amount": 4330000,
+        "from": "transparent",
+        "to": "transparent",
+        "addresses": [
+          "tmDezBwDiuqokEZgn2QCwHCVxSZEM18AhTc"
+        ],
+        "incoming": true
+      },
+      {
+        "txid": "b4d3600ef58dfc8e14f27f5d783ea36fa99adc9bb3c7d770e5b46ed812ea08fe",
+        "time": 1790936550,
+        "height": 4432756,
+        "kind": "shield",
+        "amount": 4315000,
+        "from": "transparent",
+        "to": "ironwood",
+        "addresses": [
+          "tmDezBwDiuqokEZgn2QCwHCVxSZEM18AhTc"
+        ]
+      },
+      {
+        "txid": "c9fe2d7ebaaf96d36f07b0fe2f60ea58c542ddc28c2a0f60922002bf49ea496a",
+        "time": 1790936837,
+        "height": 4432759,
+        "kind": "deshield",
+        "amount": 4310000,
+        "from": "ironwood",
+        "to": "transparent",
+        "addresses": [
+          "tmWyBjLMKBYpkka1QJw2aBGvBLFf8w5TaAJ"
+        ]
+      },
+      {
+        "txid": "a832bf57bc5e6169ba2913e9b0f7c15f737aded7ed29e7242d1eb851a3841c84",
+        "time": 1790937147,
+        "height": 4432763,
+        "kind": "deshield",
+        "amount": 1200000,
+        "from": "ironwood",
+        "to": "transparent",
+        "addresses": [
+          "tmTNQhe7WFUe1kttiNDTZSsbrawwDqtkRkv"
+        ]
+      }
+    ],
+    "findings": [
+      {
+        "rule": "round-trip",
+        "severity": "critical",
+        "title": "Round trip: 0.04315 ZEC in, 0.0431 ZEC out 5 min later",
+        "detail": "Anyone can pair these two public crossings by amount and time, which links the address that funded the shielded pool to the address that received the exit. 0.0431 ZEC has enough decimals to be close to unique on the chain. No other exit of about this amount happened in that window, so the pairing is unambiguous.",
+        "txids": [
+          "b4d3600ef58dfc8e14f27f5d783ea36fa99adc9bb3c7d770e5b46ed812ea08fe",
+          "c9fe2d7ebaaf96d36f07b0fe2f60ea58c542ddc28c2a0f60922002bf49ea496a"
+        ],
+        "links": [
+          {
+            "from": "b4d3600ef58dfc8e14f27f5d783ea36fa99adc9bb3c7d770e5b46ed812ea08fe",
+            "to": "c9fe2d7ebaaf96d36f07b0fe2f60ea58c542ddc28c2a0f60922002bf49ea496a"
+          }
+        ],
+        "fixes": [
+          "Leave a different amount: a round sum such as 0.04 ZEC, and keep the rest shielded.",
+          "Wait longer between entering and leaving the pool (days, not hours).",
+          "Pay shielded addresses directly where the recipient accepts them, so nothing leaves the pool."
+        ],
+        "crowd": {
+          "others": 0,
+          "from": 4432756,
+          "to": 4432759
+        }
+      },
+      {
+        "rule": "quick-exit",
+        "severity": "high",
+        "title": "Left the pool 13 min after entering",
+        "detail": "Few people enter and leave the shielded pool within the same hour, so the timing alone narrows down who this exit belongs to, even though the amounts differ. On chain, 1 other exit happened between your entry and your exit, which barely blurs the timing.",
+        "txids": [
+          "def1346e02520c2a16386018a1d113b254848a47c2d3e8be0d2051c250ef9b49",
+          "4794de14684ed08707d40761539605be6d193aec5f5757b4fb0e3641f2bbde97"
+        ],
+        "links": [
+          {
+            "from": "def1346e02520c2a16386018a1d113b254848a47c2d3e8be0d2051c250ef9b49",
+            "to": "4794de14684ed08707d40761539605be6d193aec5f5757b4fb0e3641f2bbde97"
+          }
+        ],
+        "fixes": [
+          "Let shielded funds sit for days before moving them out.",
+          "Avoid entering and leaving at the same time of day."
+        ],
+        "crowd": {
+          "others": 1,
+          "from": 4432609,
+          "to": 4432676
+        }
+      },
+      {
+        "rule": "quick-exit",
+        "severity": "high",
+        "title": "Left the pool 10 min after entering",
+        "detail": "Few people enter and leave the shielded pool within the same hour, so the timing alone narrows down who this exit belongs to, even though the amounts differ. On chain, 1 other exit happened between your entry and your exit, which barely blurs the timing.",
+        "txids": [
+          "b4d3600ef58dfc8e14f27f5d783ea36fa99adc9bb3c7d770e5b46ed812ea08fe",
+          "a832bf57bc5e6169ba2913e9b0f7c15f737aded7ed29e7242d1eb851a3841c84"
+        ],
+        "links": [
+          {
+            "from": "b4d3600ef58dfc8e14f27f5d783ea36fa99adc9bb3c7d770e5b46ed812ea08fe",
+            "to": "a832bf57bc5e6169ba2913e9b0f7c15f737aded7ed29e7242d1eb851a3841c84"
+          }
+        ],
+        "fixes": [
+          "Let shielded funds sit for days before moving them out.",
+          "Avoid entering and leaving at the same time of day."
+        ],
+        "crowd": {
+          "others": 1,
+          "from": 4432756,
+          "to": 4432763
+        }
+      },
+      {
+        "rule": "address-reuse",
+        "severity": "medium",
+        "title": "Transparent address reused 2 times",
+        "detail": "tmTNQhe7WF…qtkRkv received coins on 2 public transactions, so they are linked to each other regardless of what happens inside the pool.",
+        "txids": [
+          "4794de14684ed08707d40761539605be6d193aec5f5757b4fb0e3641f2bbde97",
+          "a832bf57bc5e6169ba2913e9b0f7c15f737aded7ed29e7242d1eb851a3841c84"
+        ],
+        "links": [
+          {
+            "from": "4794de14684ed08707d40761539605be6d193aec5f5757b4fb0e3641f2bbde97",
+            "to": "a832bf57bc5e6169ba2913e9b0f7c15f737aded7ed29e7242d1eb851a3841c84"
+          }
+        ],
+        "fixes": [
+          "Use a fresh transparent address each time (most wallets rotate them automatically).",
+          "For exchanges, use the TEX address they give you rather than reusing an old one."
+        ]
+      },
+      {
+        "rule": "distinctive-amount",
+        "severity": "low",
+        "title": "2 crossings with fingerprint amounts",
+        "detail": "0.12485 ZEC, 0.0437 ZEC. An amount with four or more decimals is easy to search for on the public side, and any later exit near it will stand out.",
+        "txids": [
+          "def1346e02520c2a16386018a1d113b254848a47c2d3e8be0d2051c250ef9b49",
+          "4794de14684ed08707d40761539605be6d193aec5f5757b4fb0e3641f2bbde97"
+        ],
+        "links": [],
+        "fixes": [
+          "Shield and deshield round amounts (0.5, 1, 2.5 ZEC) and leave the odd remainder shielded."
+        ]
+      },
+      {
+        "rule": "address-reuse",
+        "severity": "low",
+        "title": "Transparent address reused 2 times",
+        "detail": "tmDezBwDiu…18AhTc received coins on 2 public transactions, so they are linked to each other regardless of what happens inside the pool.",
+        "txids": [
+          "1b8ccaee540eed4680ce6c46585f66d9aa615d50a224c6fd68a7a40a479f0648",
+          "cdc1fdfbc1bd72929ee08bc2f397ef8968784eacdbd537a1560feea93df7b2a5"
+        ],
+        "links": [
+          {
+            "from": "1b8ccaee540eed4680ce6c46585f66d9aa615d50a224c6fd68a7a40a479f0648",
+            "to": "cdc1fdfbc1bd72929ee08bc2f397ef8968784eacdbd537a1560feea93df7b2a5"
+          }
+        ],
+        "fixes": [
+          "Use a fresh transparent address each time (most wallets rotate them automatically).",
+          "For exchanges, use the TEX address they give you rather than reusing an old one."
+        ]
+      }
+    ],
+    "score": 20,
+    "grade": "F",
+    "stats": {
+      "txs": 8,
+      "shields": 2,
+      "deshields": 3,
+      "migrations": 0,
+      "transparentOnly": 2
+    }
+  },
+  "web/carefulUser": {
+    "network": "main",
+    "label": "Careful saver (illustrative)",
+    "crossings": [
+      {
+        "txid": "p1receive0000000000000000000000000000000000000000000000000000000",
+        "time": 1788343200,
+        "height": 3092629,
+        "kind": "transparent",
+        "amount": 500000000,
+        "from": "transparent",
+        "to": "transparent",
+        "addresses": [
+          "t1Ex7withdrawalOnce4Ra"
+        ],
+        "incoming": true
+      },
+      {
+        "txid": "q2shield00000000000000000000000000000000000000000000000000000000",
+        "time": 1788345000,
+        "height": 3092666,
+        "kind": "shield",
+        "amount": 499985000,
+        "from": "transparent",
+        "to": "orchard",
+        "addresses": [
+          "t1Ex7withdrawalOnce4Ra"
+        ]
+      },
+      {
+        "txid": "t5exit0000000000000000000000000000000000000000000000000000000000",
+        "time": 1790500800,
+        "height": 3092777,
+        "kind": "deshield",
+        "amount": 150000000,
+        "from": "orchard",
+        "to": "transparent",
+        "addresses": [
+          "t1Ex9deposit2fresh8Kd"
+        ]
+      }
+    ],
+    "findings": [],
+    "score": 100,
+    "grade": "A",
+    "stats": {
+      "txs": 6,
+      "shields": 1,
+      "deshields": 1,
+      "migrations": 0,
+      "transparentOnly": 1
+    }
+  },
+  "web/exchangeUser": {
+    "network": "main",
+    "label": "Exchange regular (illustrative)",
+    "crossings": [
+      {
+        "txid": "b2receive0000000000000000000000000000000000000000000000000000000",
+        "time": 1789981920,
+        "height": 3092074,
+        "kind": "transparent",
+        "amount": 248311000,
+        "from": "transparent",
+        "to": "transparent",
+        "addresses": [
+          "t1My3wallet8qTransparent2aB"
+        ],
+        "incoming": true
+      },
+      {
+        "txid": "c3shield00000000000000000000000000000000000000000000000000000000",
+        "time": 1789983600,
+        "height": 3092111,
+        "kind": "shield",
+        "amount": 248296000,
+        "from": "transparent",
+        "to": "orchard",
+        "addresses": [
+          "t1My3wallet8qTransparent2aB"
+        ]
+      },
+      {
+        "txid": "e5exit0000000000000000000000000000000000000000000000000000000000",
+        "time": 1789988520,
+        "height": 3092185,
+        "kind": "deshield",
+        "amount": 120000000,
+        "from": "orchard",
+        "to": "transparent",
+        "addresses": [
+          "t1KxDeposit5f8bQ3exchangeLp9"
+        ]
+      },
+      {
+        "txid": "f6receive0000000000000000000000000000000000000000000000000000000",
+        "time": 1790259000,
+        "height": 3092222,
+        "kind": "transparent",
+        "amount": 125000000,
+        "from": "transparent",
+        "to": "transparent",
+        "addresses": [
+          "t1My3wallet8qTransparent2aB"
+        ],
+        "incoming": true
+      },
+      {
+        "txid": "g7shield00000000000000000000000000000000000000000000000000000000",
+        "time": 1790260200,
+        "height": 3092259,
+        "kind": "shield",
+        "amount": 74985000,
+        "from": "transparent",
+        "to": "orchard",
+        "addresses": [
+          "t1My3wallet8qTransparent2aB"
+        ]
+      },
+      {
+        "txid": "h8shield00000000000000000000000000000000000000000000000000000000",
+        "time": 1790262300,
+        "height": 3092296,
+        "kind": "shield",
+        "amount": 49985000,
+        "from": "transparent",
+        "to": "orchard",
+        "addresses": [
+          "t1My3wallet8qTransparent2aB"
+        ]
+      },
+      {
+        "txid": "i9exit0000000000000000000000000000000000000000000000000000000000",
+        "time": 1790278800,
+        "height": 3092333,
+        "kind": "deshield",
+        "amount": 124953000,
+        "from": "orchard",
+        "to": "transparent",
+        "addresses": [
+          "t1KxDeposit5f8bQ3exchangeLp9"
+        ]
+      },
+      {
+        "txid": "j0migrate0000000000000000000000000000000000000000000000000000000",
+        "time": 1790666100,
+        "height": 3092370,
+        "kind": "migrate",
+        "amount": 309985000,
+        "from": "sapling",
+        "to": "orchard",
+        "addresses": []
+      },
+      {
+        "txid": "k1receive0000000000000000000000000000000000000000000000000000000",
+        "time": 1790870400,
+        "height": 3092407,
+        "kind": "transparent",
+        "amount": 12345600,
+        "from": "transparent",
+        "to": "transparent",
+        "addresses": [
+          "t1Fresh6deposit4Wz9"
+        ],
+        "incoming": true
+      },
+      {
+        "txid": "l2shield00000000000000000000000000000000000000000000000000000000",
+        "time": 1790871600,
+        "height": 3092444,
+        "kind": "shield",
+        "amount": 12330600,
+        "from": "transparent",
+        "to": "orchard",
+        "addresses": [
+          "t1Fresh6deposit4Wz9"
+        ]
+      },
+      {
+        "txid": "m3exit0000000000000000000000000000000000000000000000000000000000",
+        "time": 1790873100,
+        "height": 3092481,
+        "kind": "deshield",
+        "amount": 12315600,
+        "from": "orchard",
+        "to": "transparent",
+        "addresses": [
+          "t1Cafe8merchant2Lk5"
+        ]
+      },
+      {
+        "txid": "n4plain000000000000000000000000000000000000000000000000000000000",
+        "time": 1790942400,
+        "height": 3092518,
+        "kind": "transparent",
+        "amount": 19985000,
+        "from": "transparent",
+        "to": "transparent",
+        "addresses": [
+          "t1Old9transparentBuy3",
+          "t1Friend2payment7Hs"
+        ]
+      },
+      {
+        "txid": "o5receive0000000000000000000000000000000000000000000000000000000",
+        "time": 1790962800,
+        "height": 3092555,
+        "kind": "transparent",
+        "amount": 54321000,
+        "from": "transparent",
+        "to": "transparent",
+        "addresses": [
+          "t1Ex3newWithdrawal5Ty"
+        ],
+        "incoming": true
+      },
+      {
+        "txid": "p6shield00000000000000000000000000000000000000000000000000000000",
+        "time": 1790964300,
+        "height": 3092592,
+        "kind": "shield",
+        "amount": 54306000,
+        "from": "transparent",
+        "to": "orchard",
+        "addresses": [
+          "t1Ex3newWithdrawal5Ty"
+        ]
+      }
+    ],
+    "findings": [
+      {
+        "rule": "round-trip",
+        "severity": "critical",
+        "title": "Round trip: 0.123306 ZEC in, 0.123156 ZEC out 25 min later",
+        "detail": "Anyone can pair these two public crossings by amount and time, which links the address that funded the shielded pool to the address that received the exit. 0.123156 ZEC has enough decimals to be close to unique on the chain.",
+        "txids": [
+          "l2shield00000000000000000000000000000000000000000000000000000000",
+          "m3exit0000000000000000000000000000000000000000000000000000000000"
+        ],
+        "links": [
+          {
+            "from": "l2shield00000000000000000000000000000000000000000000000000000000",
+            "to": "m3exit0000000000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "fixes": [
+          "Leave a different amount: a round sum such as 0.12 ZEC, and keep the rest shielded.",
+          "Wait longer between entering and leaving the pool (days, not hours).",
+          "Pay shielded addresses directly where the recipient accepts them, so nothing leaves the pool."
+        ]
+      },
+      {
+        "rule": "sum-match",
+        "severity": "medium",
+        "title": "Exit of 1.24953 ZEC equals 2 earlier entries combined",
+        "detail": "0.74985 + 0.49985 ZEC went in and the same total came out 4.6 h after the last of them. Splitting the entry does not hide a matching exit.",
+        "txids": [
+          "g7shield00000000000000000000000000000000000000000000000000000000",
+          "h8shield00000000000000000000000000000000000000000000000000000000",
+          "i9exit0000000000000000000000000000000000000000000000000000000000"
+        ],
+        "links": [
+          {
+            "from": "g7shield00000000000000000000000000000000000000000000000000000000",
+            "to": "i9exit0000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "from": "h8shield00000000000000000000000000000000000000000000000000000000",
+            "to": "i9exit0000000000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "fixes": [
+          "Take out an amount that does not add up to recent entries.",
+          "Spread exits over time instead of emptying what you just put in."
+        ]
+      },
+      {
+        "rule": "quick-exit",
+        "severity": "medium",
+        "title": "Left the pool 1.4 h after entering",
+        "detail": "Few people enter and leave the shielded pool within the same day, so the timing alone narrows down who this exit belongs to, even though the amounts differ.",
+        "txids": [
+          "c3shield00000000000000000000000000000000000000000000000000000000",
+          "e5exit0000000000000000000000000000000000000000000000000000000000"
+        ],
+        "links": [
+          {
+            "from": "c3shield00000000000000000000000000000000000000000000000000000000",
+            "to": "e5exit0000000000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "fixes": [
+          "Let shielded funds sit for days before moving them out.",
+          "Avoid entering and leaving at the same time of day."
+        ]
+      },
+      {
+        "rule": "address-reuse",
+        "severity": "medium",
+        "title": "Transparent address reused 2 times",
+        "detail": "t1KxDeposi…ngeLp9 received coins on 2 public transactions, so they are linked to each other regardless of what happens inside the pool.",
+        "txids": [
+          "e5exit0000000000000000000000000000000000000000000000000000000000",
+          "i9exit0000000000000000000000000000000000000000000000000000000000"
+        ],
+        "links": [
+          {
+            "from": "e5exit0000000000000000000000000000000000000000000000000000000000",
+            "to": "i9exit0000000000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "fixes": [
+          "Use a fresh transparent address each time (most wallets rotate them automatically).",
+          "For exchanges, use the TEX address they give you rather than reusing an old one."
+        ]
+      },
+      {
+        "rule": "distinctive-amount",
+        "severity": "low",
+        "title": "2 crossings with fingerprint amounts",
+        "detail": "2.48296 ZEC, 0.54306 ZEC. An amount with four or more decimals is easy to search for on the public side, and any later exit near it will stand out.",
+        "txids": [
+          "c3shield00000000000000000000000000000000000000000000000000000000",
+          "p6shield00000000000000000000000000000000000000000000000000000000"
+        ],
+        "links": [],
+        "fixes": [
+          "Shield and deshield round amounts (0.5, 1, 2.5 ZEC) and leave the odd remainder shielded."
+        ]
+      },
+      {
+        "rule": "address-reuse",
+        "severity": "low",
+        "title": "Transparent address reused 2 times",
+        "detail": "t1My3walle…ent2aB received coins on 2 public transactions, so they are linked to each other regardless of what happens inside the pool.",
+        "txids": [
+          "b2receive0000000000000000000000000000000000000000000000000000000",
+          "f6receive0000000000000000000000000000000000000000000000000000000"
+        ],
+        "links": [
+          {
+            "from": "b2receive0000000000000000000000000000000000000000000000000000000",
+            "to": "f6receive0000000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "fixes": [
+          "Use a fresh transparent address each time (most wallets rotate them automatically).",
+          "For exchanges, use the TEX address they give you rather than reusing an old one."
+        ]
+      },
+      {
+        "rule": "transparent-only",
+        "severity": "low",
+        "title": "1 fully transparent payment",
+        "detail": "These never touched a shielded pool: amounts, senders and receivers are all public, just like Bitcoin.",
+        "txids": [
+          "n4plain000000000000000000000000000000000000000000000000000000000"
+        ],
+        "links": [],
+        "fixes": [
+          "Shield transparent funds once, then pay from the shielded balance."
+        ]
+      },
+      {
+        "rule": "migration-reveal",
+        "severity": "low",
+        "title": "1 pool migration with a public amount",
+        "detail": "Moves between shielded pools (sapling to orchard) show their amount: 3.09985 ZEC. It does not link you to a transparent address, but a one-shot migration of a whole balance tells observers how much the wallet held.",
+        "txids": [
+          "j0migrate0000000000000000000000000000000000000000000000000000000"
+        ],
+        "links": [],
+        "fixes": [
+          "Migrate in a few smaller steps, or let your wallet move funds as you spend."
+        ]
+      }
+    ],
+    "score": 34,
+    "grade": "F",
+    "stats": {
+      "txs": 16,
+      "shields": 5,
+      "deshields": 3,
+      "migrations": 1,
+      "transparentOnly": 5
+    }
+  }
+}

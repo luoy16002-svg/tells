@@ -5,9 +5,11 @@ import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { homedir, tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { analyze, crossings, findingsFor, preflight, zec, ZAT, type Finding, type History, type Report } from '@tells/core';
+import { analyze, crossings, entryCrowdComplete, entryCrowdRequests, findingsFor, preflight, zec, ZAT, type Finding, type History, type Report } from '@tells/core';
 import { readHistory } from './wallet';
 import { chainContext, windowsFor } from './chain';
+import { resolveEntryCrowds, type EntryCrowdOptions } from './entry-crowd';
+import { openLightwalletd } from './lightwalletd';
 
 const c = (code: number) => (s: string) => (process.stdout.isTTY ? `\x1b[${code}m${s}\x1b[0m` : s);
 const red = c(31), yellow = c(33), green = c(32), dim = c(2), bold = c(1), cyan = c(36);
@@ -40,24 +42,56 @@ function printReport(r: Report) {
   for (const f of r.findings) {
     console.log(`${SEV[f.severity](f.severity.toUpperCase().padEnd(9))} ${bold(f.title)}`);
     console.log(`          ${f.detail}`);
+    for (const c of f.entryCrowd ?? []) {
+      console.log(dim(`          Entry ${c.txid.slice(0, 10)}: ${entryCrowdComplete(c) ? '' : 'at least '}${c.others} look-alike entries; ${c.timingOthers} total entries (${c.from}–${c.to})${entryCrowdComplete(c) ? '' : `; incomplete: ${[...c.coverage.limits, ...c.coverage.errors].join('; ')}`}.`));
+    }
     console.log(dim(`          tx ${f.txids.map(t => t.slice(0, 10)).join(', ')}`));
     console.log(`          ${cyan('Fix:')} ${f.fixes[0]}\n`);
   }
 }
 
 /** Reads the crowd around each timing or amount link from lightwalletd and attaches it to the history. */
-async function addCrowd(h: History, server?: string): Promise<History> {
+async function addCrowd(h: History, options: EntryCrowdOptions): Promise<History> {
   const cs = crossings(h.txs);
-  const windows = windowsFor(findingsFor(cs), cs);
-  if (!windows.length) return h;
+  const findings = findingsFor(cs);
+  const requests = entryCrowdRequests(findings, cs);
+  const windows = windowsFor(findings, cs);
+  if (!requests.length && !windows.length) return h;
   const blocks = windows.reduce((n, [a, b]) => n + b - a + 1, 0);
-  console.log(dim(`Reading ${blocks} compact blocks around your links to size the crowd ...`));
+  console.error(dim(`Reading ${blocks} compact blocks around your links to size the crowd ...`));
+  let source: ReturnType<typeof openLightwalletd> | undefined;
   try {
-    return { ...h, chain: await chainContext(h.network, windows, server) };
+    source = openLightwalletd(h.network, options.server, options.timeoutMs);
+    let chain = { ranges: [], exits: [], entries: [] } as NonNullable<History['chain']>;
+    try { chain = await chainContext(h.network, windows, options.server, source); }
+    catch (error) { console.error(dim(`Exit crowd unavailable: ${error instanceof Error ? error.message : error}`)); }
+    const entries = await resolveEntryCrowds(h.network, requests, { ...options, source, context: chain, excludeTxids: h.txs.map(t => t.txid) });
+    chain.entryCrowds = entries.crowds;
+    for (const c of entries.crowds) if (!entryCrowdComplete(c)) {
+      console.error(dim(`Entry crowd incomplete for ${c.txid.slice(0, 10)} (${c.from}–${c.to}): ${[...c.coverage.limits, ...c.coverage.errors].join('; ')}; ${c.coverage.resolved}/${c.coverage.candidates} candidates resolved. No entry severity reduction.`));
+    }
+    console.error(dim(`Entry crowd: ${entries.crowds.filter(entryCrowdComplete).length}/${entries.crowds.length} complete windows; ${entries.cache.fetched} full transactions fetched, ${entries.cache.diskHits} disk cache hits.`));
+    return { ...h, chain };
   } catch (e) {
-    console.log(dim(`Could not read the crowd (${e instanceof Error ? e.message : e}); grading without it.`));
+    console.error(dim(`Could not read the crowd (${e instanceof Error ? e.message : e}); keeping existing context.`));
     return h;
-  }
+  } finally { source?.close(); }
+}
+
+function crowdOptions(flags: Record<string, string | true>): EntryCrowdOptions {
+  const number = (name: string) => {
+    if (flags[name] === undefined) return undefined;
+    const value = typeof flags[name] === 'string' ? Number(flags[name]) : NaN;
+    if (!Number.isSafeInteger(value) || value < 1) throw new Error(`--${name} needs a positive integer`);
+    return value;
+  };
+  return {
+    server: flags.lightwalletd as string | undefined,
+    cacheDir: flags['crowd-cache'] as string | undefined,
+    maxBlocks: number('entry-crowd-max-blocks'),
+    maxTransactions: number('entry-crowd-max-transactions'),
+    timeoutMs: number('crowd-timeout-ms'),
+  };
 }
 
 function ufvkNetwork(ufvk: string) {
@@ -116,9 +150,13 @@ const HELP = `tells: find what gives your Zcash history away
   tells scan --ufvk <UFVK> --birthday <height> [--devtool <path>] [--wallet <dir>] [--out history.json]
       Import a viewing key into a local view-only wallet, sync it, and print the checkup.
       Without --devtool it uses zcash-devtool from PATH, or downloads a checksummed build once.
-      It then reads the compact blocks around each link to count look-alike exits (--no-crowd to skip,
+      It then counts look-alike exits and resolves entry amounts (--no-crowd to skip,
       --lightwalletd host:port to choose the server).
   tells report <wallet-dir | history.json> [--json] [--crowd]
+      Crowd options: --entry-crowd-max-blocks 1152 --entry-crowd-max-transactions 200
+      --crowd-cache .tells-cache/transactions --crowd-timeout-ms 30000
+      Limits apply per entry window, including previous transactions and cache hits. Incomplete counts
+      are reported and cannot lower severity. Full transactions are cached by network and txid.
   tells preflight <wallet-dir | history.json> --amount <ZEC> [--at <ISO date>] [--to <t-address>]
       Check a withdrawal before you make it, and get safer ways to make it.
   tells export <wallet-dir> [--account <uuid>] [--out history.json]
@@ -139,7 +177,7 @@ async function main() {
     }
     case 'report': {
       let h = load(pos[0], flags.account as string | undefined);
-      if (flags.crowd) h = await addCrowd(h, flags.lightwalletd as string | undefined);
+      if (flags.crowd) h = await addCrowd(h, crowdOptions(flags));
       const r = analyze(h);
       if (flags.json) console.log(JSON.stringify(r, null, 2)); else printReport(r);
       break;
@@ -175,7 +213,7 @@ async function main() {
       console.log(dim('Fetching the full transactions ...'));
       run(devtool, ['wallet', '-w', dir, 'enhance', '-s', server]);
       let h = readHistory(dir);
-      if (!flags['no-crowd']) h = await addCrowd(h, flags.lightwalletd as string | undefined);
+      if (!flags['no-crowd']) h = await addCrowd(h, crowdOptions(flags));
       if (out) writeFileSync(out, JSON.stringify(h, null, 2));
       printReport(analyze(h));
       break;

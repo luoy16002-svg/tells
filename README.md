@@ -28,7 +28,9 @@ Only three things cross the pool boundary in public: an amount, a block time and
 | Address reuse | One transparent address on several crossings | Low to medium |
 | Transparent payments | Transparent-to-transparent spends | Low to medium |
 | Pool migrations | Sapling, Orchard and Ironwood moves publish their amount | Low |
-| Crowd size | Look-alike exits by other people between your entry and your exit, read from compact blocks | Lowers a link by one or two levels |
+| Crowd size | Other people's look-alike entries and exits in the same window: exits from compact blocks, entry amounts by resolving each shielding transaction's transparent inputs | Lowers a link by one or two levels |
+
+Measured on mainnet blocks 3,504,400–3,504,495 (about two hours), Tells resolved all 50 shielding transactions: 36 had no look-alike entry, 10 had one and 4 had three. The first run fetched 162 transactions in 45 seconds; a repeat run reads them from the on-disk cache in under a second.
 
 **Pre-flight** takes a planned withdrawal (amount, time, destination), runs the same rules as if it had happened, and if it is risky proposes alternatives: wait, send a round amount and keep the remainder shielded, split, or use a fresh address. Every alternative is re-checked before it is shown.
 
@@ -86,7 +88,7 @@ The CLI reads `v_received_outputs`, `v_received_output_spends` and `sent_notes` 
 
 ## Limits
 
-- Crowd size counts look-alike *exits* (compact blocks carry transparent output values). Entry amounts are not in compact blocks, so the crowd of look-alike *entries* is not measured yet.
+- Entry amounts are not in compact blocks, so Tells fetches each shielding transaction in the window, plus the outputs it spends, from lightwalletd and caches them by txid. Each window is capped (1,152 blocks and 200 transactions by default, `--entry-crowd-max-blocks` and `--entry-crowd-max-transactions`). A window that hits a cap or a fetch error is reported as incomplete and never lowers a severity.
 - Amount matching assumes standard fees (ZIP 317). Unusual fees can hide or create matches.
 - It flags patterns that link transactions; it cannot prove that nobody linked them some other way (network-level metadata, exchange records).
 
@@ -99,7 +101,7 @@ The CLI reads `v_received_outputs`, `v_received_output_spends` and `sent_notes` 
 
 ## Roadmap
 
-- Entry-side crowd size, by resolving transparent inputs, and a mainnet dashboard of how linkable crossings are overall.
+- A mainnet dashboard of how linkable crossings are overall, built on the same entry and exit crowd counts.
 - WebAssembly scanning in the browser (WebZjs), so the whole checkup works without a terminal.
 - Wallet integrations: a pre-flight hook for Zashi, Zingo and YWallet before they build a transaction to a transparent or TEX address.
 

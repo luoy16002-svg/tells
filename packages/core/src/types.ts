@@ -40,6 +40,45 @@ export interface ChainContext {
   exits: { height: number; txid: string; values: number[] }[];
   /** Transactions that moved transparent inputs into a shielded pool (amounts are not in compact blocks). */
   entries: { height: number; txid: string }[];
+  /** Optional, separately measured entry crowds. Old exports retain their original scoring. */
+  entryCrowds?: EntryCrowd[];
+}
+
+/** Inclusive block window, the same comparison window used by the link rules. */
+export interface EntryCrowdRequest {
+  txid: string;
+  amount: number;
+  from: number;
+  to: number;
+}
+
+/** Net value added to all shielded pools, after transparent change and the fee. */
+export interface ChainEntry {
+  txid: string;
+  height: number;
+  amount: number;
+}
+
+export type EntryCrowdLimit = 'window' | 'transactions' | 'coverage' | 'unresolved';
+
+export interface EntryCrowdCoverage {
+  /** Blocks actually inspected; null when no complete range was available. */
+  range: [number, number] | null;
+  /** Candidate transactions in the inspected range, including the wallet's own. */
+  candidates: number;
+  /** Candidates whose full transactions and all previous outputs were resolved. */
+  resolved: number;
+  /** Unique full transactions touched, including previous transactions and cache hits. */
+  transactions: number;
+  limits: EntryCrowdLimit[];
+  errors: string[];
+}
+
+/** Counts are lower bounds if coverage is incomplete, and then cannot reduce severity. */
+export interface EntryCrowd extends EntryCrowdRequest {
+  others: number;
+  timingOthers: number;
+  coverage: EntryCrowdCoverage;
 }
 
 export interface History {
@@ -94,6 +133,8 @@ export interface Finding {
   fixes: string[];
   /** Other people's crossings that look the same in the window of the link; absent when unknown. */
   crowd?: { others: number; from: number; to: number };
+  /** Entry-side evidence, one measurement for each component of the link. */
+  entryCrowd?: EntryCrowd[];
 }
 
 export interface Report {

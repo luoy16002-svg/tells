@@ -3,3 +3,4 @@ apps/web/dist/
 *.log
 .env*
 wallets/
+.tells-cache/
